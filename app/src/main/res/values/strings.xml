@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tretyakov Gallery Quiz</string>
+    <string name="picture">Picture</string>
+    <string name="question_text">Any cognitive question about the picture or artist</string>
+</resources>
