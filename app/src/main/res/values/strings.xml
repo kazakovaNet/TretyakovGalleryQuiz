@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Tretyakov Gallery Quiz</string>
     <string name="picture">Picture</string>
-    <string name="question_text">Any cognitive question about the picture or artist</string>
+    <string name="question_text">Any long, long, long question about the artist, his picture, the history of the work of art. Must be interesting and cognitive in order to be remembered and enriched with knowledge.</string>
 </resources>
