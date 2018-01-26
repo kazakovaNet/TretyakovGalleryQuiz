@@ -4,7 +4,6 @@ package com.example.android.tretyakovgalleryquiz;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 public class PictureAnswerFragment extends Fragment implements View.OnClickListener {
     private PictureAnswerListener listener;
-    private PictureAnswer pictureAnswer;
+    private PictureQuestion pictureQuestion;
 
     public PictureAnswerFragment() {
         // Required empty public constructor
@@ -28,7 +27,7 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         if (listener != null) {
             // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            listener.onButtonClicked(v.getId(), pictureAnswer.getCorrectAnswer());
+            listener.onButtonClicked(v.getId(), pictureQuestion.getCorrectAnswer());
         }
     }
 
@@ -56,13 +55,13 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
         View view = getView();
 
         if (view != null) {
-            String[] answers = pictureAnswer.getAnswers();
+            String[] answers = pictureQuestion.getAnswers();
 
             ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
-            pictureImageView.setImageResource(pictureAnswer.getPictureId());
+            pictureImageView.setImageResource(pictureQuestion.getPictureId());
 
             TextView questionTextView = view.findViewById(R.id.question_text_view);
-            questionTextView.setText(pictureAnswer.getQuestion());
+            questionTextView.setText(pictureQuestion.getQuestion());
 
             // Получение ссылок на кнопки
             Button answer1Button = view.findViewById(R.id.answer_1_button);
@@ -92,6 +91,6 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
 
     // Определяются данные для отображения
     public void setAnswerData(int pictureId) {
-        pictureAnswer = PictureAnswer.PICTURE_ANSWERS_DATA[pictureId];
+        pictureQuestion = PictureQuestion.PICTURE_QUESTIONS_DATA[pictureId];
     }
 }

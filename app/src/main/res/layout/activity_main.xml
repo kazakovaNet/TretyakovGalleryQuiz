@@ -9,6 +9,6 @@
     <!--Фрагмент во FrameLayout будет добавляться на программном уровне-->
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </ScrollView>

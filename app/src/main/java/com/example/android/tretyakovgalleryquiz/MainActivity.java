@@ -8,6 +8,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener {
     private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
     private int step = 0;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +20,24 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
 
     @Override
     public void onButtonClicked(long id, String correctAnswer) {
-        if (correctAnswers[step] != id) {
-            Toast.makeText(this, "You gave the wrong answer. Correct answer - " + correctAnswer, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "You are absolutely right!", Toast.LENGTH_SHORT).show();
+        // Закрытие открытого тоста
+        if (toast != null) {
+            toast.cancel();
         }
 
-        if (++step < PictureAnswer.PICTURE_ANSWERS_DATA.length) {
+        if (correctAnswers[step] != id) {
+            toast = Toast.makeText(this, "You gave the wrong answer. Correct answer - " + correctAnswer, Toast.LENGTH_SHORT);
+        } else {
+            toast = Toast.makeText(this, "You are absolutely right!", Toast.LENGTH_SHORT);
+        }
+
+        toast.show();
+
+        if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
             setNewFragment();
         } else {
-            Toast.makeText(this, "You answered all questions", Toast.LENGTH_SHORT).show();
+            toast = Toast.makeText(this, "You answered all questions", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
