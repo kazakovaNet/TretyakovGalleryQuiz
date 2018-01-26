@@ -6,9 +6,9 @@
     android:fillViewport="true"
     tools:context="com.example.android.tretyakovgalleryquiz.MainActivity">
 
-    <fragment
-        android:id="@+id/picture_frag"
-        class="com.example.android.tretyakovgalleryquiz.PictureAnswerFragment"
-        android:layout_width="match_parent"
+    <!--Фрагмент во FrameLayout будет добавляться на программном уровне-->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content" />
 </ScrollView>

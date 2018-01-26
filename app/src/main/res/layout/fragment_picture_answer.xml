@@ -9,16 +9,13 @@
         android:id="@+id/picture_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/picture"
-        android:src="@drawable/pic_1" />
+        android:adjustViewBounds="true" />
 
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="@string/question_text"
         android:textColor="@color/primary_text"
         android:textSize="16sp" />
 
@@ -44,7 +41,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_custom"
-                android:text="Answer A"
                 android:textColor="@color/primary_light" />
 
             <Button
@@ -53,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_custom"
-                android:text="Answer B"
                 android:textColor="@color/primary_light" />
         </LinearLayout>
 
@@ -72,7 +67,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_custom"
-                android:text="Answer C"
                 android:textColor="@color/primary_light" />
 
             <Button
@@ -81,7 +75,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_custom"
-                android:text="Answer D"
                 android:textColor="@color/primary_light" />
         </LinearLayout>
     </LinearLayout>
