@@ -1,12 +1,15 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener {
     private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
@@ -16,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Hide status bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         resources = getResources();
@@ -23,18 +30,17 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         setNewFragment();
     }
 
-    @SuppressLint("ShowToast")
     @Override
     public void onButtonClicked(long id, String correctAnswer) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         if (correctAnswers[step] != id) {
-            builder.setTitle("Wrong")
-                    .setMessage("You gave the wrong answer.\nCorrect answer - " + correctAnswer)
+            builder.setTitle(R.string.wrong)
+                    .setMessage(getString(R.string.wrong_answer_text) + correctAnswer)
                     .setIcon(R.drawable.wrong_icon);
         } else {
-            builder.setTitle("Right")
-                    .setMessage("You are absolutely right!")
+            builder.setTitle(R.string.right)
+                    .setMessage(R.string.right_answer_text)
                     .setIcon(R.drawable.right_icon);
         }
 
@@ -45,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
                         if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
                             setNewFragment();
                         } else {
-                            builder.setTitle("End")
-                                    .setMessage("You answered all questions")
+                            builder.setTitle(R.string.end)
+                                    .setMessage(R.string.end_text)
                                     .setIcon(R.drawable.end_icon).setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

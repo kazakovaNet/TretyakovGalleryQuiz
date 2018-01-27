@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Tretyakov Gallery Quiz</string>
     <string name="picture">Picture</string>
-    <string name="question_text">Any long, long, long question about the artist, his picture, the history of the work of art. Must be interesting and cognitive in order to be remembered and enriched with knowledge.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="question_1">This is a picture of Nikolai Shilder \"Temptation\". What was it significant for Tretyakov?</string>
     <string name="question_2">Before you, Vasily Surikov\'s famous painting \"The Morning of the Streltsy Execution\". In the depiction of events, the author made a historic mistake. Name it.</string>
-    <string name="question_3">Once an illiterate shepherd boy in the field met a monk and complained to him that he was not given a letter. The monk took the prosphore from the chest, handed it to the boy, and offered to eat it. Having eaten the prosphora, the shepherd took possession of the letter, and the monk, having predicted his extraordinary destiny, disappeared. This meeting changed the boy\'s whole life. What happened to this cowherd boy?</string>
+    <string name="question_3">Once an illiterate shepherd boy in the field met a monk and complained to him that he was not given a letter. The monk took the prosphore from the chest, handed it to the boy, and offered to eat it. Having eaten the prosphora, the shepherd took possession of the letter, and the monk, having predicted his extraordinary destiny, disappeared. This meeting changed the boy\'s whole life. Who was this cowherd boy?</string>
+    <string name="wrong">Wrong</string>
+    <string name="wrong_answer_text">You gave the wrong answer.\nCorrect answer - </string>
+    <string name="right">Right</string>
+    <string name="right_answer_text">You are absolutely right!</string>
+    <string name="end">End</string>
+    <string name="end_text">You answered all questions</string>
 </resources>
