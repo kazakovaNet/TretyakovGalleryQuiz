@@ -1,8 +1,9 @@
 package com.example.android.tretyakovgalleryquiz;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         setNewFragment();
     }
 
+    @SuppressLint("ShowToast")
     @Override
     public void onButtonClicked(long id, String correctAnswer) {
         // Закрытие открытого тоста

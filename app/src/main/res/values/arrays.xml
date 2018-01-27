@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="answers_question_1">
+        <item>She was the first in the collection</item>
+        <item>To get it Tretyakov went to India</item>
+        <item>It was subjected to censorship</item>
+        <item>It depicts the princess Sophia</item>
+    </string-array>
+
+    <string-array name="answers_question_2">
+        <item>The painting was supposed to be Ivan the Terrible, not Peter I</item>
+        <item>Events took place not on the Red, but on the Bolotnaya Square</item>
+        <item>Convicts were not allowed to say goodbye to their relatives</item>
+        <item>Sagittarians were sentenced to exile, and not to be executed</item>
+    </string-array>
+
+    <string-array name="answers_question_3">
+        <item>This young man is Peresvet, a participant of the Kulikovo battle</item>
+        <item>Bartholomew - the name given at the baptism to Mikhail Lomonosov</item>
+        <item>The boy Bartholomew is the future Reverend Sergius of Radonezh</item>
+        <item>It was Bartolomeo Rastrelli, a Russian architect of Italian origin</item>
+    </string-array>
+</resources>

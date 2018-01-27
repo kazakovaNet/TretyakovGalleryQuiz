@@ -3,13 +3,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.example.android.tretyakovgalleryquiz.PictureAnswerFragment">
+    tools:resources="com.example.android.tretyakovgalleryquiz.PictureAnswerFragment">
 
     <ImageView
         android:id="@+id/picture_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/picture" />
 
     <TextView
         android:id="@+id/question_text_view"

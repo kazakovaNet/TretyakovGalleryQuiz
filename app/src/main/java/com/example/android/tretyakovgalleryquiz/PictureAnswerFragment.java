@@ -35,8 +35,6 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
         void onButtonClicked(long id, String correctAnswer);
     }
 
-    ;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
