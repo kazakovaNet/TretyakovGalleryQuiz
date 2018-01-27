@@ -1,7 +1,9 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,25 +28,44 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
     @SuppressLint("ShowToast")
     @Override
     public void onButtonClicked(long id, String correctAnswer) {
-        // Закрытие открытого тоста
-        if (toast != null) {
-            toast.cancel();
-        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         if (correctAnswers[step] != id) {
-            toast = Toast.makeText(this, "You gave the wrong answer. Correct answer - " + correctAnswer, Toast.LENGTH_SHORT);
+            builder.setTitle("Wrong")
+                    .setMessage("You gave the wrong answer. Correct answer - " + correctAnswer)
+                    .setIcon(R.drawable.ic_launcher_background);
         } else {
-            toast = Toast.makeText(this, "You are absolutely right!", Toast.LENGTH_SHORT);
+            builder.setTitle("Right")
+                    .setMessage("You are absolutely right!")
+                    .setIcon(R.drawable.ic_launcher_background);
         }
 
-        toast.show();
+        builder.setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
+                            setNewFragment();
+                        } else {
+                            builder.setTitle("End")
+                                    .setMessage("You answered all questions")
+                                    .setIcon(R.drawable.ic_launcher_background).setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
 
-        if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
-            setNewFragment();
-        } else {
-            toast = Toast.makeText(this, "You answered all questions", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void setNewFragment() {

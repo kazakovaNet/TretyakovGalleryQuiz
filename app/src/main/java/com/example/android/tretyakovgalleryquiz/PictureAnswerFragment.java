@@ -1,6 +1,7 @@
 package com.example.android.tretyakovgalleryquiz;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -81,10 +82,10 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
 
     // Вызывается при присоединении фрагмента к активности
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-        this.listener = (PictureAnswerListener) context;
+        this.listener = (PictureAnswerListener) activity;
     }
 
     // Определяются данные для отображения
