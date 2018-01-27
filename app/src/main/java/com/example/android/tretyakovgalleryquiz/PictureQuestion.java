@@ -7,7 +7,7 @@ class PictureQuestion {
     private int pictureImage;
     private String[] answers;
     private int correctAnswer;
-    private static Resources resources = new MainActivity().getResources();
+    private static Resources resources = MainActivity.resources;
 
     private PictureQuestion(String question, int pictureImage, String[] answers, int correctAnswer) {
         this.question = question;

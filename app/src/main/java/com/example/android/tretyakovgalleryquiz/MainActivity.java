@@ -2,6 +2,7 @@ package com.example.android.tretyakovgalleryquiz;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -10,11 +11,14 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
     private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
     private int step = 0;
     private Toast toast;
+    public static Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        resources = getResources();
 
         setNewFragment();
     }
