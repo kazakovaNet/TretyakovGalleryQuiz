@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
 
         if (correctAnswers[step] != id) {
             builder.setTitle(R.string.wrong)
-                    .setMessage(getString(R.string.wrong_answer_text) + correctAnswer)
+                    .setMessage(getString(R.string.wrong_answer_text) + " " + correctAnswer)
                     .setIcon(R.drawable.wrong_icon);
         } else {
             builder.setTitle(R.string.right)

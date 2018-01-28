@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:resources="com.example.android.tretyakovgalleryquiz.PictureAnswerFragment">
+
+    <ImageView
+        android:id="@+id/picture_image_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/pic_1" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/question_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:singleLine="false"
+                    android:text="@string/question_3"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/answer_1_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default"
+                    android:padding="8dp"
+                    android:text="Этот отрок - Пересвет, участник Куликовской битвы"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/answer_2_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_custom"
+                    android:padding="8dp"
+                    android:text="Варфоломей - имя данное при крещении Михаилу Ломоносову"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/answer_3_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_custom"
+                    android:padding="8dp"
+                    android:text="Отрок Варфоломей – будущий преподобный Сергий Радонежский"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/answer_4_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_custom"
+                    android:padding="8dp"
+                    android:text="Это был Бартоломео Растрелли русский архитектор итальянского происхождения"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_text"
+                    android:textSize="14sp" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>
