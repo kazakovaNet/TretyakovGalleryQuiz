@@ -1,14 +1,11 @@
 package com.example.android.tretyakovgalleryquiz;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener {
@@ -77,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
     }
 
     private void setNewFragment() {
+        setTitleQuestion(step);
+
         PictureAnswerFragment fragment = new PictureAnswerFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
@@ -89,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию
         fragmentTransaction.commit();
+    }
+
+    private void setTitleQuestion(int step) {
+        setTitle("Question " + ++step + "/" + PictureQuestion.PICTURE_QUESTIONS_DATA.length);
     }
 
     @Override
