@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
 
         resources = getResources();
 
+        if (savedInstanceState != null && savedInstanceState.containsKey("step")) {
+            step = savedInstanceState.getInt("step");
+        }
+
         setNewFragment();
     }
 
@@ -85,5 +89,12 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("step", step);
     }
 }
