@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.android.tretyakovgalleryquiz.IntroductionFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Третьяковская галерея — это главный музей национального искусства России, отражающий его уникальный вклад в мировую культуру. Это гостеприимный музей, известный своей богатой коллекцией и многообразием представленных идей." />
+
+    <EditText
+        android:id="@+id/name_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Назовите свое имя" />
+
+    <CheckBox
+        android:id="@+id/scoring_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подсчитывать очки?" />
+
+    <TextView
+        android:id="@+id/show_result_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Как вы хотите увидеть результаты?"
+        android:visibility="gone" />
+
+    <RadioGroup
+        android:id="@+id/show_result_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="На экране" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выслать на e-mail" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="e-mail"
+        android:visibility="gone" />
+</LinearLayout>

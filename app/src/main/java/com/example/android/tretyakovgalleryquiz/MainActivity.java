@@ -8,10 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener {
+public class MainActivity extends AppCompatActivity implements PictureAnswerFragment.PictureAnswerListener, IntroductionFragment.IntroductionListener {
     private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
     private int step = 0;
     public static Resources resources;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
             step = savedInstanceState.getInt("step");
         }
 
-        setNewFragment();
+        setIntroductionFragment();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
-                            setNewFragment();
+                            setPictureAnswerFragment();
                         } else {
                             builder.setTitle(R.string.end)
                                     .setMessage(R.string.end_text)
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         alertDialog.show();
     }
 
-    private void setNewFragment() {
+    private void setPictureAnswerFragment() {
         setTitleQuestion(step);
 
         PictureAnswerFragment fragment = new PictureAnswerFragment();
@@ -82,6 +83,20 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         fragment.setAnswerData(step);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
+        // Добавить в стек возврата
+        fragmentTransaction.addToBackStack(null);
+        // Включить анимацию растворения и появления фрагментов
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // Закрепить транзакцию
+        fragmentTransaction.commit();
+    }
+
+    private void setIntroductionFragment() {
+        IntroductionFragment introductionFragment = new IntroductionFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
+
+        // Заменить фрагмент
+        fragmentTransaction.replace(R.id.fragment_container, introductionFragment);
         // Добавить в стек возврата
         fragmentTransaction.addToBackStack(null);
         // Включить анимацию растворения и появления фрагментов
@@ -99,5 +114,10 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         super.onSaveInstanceState(outState);
 
         outState.putInt("step", step);
+    }
+
+    @Override
+    public void onIntroductionClicked(String name) {
+        this.name = name;
     }
 }
