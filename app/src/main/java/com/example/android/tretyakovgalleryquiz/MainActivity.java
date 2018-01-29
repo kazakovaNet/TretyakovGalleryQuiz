@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
             step = savedInstanceState.getInt("step");
         }
 
-        setNewFragment();
+        setQuestionFragment();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
-                            setNewFragment();
+                            setQuestionFragment();
                         } else {
                             builder.setTitle(R.string.end)
                                     .setMessage(R.string.end_text)
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         alertDialog.show();
     }
 
-    private void setNewFragment() {
+    private void setQuestionFragment() {
         setTitleQuestion(step);
 
         PictureAnswerFragment fragment = new PictureAnswerFragment();
@@ -89,6 +89,22 @@ public class MainActivity extends AppCompatActivity implements PictureAnswerFrag
         // Закрепить транзакцию
         fragmentTransaction.commit();
     }
+
+    private void setIntroductionFragment() {
+        IntroFragment fragment = new IntroFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
+
+//        fragment.setAnswerData(step);
+        // Заменить фрагмент
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        // Добавить в стек возврата
+        fragmentTransaction.addToBackStack(null);
+        // Включить анимацию растворения и появления фрагментов
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // Закрепить транзакцию
+        fragmentTransaction.commit();
+    }
+
 
     private void setTitleQuestion(int step) {
         setTitle("Question " + ++step + "/" + PictureQuestion.PICTURE_QUESTIONS_DATA.length);
