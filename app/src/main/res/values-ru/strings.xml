@@ -10,4 +10,12 @@
     <string name="right_answer_text">Вы абсолютно правы!</string>
     <string name="end">Конец</string>
     <string name="end_text">Вы ответили на все вопросы</string>
+    <string name="enter_your_name">Укажите свое имя</string>
+    <string name="intro_text">Третьяковская галерея — это главный музей национального искусства России, отражающий его уникальный вклад в мировую культуру. Это гостеприимный музей, известный своей богатой коллекцией и многообразием представленных идей.</string>
+    <string name="counting_points">Подсчитывать очки?</string>
+    <string name="start_button">Начать</string>
+    <string name="see_results">Как вы хотите увидеть результаты?</string>
+    <string name="on_screen">На экране</string>
+    <string name="send_on_email">Выслать письмом на e-mail</string>
+    <string name="enter_your_email">Введите свой e-mail</string>
 </resources>

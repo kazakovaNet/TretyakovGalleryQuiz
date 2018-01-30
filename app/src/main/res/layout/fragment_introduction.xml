@@ -8,25 +8,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Третьяковская галерея — это главный музей национального искусства России, отражающий его уникальный вклад в мировую культуру. Это гостеприимный музей, известный своей богатой коллекцией и многообразием представленных идей." />
+        android:text="@string/intro_text" />
 
     <EditText
         android:id="@+id/name_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Назовите свое имя" />
+        android:hint="@string/enter_your_name" />
 
     <CheckBox
         android:id="@+id/scoring_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Подсчитывать очки?" />
+        android:text="@string/counting_points" />
 
     <TextView
         android:id="@+id/show_result_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Как вы хотите увидеть результаты?"
+        android:text="@string/see_results"
         android:visibility="gone" />
 
     <RadioGroup
@@ -39,20 +39,20 @@
             android:id="@+id/on_screen_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="На экране" />
+            android:text="@string/on_screen" />
 
         <RadioButton
             android:id="@+id/on_email_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Выслать на e-mail" />
+            android:text="@string/send_on_email" />
     </RadioGroup>
 
     <EditText
         android:id="@+id/email_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="e-mail"
+        android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress"
         android:visibility="gone" />
 
@@ -60,5 +60,5 @@
         android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Начать" />
+        android:text="@string/start_button" />
 </LinearLayout>
