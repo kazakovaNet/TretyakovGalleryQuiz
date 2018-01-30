@@ -28,6 +28,7 @@ public class IntroductionFragment extends Fragment {
     private RadioGroup showResultRadioGroup;
     private IntroductionListener listener;
     private boolean onScreen;
+    private Context parentContext;
 
     public IntroductionFragment() {
         // Required empty public constructor
@@ -50,6 +51,7 @@ public class IntroductionFragment extends Fragment {
         super.onAttach(activity);
 
         this.listener = (IntroductionListener) activity;
+        this.parentContext = activity;
     }
 
     @Override
@@ -96,7 +98,7 @@ public class IntroductionFragment extends Fragment {
 
                     // TODO добавить валидацию имени
                     if (name.equals("")) {
-                        Toast.makeText(MainActivity.context, "Укажите свое имя", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parentContext, "Укажите свое имя", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -108,7 +110,7 @@ public class IntroductionFragment extends Fragment {
 
                         // TODO добавить валидацию адреса почты
                         if (email.equals("")) {
-                            Toast.makeText(MainActivity.context, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(parentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     } else {

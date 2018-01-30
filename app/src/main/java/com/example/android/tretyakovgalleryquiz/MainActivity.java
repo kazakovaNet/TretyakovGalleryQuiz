@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
     private int step = 0;
     public static Resources resources;
-    public static Context context;
     private String name;
     private String email;
 
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         setContentView(R.layout.activity_main);
 
         resources = getResources();
-        context = this;
 
         if (savedInstanceState != null && savedInstanceState.containsKey("step")) {
             step = savedInstanceState.getInt("step");
