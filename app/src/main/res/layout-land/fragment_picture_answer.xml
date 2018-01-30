@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:resources="com.example.android.tretyakovgalleryquiz.PictureAnswerFragment">
+    tools:resources="com.example.android.tretyakovgalleryquiz.QuestionFragment">
 
     <ImageView
         android:id="@+id/picture_image_view"

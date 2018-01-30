@@ -36,11 +36,13 @@
         android:visibility="gone">
 
         <RadioButton
+            android:id="@+id/on_screen_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="На экране" />
 
         <RadioButton
+            android:id="@+id/on_email_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Выслать на e-mail" />
@@ -51,5 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="e-mail"
+        android:inputType="textEmailAddress"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Начать" />
 </LinearLayout>

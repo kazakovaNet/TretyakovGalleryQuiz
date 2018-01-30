@@ -3,7 +3,6 @@ package com.example.android.tretyakovgalleryquiz;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,23 +16,23 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 
-public class PictureAnswerFragment extends Fragment implements View.OnClickListener {
-    private PictureAnswerListener listener;
+public class QuestionFragment extends Fragment implements View.OnClickListener {
+    private QuestionListener listener;
     private PictureQuestion pictureQuestion;
 
-    public PictureAnswerFragment() {
+    public QuestionFragment() {
         // Required empty public constructor
     }
 
     public void onClick(View v) {
         if (listener != null) {
             // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            listener.onButtonClicked(v.getId(), pictureQuestion.getCorrectAnswer());
+            listener.onPictureQuestionFragmentClicked(v.getId(), pictureQuestion.getCorrectAnswer());
         }
     }
 
-    interface PictureAnswerListener {
-        void onButtonClicked(long id, String correctAnswer);
+    interface QuestionListener {
+        void onPictureQuestionFragmentClicked(long id, String correctAnswer);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class PictureAnswerFragment extends Fragment implements View.OnClickListe
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        this.listener = (PictureAnswerListener) activity;
+        this.listener = (QuestionListener) activity;
     }
 
     // Определяются данные для отображения
