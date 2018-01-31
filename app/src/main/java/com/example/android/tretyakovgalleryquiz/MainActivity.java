@@ -31,7 +31,12 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
             step = savedInstanceState.getInt("step");
         }
 
-        setIntroductionFragment();
+        // В зависимости от шага отображается приветственный фрагмент / фрагмент с вопросом
+        if (step == 0) {
+            setIntroductionFragment();
+        } else {
+            setQuestionFragment();
+        }
     }
 
     private void setQuestionFragment() {
@@ -82,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         if (correctAnswers[step] != id) {
             builder.setTitle(R.string.wrong)
-                    .setMessage(getString(R.string.wrong_answer_text) + " " + correctAnswer)
+                    .setMessage(getString(R.string.wrong_answer_text) + correctAnswer)
                     .setIcon(R.drawable.wrong_icon);
         } else {
             builder.setTitle(R.string.right)

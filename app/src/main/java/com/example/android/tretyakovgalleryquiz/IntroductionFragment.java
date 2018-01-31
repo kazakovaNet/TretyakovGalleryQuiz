@@ -27,7 +27,7 @@ public class IntroductionFragment extends Fragment {
     private TextView showResultTextView;
     private RadioGroup showResultRadioGroup;
     private IntroductionListener listener;
-    private boolean onScreen;
+    private boolean onScreen = true;
     private Context parentContext;
 
     public IntroductionFragment() {
@@ -134,11 +134,12 @@ public class IntroductionFragment extends Fragment {
                         case R.id.on_screen_radio_button:
                             visible = View.GONE;
 
-                            // Флаг отображения результатов на экране
-                            onScreen = true;
                             break;
                         case R.id.on_email_radio_button:
                             visible = View.VISIBLE;
+
+                            // Флаг отображения результатов на экране
+                            onScreen = false;
                             break;
                     }
 
