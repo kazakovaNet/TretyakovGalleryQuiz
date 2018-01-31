@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     R.string.question_1,
                     R.drawable.pic_1,
                     R.array.answers_question_1,
-                    R.id.answer_1_button),
+                    R.id.answer_1_button)/*,
             new Question(
                     R.string.question_2,
                     R.drawable.pic_2,
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     R.string.question_3,
                     R.drawable.pic_3,
                     R.array.answers_question_3,
-                    R.id.answer_3_button)
+                    R.id.answer_3_button)*/
     };
 
     @Override

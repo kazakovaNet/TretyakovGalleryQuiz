@@ -34,6 +34,7 @@ public class ResultFragment extends Fragment {
     private Context mParentContext;
     private String mName;
     private TextView mNameTextView;
+    private TextView mResultTextView;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -65,44 +66,58 @@ public class ResultFragment extends Fragment {
         mEmailEditText = view.findViewById(R.id.email_edit_text);
         mShowResultTextView = view.findViewById(R.id.show_result_text_view);
 
+        mResultTextView = view.findViewById(R.id.result_on_screen_text_view);
+
         mShowResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
         mShowResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int visible = View.GONE;
-
                 switch (checkedId) {
                     case R.id.on_screen_radio_button:
-                        visible = View.GONE;
-
-                        mEmail = "";
+                        // Отображение текста с результатом викторины
+                        mResultTextView.setVisibility(View.VISIBLE);
+                        // Скрытие поля для ввода e-mail
+                        mEmailEditText.setVisibility(View.GONE);
 
                         break;
                     case R.id.on_email_radio_button:
-                        visible = View.VISIBLE;
-
-                        // Сохранение введенного адреса электронной почты,
-                        // если выбран вариант отправки результата на почту
-                        mEmail = String.valueOf(mEmailEditText.getText());
-
-                        // TODO добавить валидацию адреса почты
-                        if (mEmail.equals("")) {
-                            Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
+                        // Скрытие текста с результатом викторины
+                        mResultTextView.setVisibility(View.GONE);
+                        // Отображение поля для ввода e-mail
+                        mEmailEditText.setVisibility(View.VISIBLE);
 
                         break;
                 }
-
-                // Скрытие / отображение поля для ввода e-mail
-                mEmailEditText.setVisibility(visible);
             }
         });
+        mShowResultRadioGroup.clearCheck();
 
         mResultButton = view.findViewById(R.id.result_button);
         mResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Получение выбранного варианта отображения результатов
+                int checkedRadioButtonId = mShowResultRadioGroup.getCheckedRadioButtonId();
+
+                if (checkedRadioButtonId == R.id.on_screen_radio_button){
+                    // Отображение текста с результатом викторины
+                    mResultTextView.setVisibility(View.VISIBLE);
+                }
+
+                if (mEmailEditText.getVisibility() == View.VISIBLE) {
+                    // Сохранение введенного адреса электронной почты,
+                    // если выбран вариант отправки результата на почту
+                    mEmail = String.valueOf(mEmailEditText.getText());
+
+                    // TODO добавить валидацию адреса почты
+                    if (mEmail.equals("")) {
+                        Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } else {
+                    mEmail = "";
+                }
+
                 // Сообщить слушателю о действиях пользователя
                 if (mListener != null) {
                     mListener.onResultFragmentInteraction(mEmail);
@@ -119,10 +134,8 @@ public class ResultFragment extends Fragment {
             visible = View.GONE;
         }
 
-        mEmailEditText.setVisibility(visible);
         mShowResultTextView.setVisibility(visible);
         mShowResultRadioGroup.setVisibility(visible);
-        mShowResultRadioGroup.clearCheck();
     }
 
     public void setResultData(String name, boolean isScoring) {

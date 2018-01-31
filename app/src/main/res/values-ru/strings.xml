@@ -18,4 +18,6 @@
     <string name="on_screen">На экране</string>
     <string name="send_on_email">Выслать письмом на e-mail</string>
     <string name="enter_your_email">Введите свой e-mail</string>
+    <string name="thank_you_for_attention">Спасибо за внимание!</string>
+    <string name="results_on_screen">Вы ответили на 5 вопросов из 10</string>
 </resources>
