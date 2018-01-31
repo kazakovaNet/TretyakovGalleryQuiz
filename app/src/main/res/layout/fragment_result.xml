@@ -6,21 +6,64 @@
     tools:context="com.example.android.tretyakovgalleryquiz.ResultFragment">
 
     <TextView
+        android:id="@+id/name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Name" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/thank_you_for_attention" />
 
     <TextView
         android:id="@+id/result_text_view"
-        tools:visibility="visible"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Вы ответили на 5 вопросов из 10"/>
+        android:visibility="gone"
+        tools:text="Вы ответили на 5 вопросов из 10"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/show_result_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_results"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <RadioGroup
+        android:id="@+id/show_result_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <RadioButton
+            android:id="@+id/on_screen_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/on_screen" />
+
+        <RadioButton
+            android:id="@+id/on_email_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_on_email" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_email"
+        android:inputType="textEmailAddress"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <Button
-        android:id="@+id/get_result_button"
+        android:id="@+id/result_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Получить результат"/>
+        android:text="Получить результат" />
 </LinearLayout>

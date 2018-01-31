@@ -3,17 +3,17 @@ package com.example.android.tretyakovgalleryquiz;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.IntroductionListener, ResultFragment.OnResultFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private int mCurrentStep = 0;
     private String mName;
     private String mEmail;
     private Question mCurrentQuestion;
+    private boolean isScoring;
 
     private Question[] mQuestions = {
             new Question(
@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         ResultFragment resultFragment = new ResultFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
+        resultFragment.setResultData(mName, isScoring);
+
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, resultFragment);
         // Добавить в стек возврата
@@ -149,16 +151,22 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onIntroductionFragmentInteraction(String name, String email) {
+    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
         this.mName = name;
-        this.mEmail = email;
+        this.isScoring = isScoring;
 
         setQuestionFragment();
     }
 
     @Override
-    public void onResultFragmentInteraction(Uri uri) {
+    public void onResultFragmentInteraction(String email) {
+        this.mEmail = email;
 
+        if (!mEmail.equals("")) {
+            // TODO
+        }
+
+        finish();
     }
 
     private void setTitleQuestion(int step) {
