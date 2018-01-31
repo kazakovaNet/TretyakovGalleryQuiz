@@ -1,13 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.android.tretyakovgalleryquiz.ResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/thank_you_for_attention" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/result_text_view"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Вы ответили на 5 вопросов из 10"/>
+
+    <Button
+        android:id="@+id/get_result_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Получить результат"/>
+</LinearLayout>

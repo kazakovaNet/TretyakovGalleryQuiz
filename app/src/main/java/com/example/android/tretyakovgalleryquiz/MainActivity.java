@@ -3,17 +3,35 @@ package com.example.android.tretyakovgalleryquiz;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements QuestionFragment.QuestionListener, IntroductionFragment.IntroductionListener {
-    private int[] mCorrectAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
-    private int mStep = 0;
-    public static Resources sResources;
+public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.IntroductionListener, ResultFragment.OnResultFragmentInteractionListener {
+    private int mCurrentStep = 0;
     private String mName;
     private String mEmail;
+    private Question mCurrentQuestion;
+
+    private Question[] mQuestions = {
+            new Question(
+                    R.string.question_1,
+                    R.drawable.pic_1,
+                    R.array.answers_question_1,
+                    R.id.answer_1_button),
+            new Question(
+                    R.string.question_2,
+                    R.drawable.pic_2,
+                    R.array.answers_question_2,
+                    R.id.answer_2_button),
+            new Question(
+                    R.string.question_3,
+                    R.drawable.pic_3,
+                    R.array.answers_question_3,
+                    R.id.answer_3_button)
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,27 +42,37 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         setContentView(R.layout.activity_main);
 
-        sResources = getResources();
-
-        if (savedInstanceState != null && savedInstanceState.containsKey("mStep")) {
-            mStep = savedInstanceState.getInt("mStep");
+        if (savedInstanceState != null && savedInstanceState.containsKey("mCurrentStep")) {
+            mCurrentStep = savedInstanceState.getInt("mCurrentStep");
         }
 
-        // В зависимости от шага отображается приветственный фрагмент / фрагмент с вопросом
-        if (mStep == 0) {
+        // В зависимости от шага отображается приветственный фрагмент /
+        // фрагмент с вопросом / результирующий фрагмент
+        if (mCurrentStep == 0) {
             setIntroductionFragment();
+        } else if (mCurrentStep == mQuestions.length) {
+            setResultFragment();
         } else {
             setQuestionFragment();
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("mCurrentStep", mCurrentStep);
+    }
+
     private void setQuestionFragment() {
-        setTitleQuestion(mStep);
+        setTitleQuestion(mCurrentStep);
 
         QuestionFragment fragment = new QuestionFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        fragment.setAnswerData(mStep);
+        mCurrentQuestion = mQuestions[mCurrentStep];
+
+        fragment.setAnswerData(mCurrentQuestion);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Добавить в стек возврата
@@ -69,24 +97,31 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         fragmentTransaction.commit();
     }
 
-    private void setTitleQuestion(int step) {
-        setTitle("Question " + ++step + "/" + PictureQuestion.PICTURE_QUESTIONS_DATA.length);
+    private void setResultFragment() {
+        resetTitle();
+
+        ResultFragment resultFragment = new ResultFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
+
+        // Заменить фрагмент
+        fragmentTransaction.replace(R.id.fragment_container, resultFragment);
+        // Добавить в стек возврата
+        fragmentTransaction.addToBackStack(null);
+        // Включить анимацию растворения и появления фрагментов
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // Закрепить транзакцию
+        fragmentTransaction.commit();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putInt("mStep", mStep);
-    }
-
-    @Override
-    public void onPictureQuestionFragmentClicked(long id, String correctAnswer) {
+    public void onQuestionFragmentInteraction(int id) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        if (mCorrectAnswers[mStep] != id) {
+        int correctAnswer = mCurrentQuestion.getCorrectAnswerId();
+
+        if (correctAnswer != id) {
             builder.setTitle(R.string.wrong)
-                    .setMessage(getString(R.string.wrong_answer_text) + correctAnswer)
+                    .setMessage(getString(R.string.wrong_answer_text) + ((Button) findViewById(correctAnswer)).getText())
                     .setIcon(R.drawable.wrong_icon);
         } else {
             builder.setTitle(R.string.right)
@@ -98,20 +133,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (++mStep < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
+                        if (++mCurrentStep < mQuestions.length) {
                             setQuestionFragment();
                         } else {
-                            builder.setTitle(R.string.end)
-                                    .setMessage(R.string.end_text)
-                                    .setIcon(R.drawable.end_icon).setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            });
-
-                            AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
+                            // Если вопрос последний, отображается результирующий фрагмент
+                            setResultFragment();
                         }
 
                         dialog.cancel();
@@ -123,10 +149,23 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onIntroductionFragmentClicked(String name, String email) {
+    public void onIntroductionFragmentInteraction(String name, String email) {
         this.mName = name;
         this.mEmail = email;
 
         setQuestionFragment();
+    }
+
+    @Override
+    public void onResultFragmentInteraction(Uri uri) {
+
+    }
+
+    private void setTitleQuestion(int step) {
+        setTitle("Question " + ++step + "/" + mQuestions.length);
+    }
+
+    private void resetTitle() {
+        setTitle(getString(R.string.app_name));
     }
 }

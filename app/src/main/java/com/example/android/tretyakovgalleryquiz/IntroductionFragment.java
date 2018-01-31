@@ -34,7 +34,7 @@ public class IntroductionFragment extends Fragment {
     }
 
     interface IntroductionListener {
-        void onIntroductionFragmentClicked(String name, String email);
+        void onIntroductionFragmentInteraction(String name, String email);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class IntroductionFragment extends Fragment {
 
                     // Сообщить слушателю о действиях пользователя
                     if (mIntroductionListener != null) {
-                        mIntroductionListener.onIntroductionFragmentClicked(name, email);
+                        mIntroductionListener.onIntroductionFragmentInteraction(name, email);
                     }
                 }
             });

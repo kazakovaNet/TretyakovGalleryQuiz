@@ -3,6 +3,7 @@ package com.example.android.tretyakovgalleryquiz;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,29 +18,26 @@ import android.widget.TextView;
  */
 
 public class QuestionFragment extends Fragment implements View.OnClickListener {
-    private QuestionListener mQuestionListener;
-    private PictureQuestion mPictureQuestion;
+    private onQuestionFragmentInteractionListener mListener;
+    private Question mQuestion;
+    private Context mParentContext;
 
     public QuestionFragment() {
         // Required empty public constructor
     }
 
     public void onClick(View v) {
-        if (mQuestionListener != null) {
+        if (mListener != null) {
             // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            mQuestionListener.onPictureQuestionFragmentClicked(v.getId(), mPictureQuestion.getCorrectAnswer());
+            mListener.onQuestionFragmentInteraction(v.getId());
         }
-    }
-
-    interface QuestionListener {
-        void onPictureQuestionFragmentClicked(long id, String correctAnswer);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_picture_answer, container, false);
+        return inflater.inflate(R.layout.fragment_question, container, false);
     }
 
     @Override
@@ -53,13 +51,13 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         View view = getView();
 
         if (view != null) {
-            String[] answers = mPictureQuestion.getAnswers();
+            String[] answers = mParentContext.getResources().getStringArray(mQuestion.getAnswersArrayId());
 
             ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
-            pictureImageView.setImageResource(mPictureQuestion.getPictureId());
+            pictureImageView.setImageResource(mQuestion.getPictureId());
 
             TextView questionTextView = view.findViewById(R.id.question_text_view);
-            questionTextView.setText(mPictureQuestion.getQuestion());
+            questionTextView.setText(mParentContext.getString(mQuestion.getQuestion()));
 
             // Получение ссылок на кнопки
             Button answer1Button = view.findViewById(R.id.answer_1_button);
@@ -84,11 +82,39 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        this.mQuestionListener = (QuestionListener) activity;
+        if (activity instanceof onQuestionFragmentInteractionListener) {
+            mListener = (onQuestionFragmentInteractionListener) activity;
+        } else {
+            throw new RuntimeException(activity.toString()
+                    + " must implement OnResultFragmentInteractionListener");
+        }
+
+        mParentContext = activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        mListener = null;
     }
 
     // Определяются данные для отображения
-    public void setAnswerData(int pictureId) {
-        mPictureQuestion = PictureQuestion.PICTURE_QUESTIONS_DATA[pictureId];
+    public void setAnswerData(Question question) {
+        this.mQuestion = question;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    interface onQuestionFragmentInteractionListener {
+        void onQuestionFragmentInteraction(int id);
     }
 }
