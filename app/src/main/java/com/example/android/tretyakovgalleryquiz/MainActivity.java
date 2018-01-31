@@ -2,7 +2,6 @@ package com.example.android.tretyakovgalleryquiz;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.QuestionListener, IntroductionFragment.IntroductionListener {
-    private int[] correctAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
-    private int step = 0;
-    public static Resources resources;
-    private String name;
-    private String email;
+    private int[] mCorrectAnswers = new int[]{R.id.answer_1_button, R.id.answer_2_button, R.id.answer_3_button, R.id.answer_4_button, R.id.answer_1_button};
+    private int mStep = 0;
+    public static Resources sResources;
+    private String mName;
+    private String mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +24,14 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         setContentView(R.layout.activity_main);
 
-        resources = getResources();
+        sResources = getResources();
 
-        if (savedInstanceState != null && savedInstanceState.containsKey("step")) {
-            step = savedInstanceState.getInt("step");
+        if (savedInstanceState != null && savedInstanceState.containsKey("mStep")) {
+            mStep = savedInstanceState.getInt("mStep");
         }
 
         // В зависимости от шага отображается приветственный фрагмент / фрагмент с вопросом
-        if (step == 0) {
+        if (mStep == 0) {
             setIntroductionFragment();
         } else {
             setQuestionFragment();
@@ -40,12 +39,12 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private void setQuestionFragment() {
-        setTitleQuestion(step);
+        setTitleQuestion(mStep);
 
         QuestionFragment fragment = new QuestionFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        fragment.setAnswerData(step);
+        fragment.setAnswerData(mStep);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Добавить в стек возврата
@@ -78,14 +77,14 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt("step", step);
+        outState.putInt("mStep", mStep);
     }
 
     @Override
     public void onPictureQuestionFragmentClicked(long id, String correctAnswer) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        if (correctAnswers[step] != id) {
+        if (mCorrectAnswers[mStep] != id) {
             builder.setTitle(R.string.wrong)
                     .setMessage(getString(R.string.wrong_answer_text) + correctAnswer)
                     .setIcon(R.drawable.wrong_icon);
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (++step < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
+                        if (++mStep < PictureQuestion.PICTURE_QUESTIONS_DATA.length) {
                             setQuestionFragment();
                         } else {
                             builder.setTitle(R.string.end)
@@ -125,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void onIntroductionFragmentClicked(String name, String email) {
-        this.name = name;
-        this.email = email;
+        this.mName = name;
+        this.mEmail = email;
 
         setQuestionFragment();
     }

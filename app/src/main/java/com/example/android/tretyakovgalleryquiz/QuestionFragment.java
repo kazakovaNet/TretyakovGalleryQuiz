@@ -17,17 +17,17 @@ import android.widget.TextView;
  */
 
 public class QuestionFragment extends Fragment implements View.OnClickListener {
-    private QuestionListener listener;
-    private PictureQuestion pictureQuestion;
+    private QuestionListener mQuestionListener;
+    private PictureQuestion mPictureQuestion;
 
     public QuestionFragment() {
         // Required empty public constructor
     }
 
     public void onClick(View v) {
-        if (listener != null) {
+        if (mQuestionListener != null) {
             // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            listener.onPictureQuestionFragmentClicked(v.getId(), pictureQuestion.getCorrectAnswer());
+            mQuestionListener.onPictureQuestionFragmentClicked(v.getId(), mPictureQuestion.getCorrectAnswer());
         }
     }
 
@@ -53,13 +53,13 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         View view = getView();
 
         if (view != null) {
-            String[] answers = pictureQuestion.getAnswers();
+            String[] answers = mPictureQuestion.getAnswers();
 
             ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
-            pictureImageView.setImageResource(pictureQuestion.getPictureId());
+            pictureImageView.setImageResource(mPictureQuestion.getPictureId());
 
             TextView questionTextView = view.findViewById(R.id.question_text_view);
-            questionTextView.setText(pictureQuestion.getQuestion());
+            questionTextView.setText(mPictureQuestion.getQuestion());
 
             // Получение ссылок на кнопки
             Button answer1Button = view.findViewById(R.id.answer_1_button);
@@ -84,11 +84,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        this.listener = (QuestionListener) activity;
+        this.mQuestionListener = (QuestionListener) activity;
     }
 
     // Определяются данные для отображения
     public void setAnswerData(int pictureId) {
-        pictureQuestion = PictureQuestion.PICTURE_QUESTIONS_DATA[pictureId];
+        mPictureQuestion = PictureQuestion.PICTURE_QUESTIONS_DATA[pictureId];
     }
 }

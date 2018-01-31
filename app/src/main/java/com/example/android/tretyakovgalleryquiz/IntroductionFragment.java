@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +20,14 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass.
  */
 public class IntroductionFragment extends Fragment {
-    private EditText nameEditText;
-    private EditText emailEditText;
-    private CheckBox scoringCheckBox;
-    private TextView showResultTextView;
-    private RadioGroup showResultRadioGroup;
-    private IntroductionListener listener;
-    private boolean onScreen = true;
-    private Context parentContext;
+    private EditText mNameEditText;
+    private EditText mEmailEditText;
+    private CheckBox mScoringCheckBox;
+    private TextView mShowResultTextView;
+    private RadioGroup mShowResultRadioGroup;
+    private IntroductionListener mIntroductionListener;
+    private boolean mOnScreen = true;
+    private Context mParentContext;
 
     public IntroductionFragment() {
         // Required empty public constructor
@@ -50,8 +49,8 @@ public class IntroductionFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        this.listener = (IntroductionListener) activity;
-        this.parentContext = activity;
+        this.mIntroductionListener = (IntroductionListener) activity;
+        this.mParentContext = activity;
     }
 
     @Override
@@ -61,12 +60,12 @@ public class IntroductionFragment extends Fragment {
         View view = getView();
 
         if (view != null) {
-            nameEditText = view.findViewById(R.id.name_edit_text);
-            emailEditText = view.findViewById(R.id.email_edit_text);
-            showResultTextView = view.findViewById(R.id.show_result_text_view);
+            mNameEditText = view.findViewById(R.id.name_edit_text);
+            mEmailEditText = view.findViewById(R.id.email_edit_text);
+            mShowResultTextView = view.findViewById(R.id.show_result_text_view);
 
-            scoringCheckBox = view.findViewById(R.id.scoring_check_box);
-            scoringCheckBox.setOnClickListener(new View.OnClickListener() {
+            mScoringCheckBox = view.findViewById(R.id.scoring_check_box);
+            mScoringCheckBox.setOnClickListener(new View.OnClickListener() {
                 // Установка / снятие флажка Подсчитывать результаты
                 @Override
                 public void onClick(View v) {
@@ -74,18 +73,18 @@ public class IntroductionFragment extends Fragment {
 
                     // Скрытие / отображение блока способа отображения результатов
                     // в зависимости от установленного checkbox
-                    if (scoringCheckBox.isChecked()) {
+                    if (mScoringCheckBox.isChecked()) {
                         visible = View.VISIBLE;
                     } else {
                         visible = View.GONE;
 
                         // Скрытие поля ввода электронной почты при снятии галочки подсчета результатов
-                        emailEditText.setVisibility(visible);
+                        mEmailEditText.setVisibility(visible);
                     }
 
-                    showResultTextView.setVisibility(visible);
-                    showResultRadioGroup.setVisibility(visible);
-                    showResultRadioGroup.clearCheck();
+                    mShowResultTextView.setVisibility(visible);
+                    mShowResultRadioGroup.setVisibility(visible);
+                    mShowResultRadioGroup.clearCheck();
                 }
             });
 
@@ -94,23 +93,23 @@ public class IntroductionFragment extends Fragment {
                 // Нажатие на кнопку Старт
                 @Override
                 public void onClick(View v) {
-                    String name = String.valueOf(nameEditText.getText());
+                    String name = String.valueOf(mNameEditText.getText());
 
                     // TODO добавить валидацию имени
                     if (name.equals("")) {
-                        Toast.makeText(parentContext, "Укажите свое имя", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mParentContext, "Укажите свое имя", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     // Сохранение введенного адреса электронной почты,
                     // если выбран вариант отправки результата на почту
                     String email;
-                    if (!onScreen) {
-                        email = String.valueOf(emailEditText.getText());
+                    if (!mOnScreen) {
+                        email = String.valueOf(mEmailEditText.getText());
 
                         // TODO добавить валидацию адреса почты
                         if (email.equals("")) {
-                            Toast.makeText(parentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     } else {
@@ -118,14 +117,14 @@ public class IntroductionFragment extends Fragment {
                     }
 
                     // Сообщить слушателю о действиях пользователя
-                    if (listener != null) {
-                        listener.onIntroductionFragmentClicked(name, email);
+                    if (mIntroductionListener != null) {
+                        mIntroductionListener.onIntroductionFragmentClicked(name, email);
                     }
                 }
             });
 
-            showResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
-            showResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            mShowResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
+            mShowResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     int visible = View.GONE;
@@ -139,12 +138,12 @@ public class IntroductionFragment extends Fragment {
                             visible = View.VISIBLE;
 
                             // Флаг отображения результатов на экране
-                            onScreen = false;
+                            mOnScreen = false;
                             break;
                     }
 
                     // Скрытие / отображение поля для ввода e-mail
-                    emailEditText.setVisibility(visible);
+                    mEmailEditText.setVisibility(visible);
                 }
             });
         }
