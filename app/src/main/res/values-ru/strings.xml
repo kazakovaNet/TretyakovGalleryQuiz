@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Викторина \"Третьяковская галерея\"</string>
     <string name="picture">Картина</string>
     <string name="question_1">Это картина Николая Шильдера \"Искушение\". Чем она была знаменательна для Третьякова?</string>
@@ -19,5 +19,8 @@
     <string name="send_on_email">Выслать письмом на e-mail</string>
     <string name="enter_your_email">Введите свой e-mail</string>
     <string name="thank_you_for_attention">Спасибо за внимание!</string>
-    <string name="results_on_screen">Вы ответили на 5 вопросов из 10</string>
+    <string name="text_result_on_screen">You answered <xliff:g example="2" id="score">%d</xliff:g> questions out of <xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
+    <string name="your_result">Ваш результат</string>
+    <string name="exit">Выход</string>
+    <string name="enter_email">Укажите адрес электронной почты</string>
 </resources>

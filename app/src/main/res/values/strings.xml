@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Tretyakov Gallery Quiz</string>
     <string name="picture">Picture</string>
     <string name="question_1">This is a picture of Nikolai Shilder \"Temptation\". What was it significant for Tretyakov?</string>
@@ -19,5 +19,8 @@
     <string name="send_on_email">Send on e-mail</string>
     <string name="enter_your_email">Enter your e-mail</string>
     <string name="thank_you_for_attention">Thank you for attention!</string>
-    <string name="results_on_screen">You answered 5 questions out of 10</string>
+    <string name="text_result_on_screen">You answered <xliff:g example="2" id="score">%d</xliff:g> questions out of <xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
+    <string name="your_result">Your result</string>
+    <string name="exit">Exit</string>
+    <string name="enter_email">Enter your email address</string>
 </resources>

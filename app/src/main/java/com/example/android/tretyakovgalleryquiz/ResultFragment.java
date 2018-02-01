@@ -120,7 +120,7 @@ public class ResultFragment extends Fragment {
 
                         // TODO добавить валидацию адреса почты
                         if (mEmail.equals("")) {
-                            Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mParentContext, mParentContext.getString(R.string.enter_email), Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -190,11 +190,11 @@ public class ResultFragment extends Fragment {
     private void showResultAlert() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mParentContext);
 
-        builder.setTitle("Ваш результат")
-                .setMessage("You answered " + mScore + " questions out of " + mCountOfQuestion)
+        builder.setTitle(R.string.your_result)
+                .setMessage(mParentContext.getString(R.string.text_result_on_screen, mScore, mCountOfQuestion))
                 .setIcon(R.drawable.right_icon)
                 .setCancelable(false)
-                .setNegativeButton("Выход", new DialogInterface.OnClickListener() {
+                .setNegativeButton(mParentContext.getString(R.string.exit), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
