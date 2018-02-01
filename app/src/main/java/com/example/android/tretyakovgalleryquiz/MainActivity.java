@@ -5,10 +5,12 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
+    private static final String TAG = "MainActivity";
     private int mCurrentStep = 0;
     private String mName;
     private String mEmail;
@@ -162,10 +164,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     public void onResultFragmentInteraction(String email) {
         this.mEmail = email;
 
-        if (!mEmail.equals("")) {
-            // TODO
-        }
+        Log.d(TAG, email);
+    }
 
+    @Override
+    public void onExitButtonClicked() {
         finish();
     }
 

@@ -1,8 +1,10 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,11 +24,13 @@ import android.widget.Toast;
  * to handle interaction events.
  */
 public class ResultFragment extends Fragment {
+    private final String ON_SCREEN = "onScreen";
+    private final String ON_EMAIL = "onEmail";
     private TextView mShowResultTextView;
     private EditText mEmailEditText;
     private RadioGroup mShowResultRadioGroup;
     private Button mResultButton;
-    private boolean mOnScreen = true;
+    private String mTypeResultShow = ON_SCREEN;
     private boolean isScoring;
     private String mEmail;
     private String TAG = "ResultFragment";
@@ -35,6 +39,7 @@ public class ResultFragment extends Fragment {
     private String mName;
     private TextView mNameTextView;
     private TextView mResultTextView;
+    private Button mExitButton;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -74,15 +79,17 @@ public class ResultFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.on_screen_radio_button:
-                        // Отображение текста с результатом викторины
-                        mResultTextView.setVisibility(View.VISIBLE);
+                        // Флаг отображения на экране
+                        mTypeResultShow = ON_SCREEN;
+
                         // Скрытие поля для ввода e-mail
                         mEmailEditText.setVisibility(View.GONE);
 
                         break;
                     case R.id.on_email_radio_button:
-                        // Скрытие текста с результатом викторины
-                        mResultTextView.setVisibility(View.GONE);
+                        // Флаг отправки на почту
+                        mTypeResultShow = ON_EMAIL;
+
                         // Отображение поля для ввода e-mail
                         mEmailEditText.setVisibility(View.VISIBLE);
 
@@ -93,57 +100,68 @@ public class ResultFragment extends Fragment {
         mShowResultRadioGroup.clearCheck();
 
         mResultButton = view.findViewById(R.id.result_button);
+        // Если выставлен чекбокс подсчета очков, отображается кнопка отображения результатов
+        if (isScoring) {
+            mResultButton.setVisibility(View.VISIBLE);
+        }
         mResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Получение выбранного варианта отображения результатов
-                int checkedRadioButtonId = mShowResultRadioGroup.getCheckedRadioButtonId();
+                switch (mTypeResultShow) {
+                    case ON_SCREEN:
+                        // Отображение текста с результатом викторины
+                        showResultAlert();
+                        break;
+                    case ON_EMAIL:
+                        // Сохранение введенного адреса электронной почты,
+                        // если выбран вариант отправки результата на почту
+                        mEmail = String.valueOf(mEmailEditText.getText());
 
-                if (checkedRadioButtonId == R.id.on_screen_radio_button){
-                    // Отображение текста с результатом викторины
-                    mResultTextView.setVisibility(View.VISIBLE);
-                }
+                        // TODO добавить валидацию адреса почты
+                        if (mEmail.equals("")) {
+                            Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                if (mEmailEditText.getVisibility() == View.VISIBLE) {
-                    // Сохранение введенного адреса электронной почты,
-                    // если выбран вариант отправки результата на почту
-                    mEmail = String.valueOf(mEmailEditText.getText());
-
-                    // TODO добавить валидацию адреса почты
-                    if (mEmail.equals("")) {
-                        Toast.makeText(mParentContext, "Укажите адрес электронной почты", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                } else {
-                    mEmail = "";
-                }
-
-                // Сообщить слушателю о действиях пользователя
-                if (mListener != null) {
-                    mListener.onResultFragmentInteraction(mEmail);
+                        // Сообщить слушателю о действиях пользователя
+                        if (mListener != null) {
+                            mListener.onResultFragmentInteraction(mEmail);
+                        }
+                        break;
                 }
             }
         });
 
-        // Скрытие / отображение блока способа отображения результатов
-        // в зависимости от установленного checkbox на приветственном экране
-        int visible;
-        if (isScoring) {
-            visible = View.VISIBLE;
-        } else {
-            visible = View.GONE;
+        mExitButton = view.findViewById(R.id.exit_button);
+        // Если не выставлен чекбокс подсчета очков, отображается кнопка выхода
+        if (!isScoring) {
+            mExitButton.setVisibility(View.VISIBLE);
         }
+        mExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Сообщить слушателю о действиях пользователя
+                if (mListener != null) {
+                    mListener.onExitButtonClicked();
+                }
+            }
+        });
 
-        mShowResultTextView.setVisibility(visible);
-        mShowResultRadioGroup.setVisibility(visible);
+        // Скрытие / отображение блока способа отображения результатов и кнопки выхода
+        // в зависимости от установленного checkbox на приветственном экране
+        if (isScoring) {
+            mShowResultTextView.setVisibility(View.VISIBLE);
+            mShowResultRadioGroup.setVisibility(View.VISIBLE);
+        } else {
+            mShowResultTextView.setVisibility(View.GONE);
+            mShowResultRadioGroup.setVisibility(View.GONE);
+            mExitButton.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setResultData(String name, boolean isScoring) {
         this.isScoring = isScoring;
         this.mName = name;
-
-        Log.d(TAG, String.valueOf(isScoring));
-        Log.d(TAG, name);
     }
 
     @Override
@@ -166,6 +184,29 @@ public class ResultFragment extends Fragment {
         mListener = null;
     }
 
+    private void showResultAlert() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mParentContext);
+
+        builder.setTitle("Ваш результат")
+                .setMessage("You answered 5 questions out of 10")
+                .setIcon(R.drawable.right_icon)
+                .setCancelable(false)
+                .setNegativeButton("Выход", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+
+                        // Завершить работу приложения
+                        if (mListener != null) {
+                            mListener.onExitButtonClicked();
+                        }
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -179,5 +220,7 @@ public class ResultFragment extends Fragment {
     public interface OnResultFragmentInteractionListener {
         // TODO: Update argument type and name
         void onResultFragmentInteraction(String email);
+
+        void onExitButtonClicked();
     }
 }

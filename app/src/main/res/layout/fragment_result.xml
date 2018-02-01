@@ -17,14 +17,6 @@
         android:text="@string/thank_you_for_attention" />
 
     <TextView
-        android:id="@+id/result_on_screen_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="@string/results_on_screen"
-        tools:visibility="visible" />
-
-    <TextView
         android:id="@+id/show_result_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,5 +57,23 @@
         android:id="@+id/result_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Получить результат" />
+        android:text="Получить результат"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выйти"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/result_on_screen_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/results_on_screen"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </LinearLayout>
