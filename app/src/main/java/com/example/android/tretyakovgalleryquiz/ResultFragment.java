@@ -6,7 +6,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,8 @@ public class ResultFragment extends Fragment {
     private TextView mNameTextView;
     private TextView mResultTextView;
     private Button mExitButton;
+    private int mScore;
+    private int mCountOfQuestion;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -159,9 +160,11 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    public void setResultData(String name, boolean isScoring) {
+    public void setResultData(String name, boolean isScoring, int score, int countOfQuestion) {
         this.isScoring = isScoring;
         this.mName = name;
+        this.mScore = score;
+        this.mCountOfQuestion = countOfQuestion;
     }
 
     @Override
@@ -188,7 +191,7 @@ public class ResultFragment extends Fragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mParentContext);
 
         builder.setTitle("Ваш результат")
-                .setMessage("You answered 5 questions out of 10")
+                .setMessage("You answered " + mScore + " questions out of " + mCountOfQuestion)
                 .setIcon(R.drawable.right_icon)
                 .setCancelable(false)
                 .setNegativeButton("Выход", new DialogInterface.OnClickListener() {

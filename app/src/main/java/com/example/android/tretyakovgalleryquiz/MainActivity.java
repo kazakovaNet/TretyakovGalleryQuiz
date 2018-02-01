@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     private String mEmail;
     private Question mCurrentQuestion;
     private boolean isScoring;
+    private int mScore;
 
     private Question[] mQuestions = {
             new Question(
@@ -44,8 +45,14 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         setContentView(R.layout.activity_main);
 
+        // Восстанавление значения текущего шага
         if (savedInstanceState != null && savedInstanceState.containsKey("mCurrentStep")) {
             mCurrentStep = savedInstanceState.getInt("mCurrentStep");
+        }
+
+        // Восстанавление количества набранных очков
+        if (savedInstanceState != null && savedInstanceState.containsKey("mScore")) {
+            mScore = savedInstanceState.getInt("mScore");
         }
 
         // В зависимости от шага отображается приветственный фрагмент /
@@ -63,7 +70,10 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        // Сохранение значения текущего шага
         outState.putInt("mCurrentStep", mCurrentStep);
+        // Сохранение количества набранных очков
+        outState.putInt("mScore", mScore);
     }
 
     private void setQuestionFragment() {
@@ -105,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         ResultFragment resultFragment = new ResultFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        resultFragment.setResultData(mName, isScoring);
+        resultFragment.setResultData(mName, isScoring, mScore, mQuestions.length);
 
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, resultFragment);
@@ -128,6 +138,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     .setMessage(getString(R.string.wrong_answer_text) + ((Button) findViewById(correctAnswer)).getText())
                     .setIcon(R.drawable.wrong_icon);
         } else {
+            // Увеличение количества набранных очков, если установлен чекбокс подсчета результата
+            if (isScoring) {
+                mScore++;
+            }
+
             builder.setTitle(R.string.right)
                     .setMessage(R.string.right_answer_text)
                     .setIcon(R.drawable.right_icon);
