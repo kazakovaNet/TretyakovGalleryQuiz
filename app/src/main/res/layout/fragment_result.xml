@@ -1,33 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.android.tretyakovgalleryquiz.ResultFragment">
 
     <TextView
         android:id="@+id/name_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
+        android:textSize="18sp"
+        android:gravity="center"
         tools:text="Name" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/thank_you_for_attention" />
-
-    <TextView
         android:id="@+id/show_result_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/name_text_view"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
         android:text="@string/see_results"
+        android:textSize="18sp"
         android:visibility="gone"
         tools:visibility="visible" />
 
     <RadioGroup
         android:id="@+id/show_result_radio_group"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/show_result_text_view"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="16dp"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -46,35 +56,44 @@
 
     <EditText
         android:id="@+id/email_edit_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/show_result_radio_group"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:hint="@string/enter_your_email"
-        android:text="kazakova.net@yandex.ru"
         android:inputType="textEmailAddress"
+        android:text="kazakova.net@yandex.ru"
         android:visibility="gone"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/result_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Получить результат"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:background="@drawable/button_custom"
+        android:text="@string/get_result_button"
+        android:textColor="@color/primary_text"
         android:visibility="gone"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/exit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:background="@drawable/button_custom"
         android:text="@string/exit"
+        android:textColor="@color/primary_text"
         android:visibility="gone"
         tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/result_on_screen_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_result_on_screen"
-        android:visibility="gone"
-        tools:visibility="visible" />
-</LinearLayout>
+</RelativeLayout>

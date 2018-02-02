@@ -15,13 +15,14 @@
     <string name="counting_points">Counting points?</string>
     <string name="start_button">Start</string>
     <string name="see_results">How do you want to see the results?</string>
-    <string name="on_screen">On screen</string>
-    <string name="send_on_email">Send on e-mail</string>
+    <string name="on_screen">Show on screen</string>
+    <string name="send_on_email">Send by e-mail</string>
     <string name="enter_your_email">Enter your e-mail</string>
-    <string name="thank_you_for_attention">Thank you for attention!</string>
+    <string name="thank_you_for_attention"><xliff:g example="Natalia" id="name">%s</xliff:g>, thank you for attention!</string>
     <string name="text_result_on_screen">You answered <xliff:g example="2" id="score">%d</xliff:g> questions out of <xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
     <string name="your_result">Your result</string>
     <string name="exit">Exit</string>
     <string name="enter_valid_email">Please enter valid email address</string>
     <string name="result_email_subject">Results of the quiz \"Tretyakov Gallery\"</string>
+    <string name="get_result_button">View results</string>
 </resources>

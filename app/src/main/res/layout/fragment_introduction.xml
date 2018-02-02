@@ -1,31 +1,54 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.android.tretyakovgalleryquiz.IntroductionFragment">
 
     <TextView
+        android:id="@+id/museum_description_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/intro_text" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/intro_text"
+        android:textStyle="italic" />
 
     <EditText
         android:id="@+id/name_edit_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Natalie"
+        android:layout_below="@id/museum_description_text_view"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
         android:hint="@string/enter_your_name" />
 
     <CheckBox
         android:id="@+id/scoring_check_box"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/name_edit_text"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="16dp"
         android:text="@string/counting_points" />
 
     <Button
         android:id="@+id/start_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start_button" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:background="@drawable/button_custom"
+        android:text="@string/start_button"
+
+        android:textColor="@color/primary_text" />
+</RelativeLayout>

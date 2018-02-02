@@ -55,6 +55,13 @@ public class IntroductionFragment extends Fragment {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // TODO добавить сохранение введенных имени и галочки
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 

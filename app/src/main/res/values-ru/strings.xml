@@ -15,13 +15,14 @@
     <string name="counting_points">Подсчитывать очки?</string>
     <string name="start_button">Начать</string>
     <string name="see_results">Как вы хотите увидеть результаты?</string>
-    <string name="on_screen">На экране</string>
+    <string name="on_screen">Показать на экране</string>
     <string name="send_on_email">Выслать письмом на e-mail</string>
     <string name="enter_your_email">Введите свой e-mail</string>
-    <string name="thank_you_for_attention">Спасибо за внимание!</string>
+    <string name="thank_you_for_attention"><xliff:g example="Natalia" id="name">%s</xliff:g>, cпасибо за внимание!</string>
     <string name="text_result_on_screen">You answered <xliff:g example="2" id="score">%d</xliff:g> questions out of <xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
     <string name="your_result">Ваш результат</string>
     <string name="exit">Выход</string>
     <string name="enter_valid_email">Пожалуйста, укажите правильный адрес электронной почты</string>
     <string name="result_email_subject">Результаты викторины \"Третьяковская галерея\"</string>
+    <string name="get_result_button">Посмотреть результат</string>
 </resources>

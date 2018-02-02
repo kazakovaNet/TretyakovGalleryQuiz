@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private int mCurrentStep = 0;
+    private int mCurrentStep = -1;
     private String mName;
     private Question mCurrentQuestion;
     private boolean isScoring;
@@ -56,9 +55,14 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
             mScore = savedInstanceState.getInt("mScore");
         }
 
+        // Восстановление имени
+        if (savedInstanceState != null && savedInstanceState.containsKey("mName")) {
+            mName = savedInstanceState.getString("mName");
+        }
+
         // В зависимости от шага отображается приветственный фрагмент /
         // фрагмент с вопросом / результирующий фрагмент
-        if (mCurrentStep == 0) {
+        if (mCurrentStep == -1) {
             setIntroductionFragment();
         } else if (mCurrentStep == mQuestions.length) {
             setResultFragment();
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         outState.putInt("mCurrentStep", mCurrentStep);
         // Сохранение количества набранных очков
         outState.putInt("mScore", mScore);
+        // Сохранение имени
+        outState.putString("mName", mName);
     }
 
     private void setQuestionFragment() {
@@ -173,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         this.mName = name;
         this.isScoring = isScoring;
 
+        mCurrentStep++;
+
         setQuestionFragment();
     }
 
@@ -195,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     /**
-     *
      * @param email
      */
     public void sentResultOnEmail(String email) {

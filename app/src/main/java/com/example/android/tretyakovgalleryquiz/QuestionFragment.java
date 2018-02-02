@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -64,16 +63,16 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        RadioButton answer1RadioButton = view.findViewById(R.id.answer_1_radio_button);
-        RadioButton answer2RadioButton = view.findViewById(R.id.answer_2_radio_button);
-        RadioButton answer3RadioButton = view.findViewById(R.id.answer_3_radio_button);
-        RadioButton answer4RadioButton = view.findViewById(R.id.answer_4_radio_button);
-
         // Назначение текста радио-кнопкам
         String[] answers = mParentContext.getResources().getStringArray(mQuestion.getAnswersArrayId());
+
+        RadioButton answer1RadioButton = view.findViewById(R.id.answer_1_radio_button);
         answer1RadioButton.setText(answers[0]);
+        RadioButton answer2RadioButton = view.findViewById(R.id.answer_2_radio_button);
         answer2RadioButton.setText(answers[1]);
+        RadioButton answer3RadioButton = view.findViewById(R.id.answer_3_radio_button);
         answer3RadioButton.setText(answers[2]);
+        RadioButton answer4RadioButton = view.findViewById(R.id.answer_4_radio_button);
         answer4RadioButton.setText(answers[3]);
     }
 

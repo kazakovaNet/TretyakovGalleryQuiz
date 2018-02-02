@@ -70,12 +70,10 @@ public class ResultFragment extends Fragment {
     private void initializeFragment(View view) {
         // Назначение имени пользователя
         mNameTextView = view.findViewById(R.id.name_text_view);
-        mNameTextView.setText(mName);
+        mNameTextView.setText(mParentContext.getString(R.string.thank_you_for_attention, mName));
 
         mEmailEditText = view.findViewById(R.id.email_edit_text);
         mShowResultTextView = view.findViewById(R.id.show_result_text_view);
-
-        mResultTextView = view.findViewById(R.id.result_on_screen_text_view);
 
         mShowResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
         mShowResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
