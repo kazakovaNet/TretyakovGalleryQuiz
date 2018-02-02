@@ -3,6 +3,8 @@ package com.example.android.tretyakovgalleryquiz;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     private static final String TAG = "MainActivity";
     private int mCurrentStep = 0;
     private String mName;
-    private String mEmail;
     private Question mCurrentQuestion;
     private boolean isScoring;
     private int mScore;
@@ -177,9 +178,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void onResultFragmentInteraction(String email) {
-        this.mEmail = email;
-
-        Log.d(TAG, email);
+        sentResultOnEmail(email);
     }
 
     @Override
@@ -193,5 +192,30 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     private void resetTitle() {
         setTitle(getString(R.string.app_name));
+    }
+
+    /**
+     *
+     * @param email
+     */
+    public void sentResultOnEmail(String email) {
+        String resultSummary = createResultSummary();
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SENDTO);
+        // only email apps should handle this
+        sendIntent.setData(Uri.parse("mailto:"));
+        // добавляем текст для передачи
+        sendIntent.putExtra(Intent.EXTRA_TEXT, resultSummary);
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.result_email_subject, mName));
+        // запускаем активити
+        if (sendIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(sendIntent);
+        }
+    }
+
+    private String createResultSummary() {
+        return null;
     }
 }

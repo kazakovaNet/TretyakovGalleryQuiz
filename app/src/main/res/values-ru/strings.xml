@@ -23,4 +23,5 @@
     <string name="your_result">Ваш результат</string>
     <string name="exit">Выход</string>
     <string name="enter_valid_email">Пожалуйста, укажите правильный адрес электронной почты</string>
+    <string name="result_email_subject">Результаты викторины \"Третьяковская галерея\"</string>
 </resources>
