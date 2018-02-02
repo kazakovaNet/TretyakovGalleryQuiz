@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -53,22 +55,33 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         TextView questionTextView = view.findViewById(R.id.question_text_view);
         questionTextView.setText(mParentContext.getString(mQuestion.getQuestion()));
 
-        // Получение ссылок на кнопки и назначение слушателей клика
-        Button answer1Button = view.findViewById(R.id.answer_1_button);
-        answer1Button.setOnClickListener(this);
-        Button answer2Button = view.findViewById(R.id.answer_2_button);
-        answer2Button.setOnClickListener(this);
-        Button answer3Button = view.findViewById(R.id.answer_3_button);
-        answer3Button.setOnClickListener(this);
-        Button answer4Button = view.findViewById(R.id.answer_4_button);
-        answer4Button.setOnClickListener(this);
+        // Получение ссылок на радио-кнопки и назначение слушателя клика
+        RadioGroup answerRadioGroup = view.findViewById(R.id.answer_radio_group);
+        answerRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                onClick(checkedId);
+            }
+        });
 
-        // Назначение текста кнопкам
+        RadioButton answer1RadioButton = view.findViewById(R.id.answer_1_radio_button);
+        RadioButton answer2RadioButton = view.findViewById(R.id.answer_2_radio_button);
+        RadioButton answer3RadioButton = view.findViewById(R.id.answer_3_radio_button);
+        RadioButton answer4RadioButton = view.findViewById(R.id.answer_4_radio_button);
+
+        // Назначение текста радио-кнопкам
         String[] answers = mParentContext.getResources().getStringArray(mQuestion.getAnswersArrayId());
-        answer1Button.setText(answers[0]);
-        answer2Button.setText(answers[1]);
-        answer3Button.setText(answers[2]);
-        answer4Button.setText(answers[3]);
+        answer1RadioButton.setText(answers[0]);
+        answer2RadioButton.setText(answers[1]);
+        answer3RadioButton.setText(answers[2]);
+        answer4RadioButton.setText(answers[3]);
+    }
+
+    private void onClick(int checkedId) {
+        if (mListener != null) {
+            // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
+            mListener.onQuestionFragmentInteraction(checkedId);
+        }
     }
 
     // Вызывается при присоединении фрагмента к активности
