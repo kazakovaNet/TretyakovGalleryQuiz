@@ -22,5 +22,5 @@
     <string name="text_result_on_screen">You answered <xliff:g example="2" id="score">%d</xliff:g> questions out of <xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
     <string name="your_result">Ваш результат</string>
     <string name="exit">Выход</string>
-    <string name="enter_email">Укажите адрес электронной почты</string>
+    <string name="enter_valid_email">Пожалуйста, укажите правильный адрес электронной почты</string>
 </resources>

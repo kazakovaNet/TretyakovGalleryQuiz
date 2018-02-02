@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,9 +119,8 @@ public class ResultFragment extends Fragment {
                         // если выбран вариант отправки результата на почту
                         mEmail = String.valueOf(mEmailEditText.getText());
 
-                        // TODO добавить валидацию адреса почты
-                        if (mEmail.equals("")) {
-                            Toast.makeText(mParentContext, mParentContext.getString(R.string.enter_email), Toast.LENGTH_SHORT).show();
+                        if (!isValidEmail(mEmail)) {
+                            Toast.makeText(mParentContext, mParentContext.getString(R.string.enter_valid_email), Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -208,6 +208,10 @@ public class ResultFragment extends Fragment {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
     /**
