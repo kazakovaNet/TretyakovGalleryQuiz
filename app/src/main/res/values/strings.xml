@@ -25,4 +25,8 @@
     <string name="enter_valid_email">Please enter valid email address</string>
     <string name="result_email_subject">Results of the quiz \"Tretyakov Gallery\"</string>
     <string name="get_result_button">View results</string>
+    <string name="quit_are_you_sure">Quit: Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="next">Further</string>
 </resources>

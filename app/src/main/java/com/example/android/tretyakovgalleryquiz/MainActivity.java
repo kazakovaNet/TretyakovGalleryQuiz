@@ -94,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         fragment.setAnswerData(mCurrentQuestion);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-        // Добавить в стек возврата
-        fragmentTransaction.addToBackStack(null);
         // Включить анимацию растворения и появления фрагментов
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию
@@ -106,10 +104,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         IntroductionFragment introductionFragment = new IntroductionFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        // Заменить фрагмент
-        fragmentTransaction.replace(R.id.fragment_container, introductionFragment);
-        // Добавить в стек возврата
-        fragmentTransaction.addToBackStack(null);
+        // Добавить фрагмент
+        fragmentTransaction.add(R.id.fragment_container, introductionFragment);
         // Включить анимацию растворения и появления фрагментов
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию
@@ -126,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, resultFragment);
-        // Добавить в стек возврата
-        fragmentTransaction.addToBackStack(null);
         // Включить анимацию растворения и появления фрагментов
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию
@@ -156,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         }
 
         builder.setCancelable(false)
-                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.next, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (++mCurrentStep < mQuestions.length) {
@@ -224,5 +218,30 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     private String createResultSummary() {
         return null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        openQuitDialog();
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(MainActivity.this);
+        quitDialog.setTitle(R.string.quit_are_you_sure)
+                .setIcon(R.drawable.end_icon)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = quitDialog.create();
+        alertDialog.show();
     }
 }

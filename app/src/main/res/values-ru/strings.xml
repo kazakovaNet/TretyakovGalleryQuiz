@@ -25,4 +25,8 @@
     <string name="enter_valid_email">Пожалуйста, укажите правильный адрес электронной почты</string>
     <string name="result_email_subject">Результаты викторины \"Третьяковская галерея\"</string>
     <string name="get_result_button">Посмотреть результат</string>
+    <string name="quit_are_you_sure">Выход: Вы уверены?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="next">Далее</string>
 </resources>

@@ -72,6 +72,8 @@ public class IntroductionFragment extends Fragment {
         }
     }
 
+
+
     private void initializeFragment(View view) {
         mNameEditText = view.findViewById(R.id.name_edit_text);
 
