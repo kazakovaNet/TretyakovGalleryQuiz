@@ -29,4 +29,23 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="next">Further</string>
+    <string name="question_4">Name the author of the picture \"Noon. In the vicinity of Moscow\"</string>
+    <string name="question_5">Before you the main facade of the Tretyakov Gallery, overlooking Lavrushinsky lane and executed in the Russian style. Perestroika was completed in 1904, after the death of P.M. Tretyakov. Who was the author of this sketch of the building?</string>
+    <string name="question_6">In the spring of 1880 an unusual exhibition opened in St. Petersburg. To the building where it was located, crowds of people flocked. A long queue lined the door. And in the hall with the curtains on the windows, lit by electric lamps, there was one single picture. What was the name of this painting, who wrote it?</string>
+    <string name="question_7">
+        In the Tretyakov collection a significant place is occupied by paintings on everyday subjects. One of the artists wrote a detailed explanation of his painting in verse. Listen to the excerpt:\n\n
+        \"Honest gentlemen,\n
+        Come here!\n
+        Welcome,\n
+        We will not ask for money:\n
+        For free,\n
+        Just clean the glasses carefully.\n
+        It begins,\n
+        Begins\n
+        About how people live on earth,\n
+        How others chew at someone else\'s expense.\n
+        Themselves work lazy,\n
+        So the rich get married…\"\n\n
+        Name the author of the poem. What kind of picture is it?
+    </string>
 </resources>
