@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "onCreate");
+
         // Hide status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -60,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
             mName = savedInstanceState.getString("mName");
         }
 
+        // Восстановление галочки подсчета результатов
+        if (savedInstanceState != null && savedInstanceState.containsKey("isScoring")) {
+            isScoring = savedInstanceState.getBoolean("isScoring");
+        }
+
         // В зависимости от шага отображается приветственный фрагмент /
         // фрагмент с вопросом / результирующий фрагмент
         if (mCurrentStep == -1) {
@@ -75,12 +83,16 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        Log.d(TAG, "onSaveInstanceState");
+
         // Сохранение значения текущего шага
         outState.putInt("mCurrentStep", mCurrentStep);
         // Сохранение количества набранных очков
         outState.putInt("mScore", mScore);
         // Сохранение имени
         outState.putString("mName", mName);
+        // Сохранение галочки подсчета результатов
+        outState.putBoolean("isScoring", isScoring);
     }
 
     private void setQuestionFragment() {
@@ -103,6 +115,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     private void setIntroductionFragment() {
         IntroductionFragment introductionFragment = new IntroductionFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
+
+        // Передаем имя и состояние галочки
+        if (mName != null) {
+            introductionFragment.setIntroductionData(mName, isScoring);
+        }
 
         // Добавить фрагмент
         fragmentTransaction.add(R.id.fragment_container, introductionFragment);
@@ -169,13 +186,19 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
+    public void onIntroductionFragmentSendData(String name, boolean isScoring) {
         this.mName = name;
         this.isScoring = isScoring;
 
         mCurrentStep++;
 
         setQuestionFragment();
+    }
+
+    @Override
+    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
+        this.mName = name;
+        this.isScoring = isScoring;
     }
 
     @Override

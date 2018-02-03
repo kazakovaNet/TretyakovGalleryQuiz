@@ -5,7 +5,6 @@
     android:orientation="horizontal"
     tools:resources="com.example.android.tretyakovgalleryquiz.QuestionFragment">
 
-    <!--TODO Добавить обрамление фигурной рамкой-->
     <ImageView
         android:id="@+id/picture_image_view"
         android:layout_width="0dp"
@@ -57,8 +56,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_custom"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         android:textColor="@color/primary_text"
+                        android:theme="@style/MyRadioButton"
                         android:textSize="14sp"
                         tools:text="Она была первой в коллекции" />
 
@@ -68,9 +70,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/button_custom"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         android:textColor="@color/primary_text"
                         android:textSize="14sp"
+                        android:theme="@style/MyRadioButton"
                         tools:text="Чтобы получить ее Третьяков ездил в Индию" />
 
                     <RadioButton
@@ -79,9 +84,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/button_custom"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         android:textColor="@color/primary_text"
                         android:textSize="14sp"
+                        android:theme="@style/MyRadioButton"
                         tools:text="Она была подвергнута цензурному запрету" />
 
                     <RadioButton
@@ -90,9 +98,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/button_custom"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         android:textColor="@color/primary_text"
                         android:textSize="14sp"
+                        android:theme="@style/MyRadioButton"
                         tools:text="На ней изображена Царевна Софья" />
                 </RadioGroup>
             </TableRow>

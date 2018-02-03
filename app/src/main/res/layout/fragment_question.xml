@@ -6,7 +6,6 @@
     tools:resources="com.example.android.tretyakovgalleryquiz.QuestionFragment"
     tools:targetApi="m">
 
-    <!--TODO Добавить обрамление фигурной рамкой-->
     <ImageView
         android:id="@+id/picture_image_view"
         android:layout_width="match_parent"
