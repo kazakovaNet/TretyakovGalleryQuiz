@@ -20,4 +20,32 @@
         <item>Отрок Варфоломей – будущий преподобный Сергий Радонежский</item>
         <item>Это был Бартоломео Растрелли русский архитектор итальянского происхождения</item>
     </string-array>
+
+    <string-array name="answers_question_4">
+        <item>И.И. Шишкин</item>
+        <item>А.И. Куинджи</item>
+        <item>И.Н. Крамской</item>
+        <item>В.Г. Перов</item>
+    </string-array>
+
+    <string-array name="answers_question_5">
+        <item>Сам П.М. Третьяков </item>
+        <item>Карл Брюлов</item>
+        <item>В.М. Васнецов</item>
+        <item>А.К. Саврасов</item>
+    </string-array>
+
+    <string-array name="answers_question_6">
+        <item>П.В. Васнецов, \"Последний день Помпеи\"</item>
+        <item>В.М. Нестеров, \"Видение отроку Варфоломею\"</item>
+        <item>П.А. Федотов, \"Сватовство майора\"</item>
+        <item>А.И. Куинджи, \"Лунная ночь на Днепре\"</item>
+    </string-array>
+
+    <string-array name="answers_question_7">
+        <item>Е.В. Маковский, \"В трактире\"</item>
+        <item>И.М. Прянишников, \"В ожидании шафера\"</item>
+        <item>Л.И. Соломаткин, \"Старый быт\"</item>
+        <item>П.А. Федотов, \"Сватовство майора\"</item>
+    </string-array>
 </resources>

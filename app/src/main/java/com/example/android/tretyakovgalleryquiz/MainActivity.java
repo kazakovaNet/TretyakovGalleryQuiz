@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     private int mScore;
 
     private Question[] mQuestions = {
-            new Question(
+            /*new Question(
                     R.string.question_1,
                     R.drawable.pic_1,
                     R.array.answers_question_1,
@@ -34,7 +34,27 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     R.string.question_3,
                     R.drawable.pic_3,
                     R.array.answers_question_3,
-                    R.id.answer_3_radio_button)
+                    R.id.answer_3_radio_button),
+            new Question(
+                    R.string.question_4,
+                    R.drawable.pic_4,
+                    R.array.answers_question_4,
+                    R.id.answer_1_radio_button),
+            new Question(
+                    R.string.question_5,
+                    R.drawable.pic_5,
+                    R.array.answers_question_5,
+                    R.id.answer_3_radio_button),
+            new Question(
+                    R.string.question_6,
+                    R.drawable.pic_6,
+                    R.array.answers_question_6,
+                    R.id.answer_4_radio_button),*/
+            new Question(
+                    R.string.question_7,
+                    R.drawable.pic_7,
+                    R.array.answers_question_7,
+                    R.id.answer_4_radio_button)
     };
 
     @Override
@@ -147,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void onQuestionFragmentInteraction(int id) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         int correctAnswer = mCurrentQuestion.getCorrectAnswerId();
 

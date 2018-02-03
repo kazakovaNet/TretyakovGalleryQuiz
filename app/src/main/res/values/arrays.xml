@@ -20,4 +20,32 @@
         <item>The boy Bartholomew is the future Reverend Sergius of Radonezh</item>
         <item>It was Bartolomeo Rastrelli, a Russian architect of Italian origin</item>
     </string-array>
+
+    <string-array name="answers_question_4">
+        <item>I.I. Shishkin</item>
+        <item>A.I. Kuinji</item>
+        <item>I.N. Kramskoy</item>
+        <item>V.G. Perov</item>
+    </string-array>
+
+    <string-array name="answers_question_5">
+        <item>Himself PM. Tretyakov</item>
+        <item>Karl Brulov</item>
+        <item>V.M. Vasnetsov</item>
+        <item>A.K. Savrasov</item>
+    </string-array>
+
+    <string-array name="answers_question_6">
+        <item>P.V. Vasnetsov, \"The Last Day of Pompeii\"</item>
+        <item>V.M. Nesterov, \"Vision for the Bartholomew\"</item>
+        <item>P.A. Fedotov \"Matchmaking of the Major\"</item>
+        <item>A.I. Kuindzhi, \"Moonlit Night on the Dnieper\"</item>
+    </string-array>
+
+    <string-array name="answers_question_7">
+        <item>E.V. Makovsky, \"In the Inn\"</item>
+        <item>I.M. Pryanishnikov, \"Waiting for the best man\"</item>
+        <item>L.I. Solomatkin, \"The Old Way of Life\"</item>
+        <item>P.A. Fedotov, \"Matchmaking Major\"</item>
+    </string-array>
 </resources>

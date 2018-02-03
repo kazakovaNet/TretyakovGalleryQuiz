@@ -32,6 +32,7 @@
                     android:padding="16dp"
                     android:textColor="@color/secondary_text"
                     android:textSize="16sp"
+                    android:maxLines="100"
                     tools:text="@string/question_3" />
             </TableRow>
 
