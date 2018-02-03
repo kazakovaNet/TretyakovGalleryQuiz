@@ -51,6 +51,7 @@
             android:layout_marginTop="56dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
+            android:layout_marginBottom="48dp"
             android:background="@drawable/button_custom"
             android:text="@string/start_button"
             android:textColor="@color/primary_text" />

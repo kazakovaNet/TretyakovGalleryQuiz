@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -45,6 +46,8 @@ public class IntroductionFragment extends Fragment {
         // Сохранение введенных пользователем имени и галочки при смене ориентации
         if (mListener != null) {
             mListener.onIntroductionFragmentInteraction(String.valueOf(mNameEditText.getText()), mScoringCheckBox.isChecked());
+            mNameEditText.setText("");
+            mNameEditText.setHint("");
         }
 
         Log.d(TAG, "onPause");

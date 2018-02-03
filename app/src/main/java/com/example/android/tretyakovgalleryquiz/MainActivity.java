@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         }
 
         // Добавить фрагмент
-        fragmentTransaction.add(R.id.fragment_container, introductionFragment);
+        fragmentTransaction.replace(R.id.fragment_container, introductionFragment);
         // Включить анимацию растворения и появления фрагментов
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         // Закрепить транзакцию

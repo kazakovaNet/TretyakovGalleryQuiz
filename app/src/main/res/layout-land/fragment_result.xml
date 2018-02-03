@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:textSize="18sp"
         android:gravity="center"
         tools:text="Name" />
@@ -23,7 +23,7 @@
         android:layout_below="@id/name_text_view"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/see_results"
         android:textSize="18sp"
@@ -37,7 +37,7 @@
         android:layout_below="@id/show_result_text_view"
         android:layout_marginLeft="56dp"
         android:layout_marginRight="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -61,7 +61,7 @@
         android:layout_below="@id/show_result_radio_group"
         android:layout_marginLeft="56dp"
         android:layout_marginRight="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress"
