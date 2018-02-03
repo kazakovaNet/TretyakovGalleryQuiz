@@ -1,12 +1,9 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,6 +25,7 @@ import android.widget.Toast;
 public class ResultFragment extends Fragment {
     private final String ON_SCREEN = "onScreen";
     private final String ON_EMAIL = "onEmail";
+    private static final String DIALOG_ALERT = "DialogAlert";
     private TextView mShowResultTextView;
     private EditText mEmailEditText;
     private RadioGroup mShowResultRadioGroup;
@@ -44,6 +42,7 @@ public class ResultFragment extends Fragment {
     private Button mExitButton;
     private int mScore;
     private int mCountOfQuestion;
+    private DialogAlertFragment mResultDialog;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -188,26 +187,13 @@ public class ResultFragment extends Fragment {
     }
 
     private void showResultAlert() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mParentContext);
+        FragmentManager manager = getFragmentManager();
+        mResultDialog = new DialogAlertFragment();
 
-        builder.setTitle(R.string.your_result)
-                .setMessage(mParentContext.getString(R.string.text_result_on_screen, mScore, mCountOfQuestion))
-                .setIcon(R.drawable.right_icon)
-                .setCancelable(false)
-                .setNegativeButton(mParentContext.getString(R.string.exit), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+        String message = getString(R.string.text_result_on_screen, mScore, mCountOfQuestion);
+        mResultDialog.setData(R.string.your_result, message, R.drawable.right_icon, String.valueOf(this.getClass()), getString(R.string.exit));
 
-                        // Завершить работу приложения
-                        if (mListener != null) {
-                            mListener.onExitButtonClicked();
-                        }
-                    }
-                });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        mResultDialog.show(manager, DIALOG_ALERT);
     }
 
     private boolean isValidEmail(CharSequence target) {

@@ -1,26 +1,26 @@
 package com.example.android.tretyakovgalleryquiz;
 
-import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.RadioButton;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private int mCurrentStep = -1;
-    private String mName;
+    private static final String DIALOG_ALERT = "DialogAlert";
     private Question mCurrentQuestion;
+    private String mName;
     private boolean isScoring;
     private int mScore;
+    private int mCurrentStep = -1;
 
     private Question[] mQuestions = {
-            /*new Question(
+            new Question(
                     R.string.question_1,
                     R.drawable.pic_1,
                     R.array.answers_question_1,
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     R.string.question_2,
                     R.drawable.pic_2,
                     R.array.answers_question_2,
-                    R.id.answer_2_radio_button),
+                    R.id.answer_2_radio_button)/*,
             new Question(
                     R.string.question_3,
                     R.drawable.pic_3,
@@ -49,19 +49,17 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
                     R.string.question_6,
                     R.drawable.pic_6,
                     R.array.answers_question_6,
-                    R.id.answer_4_radio_button),*/
+                    R.id.answer_4_radio_button),
             new Question(
                     R.string.question_7,
                     R.drawable.pic_7,
                     R.array.answers_question_7,
-                    R.id.answer_4_radio_button)
+                    R.id.answer_4_radio_button)*/
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d(TAG, "onCreate");
 
         // Hide status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -102,8 +100,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        Log.d(TAG, "onSaveInstanceState");
 
         // Сохранение значения текущего шага
         outState.putInt("mCurrentStep", mCurrentStep);
@@ -167,42 +163,38 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
     @Override
     public void onQuestionFragmentInteraction(int id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
         int correctAnswer = mCurrentQuestion.getCorrectAnswerId();
+        String message;
+
+        FragmentManager manager = getFragmentManager();
+        DialogAlertFragment questionDialog = new DialogAlertFragment();
 
         if (correctAnswer != id) {
-            builder.setTitle(R.string.wrong)
-                    .setMessage(getString(R.string.wrong_answer_text) + ((Button) findViewById(correctAnswer)).getText())
-                    .setIcon(R.drawable.wrong_icon);
+            message = getString(R.string.wrong_answer_text) + ((RadioButton) findViewById(correctAnswer)).getText();
+
+            questionDialog.setData(R.string.wrong, message, R.drawable.wrong_icon, String.valueOf(QuestionFragment.class), getString(R.string.next));
         } else {
+            message = getString(R.string.right_answer_text);
+
+            questionDialog.setData(R.string.right, message, R.drawable.right_icon, String.valueOf(QuestionFragment.class), getString(R.string.next));
+
             // Увеличение количества набранных очков, если установлен чекбокс подсчета результата
             if (isScoring) {
                 mScore++;
             }
-
-            builder.setTitle(R.string.right)
-                    .setMessage(R.string.right_answer_text)
-                    .setIcon(R.drawable.right_icon);
         }
 
-        builder.setCancelable(false)
-                .setNegativeButton(R.string.next, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (++mCurrentStep < mQuestions.length) {
-                            setQuestionFragment();
-                        } else {
-                            // Если вопрос последний, отображается результирующий фрагмент
-                            setResultFragment();
-                        }
+        questionDialog.show(manager, DIALOG_ALERT);
+    }
 
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+    @Override
+    public void onQuestionDialogClose() {
+        if (++mCurrentStep < mQuestions.length) {
+            setQuestionFragment();
+        } else {
+            // Если вопрос последний, отображается результирующий фрагмент
+            setResultFragment();
+        }
     }
 
     @Override
@@ -239,9 +231,6 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         setTitle(getString(R.string.app_name));
     }
 
-    /**
-     * @param email
-     */
     public void sentResultOnEmail(String email) {
         String resultSummary = createResultSummary();
 
@@ -269,22 +258,11 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private void openQuitDialog() {
-        AlertDialog.Builder quitDialog = new AlertDialog.Builder(MainActivity.this);
-        quitDialog.setTitle(R.string.quit_are_you_sure)
-                .setIcon(R.drawable.end_icon)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        FragmentManager manager = getFragmentManager();
+        DialogAlertFragment exitDialog = new DialogAlertFragment();
 
-        AlertDialog alertDialog = quitDialog.create();
-        alertDialog.show();
+        exitDialog.setData(R.string.quit, getString(R.string.are_you_sure), R.drawable.end_icon, String.valueOf(this.getClass()), getString(R.string.exit));
+
+        exitDialog.show(manager, DIALOG_ALERT);
     }
 }
