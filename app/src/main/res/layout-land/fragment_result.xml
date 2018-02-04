@@ -65,7 +65,6 @@
         android:gravity="center"
         android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress"
-        android:text="kazakova.net@yandex.ru"
         android:visibility="gone"
         android:imeOptions="actionDone"
         tools:visibility="visible" />

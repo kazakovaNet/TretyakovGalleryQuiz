@@ -23,6 +23,8 @@ public class QuestionWithEditTextFragment extends Fragment {
     private onQuestionWithEditTextFragmentInteractionListener mListener;
     private Context mParentContext;
     private QuestionWithEditText mQuestionWithEditText;
+    private EditText mQuestionEditText;
+    private String mEnterAnswer;
 
     public QuestionWithEditTextFragment() {
         // Required empty public constructor
@@ -56,13 +58,16 @@ public class QuestionWithEditTextFragment extends Fragment {
         questionTextView.setText(mParentContext.getString(mQuestionWithEditText.getQuestion()));
 
         // Получение ссылки на поле ввода текста
-        final EditText questionEditText = view.findViewById(R.id.question_edit_text);
+        mQuestionEditText = view.findViewById(R.id.question_edit_text);
+        if (mEnterAnswer != null && !mEnterAnswer.equals("")) {
+            mQuestionEditText.setText(mEnterAnswer);
+        }
 
         Button questionButton = view.findViewById(R.id.question_button);
         questionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String enterAnswer = String.valueOf(questionEditText.getText());
+                String enterAnswer = String.valueOf(mQuestionEditText.getText());
 
                 if (enterAnswer.equals("")) {
                     Toast.makeText(
@@ -97,6 +102,16 @@ public class QuestionWithEditTextFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        // Сохранение введенных пользователем имени и галочки при смене ориентации
+        if (mListener != null) {
+            mListener.onQuestionWithEditTextFragmentPause(String.valueOf(mQuestionEditText.getText()));
+        }
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
 
@@ -105,8 +120,9 @@ public class QuestionWithEditTextFragment extends Fragment {
     }
 
     // Определяются данные для отображения
-    public void initQuestionWithEditTextFragment(QuestionWithEditText questionWithEditText) {
+    public void initQuestionWithEditTextFragment(QuestionWithEditText questionWithEditText, String answer) {
         mQuestionWithEditText = questionWithEditText;
+        mEnterAnswer = answer;
     }
 
     /**
@@ -123,5 +139,7 @@ public class QuestionWithEditTextFragment extends Fragment {
         void onQuestionWithEditTextFragmentInteraction(String answer);
 
         void onQuestionDialogClose();
+
+        void onQuestionWithEditTextFragmentPause(String ennterAnswer);
     }
 }

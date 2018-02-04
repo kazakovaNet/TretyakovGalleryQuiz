@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
             )
     };
     private QuestionWithEditText mCurrentQuestionWithEditText;
+    private String mEnterAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
             isScoring = savedInstanceState.getBoolean("isScoring");
         }
 
+        // Восстановление введенного в EditText значения
+        if (savedInstanceState != null && savedInstanceState.containsKey("mEnterAnswer")) {
+            mEnterAnswer = savedInstanceState.getString("mEnterAnswer");
+        }
+
         // В зависимости от шага отображается приветственный фрагмент /
         // фрагмент с вопросом / результирующий фрагмент
         if (mCurrentStep == -1) {
@@ -113,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         outState.putString("mName", mName);
         // Сохранение галочки подсчета результатов
         outState.putBoolean("isScoring", isScoring);
+        // Сохранение введенного в EditText значения
+        outState.putString("mEnterAnswer", mEnterAnswer);
     }
 
     private void setQuestionWithRadioButtonFragment() {
@@ -140,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
 
         mCurrentQuestionWithEditText = (QuestionWithEditText) mQuestions[mCurrentStep];
 
-        fragment.initQuestionWithEditTextFragment(mCurrentQuestionWithEditText);
+        fragment.initQuestionWithEditTextFragment(mCurrentQuestionWithEditText, mEnterAnswer);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Включить анимацию растворения и появления фрагментов
@@ -236,6 +244,11 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     public void onIntroductionFragmentPause(String name, boolean isScoring) {
         this.mName = name;
         this.isScoring = isScoring;
+    }
+
+    @Override
+    public void onQuestionWithEditTextFragmentPause(String enterAnswer) {
+        this.mEnterAnswer = enterAnswer;
     }
 
     @Override

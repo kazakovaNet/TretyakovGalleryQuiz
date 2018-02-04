@@ -95,6 +95,8 @@ public class ResultFragment extends Fragment {
         // Если выставлен чекбокс подсчета очков, отображается кнопка отображения результатов
         if (isScoring) {
             resultButton.setVisibility(View.VISIBLE);
+        } else {
+            mEmailEditText.setVisibility(View.GONE);
         }
         resultButton.setOnClickListener(new View.OnClickListener() {
             @Override
