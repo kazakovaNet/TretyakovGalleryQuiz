@@ -18,12 +18,12 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 
-public class QuestionFragment extends Fragment implements View.OnClickListener {
-    private onQuestionFragmentInteractionListener mListener;
+public class QuestionWithRadioButtonFragment extends Fragment {
+    private onQuestionWithRadioButtonFragmentInteractionListener mListener;
     private Context mParentContext;
-    private Question mQuestion;
+    private QuestionWithRadioButton mQuestionWithRadioButton;
 
-    public QuestionFragment() {
+    public QuestionWithRadioButtonFragment() {
         // Required empty public constructor
     }
 
@@ -31,7 +31,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false);
+        return inflater.inflate(R.layout.fragment_question_whith_radio_button, container, false);
     }
 
     @Override
@@ -48,23 +48,26 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private void initializeFragment(View view) {
         // Назначение изображения
         ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
-        pictureImageView.setImageResource(mQuestion.getPictureId());
+        pictureImageView.setImageResource(mQuestionWithRadioButton.getPictureId());
 
         // Назначение текста вопроса
         TextView questionTextView = view.findViewById(R.id.question_text_view);
-        questionTextView.setText(mParentContext.getString(mQuestion.getQuestion()));
+        questionTextView.setText(mParentContext.getString(mQuestionWithRadioButton.getQuestion()));
 
         // Получение ссылок на радио-кнопки и назначение слушателя клика
         RadioGroup answerRadioGroup = view.findViewById(R.id.answer_radio_group);
         answerRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                onClick(checkedId);
+                if (mListener != null) {
+                    // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
+                    mListener.onQuestionWithRadioButtonFragmentInteraction(checkedId);
+                }
             }
         });
 
         // Назначение текста радио-кнопкам
-        String[] answers = mParentContext.getResources().getStringArray(mQuestion.getAnswersArrayId());
+        String[] answers = mParentContext.getResources().getStringArray(mQuestionWithRadioButton.getAnswersArrayId());
 
         RadioButton answer1RadioButton = view.findViewById(R.id.answer_1_radio_button);
         answer1RadioButton.setText(answers[0]);
@@ -76,23 +79,16 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         answer4RadioButton.setText(answers[3]);
     }
 
-    private void onClick(int checkedId) {
-        if (mListener != null) {
-            // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            mListener.onQuestionFragmentInteraction(checkedId);
-        }
-    }
-
     // Вызывается при присоединении фрагмента к активности
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (activity instanceof onQuestionFragmentInteractionListener) {
-            mListener = (onQuestionFragmentInteractionListener) activity;
+        if (activity instanceof onQuestionWithRadioButtonFragmentInteractionListener) {
+            mListener = (onQuestionWithRadioButtonFragmentInteractionListener) activity;
         } else {
             throw new RuntimeException(activity.toString()
-                    + " must implement OnResultFragmentInteractionListener");
+                    + " must implement onQuestionWithRadioButtonFragmentInteractionListener");
         }
 
         mParentContext = activity;
@@ -107,15 +103,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     }
 
     // Определяются данные для отображения
-    public void initQuestionFragment(Question question) {
-        mQuestion = question;
-    }
-
-    public void onClick(View v) {
-        if (mListener != null) {
-            // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-            mListener.onQuestionFragmentInteraction(v.getId());
-        }
+    public void initQuestionWhithRadioButtonFragment(QuestionWithRadioButton questionWithRadioButton) {
+        mQuestionWithRadioButton = questionWithRadioButton;
     }
 
     /**
@@ -128,8 +117,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    interface onQuestionFragmentInteractionListener {
-        void onQuestionFragmentInteraction(int id);
+    interface onQuestionWithRadioButtonFragmentInteractionListener {
+        void onQuestionWithRadioButtonFragmentInteraction(int id);
 
         void onQuestionDialogClose();
     }

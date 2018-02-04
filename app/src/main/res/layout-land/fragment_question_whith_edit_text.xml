@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:resources="com.example.android.tretyakovgalleryquiz.QuestionWithRadioButtonFragment">
+
+    <ImageView
+        android:id="@+id/picture_image_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/pic_1" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/question_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:maxLines="100"
+                    android:singleLine="false"
+                    android:text="@string/question_3"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/question_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginRight="48dp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/question_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginRight="48dp"
+                    android:background="@drawable/button_custom"
+                    android:text="@string/check"
+                    android:textColor="@color/primary_text" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.example.android.tretyakovgalleryquiz;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 class AlertHelper {
@@ -13,7 +14,7 @@ class AlertHelper {
         mActivity = activity;
     }
 
-    void openQuestionDialog(int correctAnswer, int selectAnswer) {
+    void openQuestionWithRadioButtonDialog(int correctAnswer, int selectAnswer) {
         mFragmentManager = mActivity.getFragmentManager();
 
         DialogAlertFragment questionDialog = new DialogAlertFragment();
@@ -28,7 +29,7 @@ class AlertHelper {
                     R.string.wrong,
                     message,
                     R.drawable.wrong_icon,
-                    String.valueOf(QuestionFragment.class),
+                    String.valueOf(QuestionWithRadioButtonFragment.class),
                     mActivity.getString(R.string.next));
         } else {
             message = mActivity.getString(R.string.right_answer_text);
@@ -36,7 +37,7 @@ class AlertHelper {
             questionDialog.initDialogAlertFragment(
                     R.string.right, message,
                     R.drawable.right_icon,
-                    String.valueOf(QuestionFragment.class),
+                    String.valueOf(QuestionWithRadioButtonFragment.class),
                     mActivity.getString(R.string.next));
         }
 
@@ -69,5 +70,34 @@ class AlertHelper {
                 mActivity.getString(R.string.exit));
 
         resultDialog.show(mFragmentManager, DIALOG_ALERT);
+    }
+
+    void openQuestionWithEditTextDialog(String correctAnswer, String selectAnswer) {
+        mFragmentManager = mActivity.getFragmentManager();
+
+        DialogAlertFragment questionDialog = new DialogAlertFragment();
+
+        String message;
+        if (!correctAnswer.equals(selectAnswer)) {
+            message = mActivity.getString(R.string.wrong_answer_text) + correctAnswer;
+
+            questionDialog.initDialogAlertFragment(
+                    R.string.wrong,
+                    message,
+                    R.drawable.wrong_icon,
+                    String.valueOf(QuestionWithEditTextFragment.class),
+                    mActivity.getString(R.string.next));
+        } else {
+            message = mActivity.getString(R.string.right_answer_text);
+
+            questionDialog.initDialogAlertFragment(
+                    R.string.right,
+                    message,
+                    R.drawable.right_icon,
+                    String.valueOf(QuestionWithEditTextFragment.class),
+                    mActivity.getString(R.string.next));
+        }
+
+        questionDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 }

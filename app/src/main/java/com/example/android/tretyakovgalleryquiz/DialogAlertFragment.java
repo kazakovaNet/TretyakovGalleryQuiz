@@ -19,7 +19,8 @@ public class DialogAlertFragment extends DialogFragment {
     private final String TITLE_TAG = "mTitle";
     private final String ICON_TAG = "mIcon";
     private final String MESSAGE_TAG = "mMessage";
-    private final String QUESTION_CLASS = String.valueOf(QuestionFragment.class);
+    private final String QUESTION_WITH_RADIO_BUTTON_CLASS = String.valueOf(QuestionWithRadioButtonFragment.class);
+    private final String QUESTION_WITH_EDIT_TEXT_CLASS = String.valueOf(QuestionWithEditTextFragment.class);
     private final String RESULT_CLASS = String.valueOf(ResultFragment.class);
     private final String MAIN_CLASS = String.valueOf(MainActivity.class);
     private String mCallTag;
@@ -27,7 +28,8 @@ public class DialogAlertFragment extends DialogFragment {
     private String mButtonText;
     private int mTitle = R.string.right;
     private int mIcon;
-    private QuestionFragment.onQuestionFragmentInteractionListener mQuestionListener;
+    private QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener mOnQuestionWithRadioButtonFragmentInteractionListener;
+    private QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener mOnQuestionWithEditTextFragmentInteractionListener;
     private ResultFragment.OnResultFragmentInteractionListener mResultListener;
 
     @Nullable
@@ -56,9 +58,11 @@ public class DialogAlertFragment extends DialogFragment {
                 .setPositiveButton(mButtonText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (mCallTag.equals(QUESTION_CLASS)) {
-                            mQuestionListener.onQuestionDialogClose();
-                        } else if (mCallTag.equals(RESULT_CLASS)) {
+                        if (mCallTag.equals(QUESTION_WITH_RADIO_BUTTON_CLASS)) {
+                            mOnQuestionWithRadioButtonFragmentInteractionListener.onQuestionDialogClose();
+                        } else if (mCallTag.equals(QUESTION_WITH_EDIT_TEXT_CLASS)) {
+                            mOnQuestionWithEditTextFragmentInteractionListener.onQuestionDialogClose();
+                        }if (mCallTag.equals(RESULT_CLASS)) {
                             mResultListener.onExitButtonClicked();
                         } else if (mCallTag.equals(MAIN_CLASS)){
                             mResultListener.onExitButtonClicked();
@@ -96,11 +100,15 @@ public class DialogAlertFragment extends DialogFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (activity instanceof QuestionFragment.onQuestionFragmentInteractionListener) {
-            mQuestionListener = (QuestionFragment.onQuestionFragmentInteractionListener) activity;
+        if (activity instanceof QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener) {
+            mOnQuestionWithRadioButtonFragmentInteractionListener = (QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener) activity;
         }
 
-        if (activity instanceof QuestionFragment.onQuestionFragmentInteractionListener) {
+        if (activity instanceof QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener) {
+            mOnQuestionWithEditTextFragmentInteractionListener = (QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener) activity;
+        }
+
+        if (activity instanceof QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener) {
             mResultListener = (ResultFragment.OnResultFragmentInteractionListener) activity;
         }
     }

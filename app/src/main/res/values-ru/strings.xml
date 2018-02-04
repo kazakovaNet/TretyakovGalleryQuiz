@@ -49,4 +49,6 @@
         Назовите автора стихотворения.  О какой картине идет речь?
     </string>
     <string name="are_you_sure">Как, уже?</string>
+    <string name="question_8">Question with Edit Text</string>
+    <string name="check">Проверить</string>
 </resources>

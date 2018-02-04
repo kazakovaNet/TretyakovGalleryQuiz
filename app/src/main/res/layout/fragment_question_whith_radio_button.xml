@@ -1,33 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:resources="com.example.android.tretyakovgalleryquiz.QuestionFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:resources="com.example.android.tretyakovgalleryquiz.QuestionWithRadioButtonFragment"
+    tools:targetApi="m">
 
     <ImageView
         android:id="@+id/picture_image_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
         android:adjustViewBounds="true"
         android:contentDescription="@string/picture"
-        android:src="@drawable/pic_1" />
+        tools:src="@drawable/pic_1" />
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="24dp">
+            android:layout_marginBottom="16dp">
 
             <TableRow>
 
@@ -35,12 +29,11 @@
                     android:id="@+id/question_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:maxLines="100"
-                    android:singleLine="false"
-                    android:text="@string/question_3"
+                    android:padding="16dp"
                     android:textColor="@color/secondary_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLines="100"
+                    tools:text="@string/question_3" />
             </TableRow>
 
             <TableRow>
@@ -50,7 +43,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="48dp"
+                    android:paddingRight="48dp">
 
                     <RadioButton
                         android:id="@+id/answer_1_radio_button"
@@ -108,6 +103,9 @@
                         tools:text="На ней изображена Царевна Софья" />
                 </RadioGroup>
             </TableRow>
+
+
         </TableLayout>
     </ScrollView>
+
 </LinearLayout>

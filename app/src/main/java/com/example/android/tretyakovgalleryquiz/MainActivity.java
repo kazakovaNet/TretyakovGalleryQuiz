@@ -7,51 +7,57 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener, QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private Question mCurrentQuestion;
+    private QuestionWithRadioButton mCurrentQuestionWithRadioButton;
     private String mName;
     private boolean isScoring;
     private int mScore;
     private int mCurrentStep = -1;
 
     private Question[] mQuestions = {
-            new Question(
+            new QuestionWithRadioButton(
                     R.string.question_1,
                     R.drawable.pic_1,
                     R.array.answers_question_1,
                     R.id.answer_1_radio_button),
-            new Question(
+            /*new QuestionWithRadioButton(
                     R.string.question_2,
                     R.drawable.pic_2,
                     R.array.answers_question_2,
-                    R.id.answer_2_radio_button)/*,
-            new Question(
+                    R.id.answer_2_radio_button),
+            new QuestionWithRadioButton(
                     R.string.question_3,
                     R.drawable.pic_3,
                     R.array.answers_question_3,
                     R.id.answer_3_radio_button),
-            new Question(
+            new QuestionWithRadioButton(
                     R.string.question_4,
                     R.drawable.pic_4,
                     R.array.answers_question_4,
                     R.id.answer_1_radio_button),
-            new Question(
+            new QuestionWithRadioButton(
                     R.string.question_5,
                     R.drawable.pic_5,
                     R.array.answers_question_5,
                     R.id.answer_3_radio_button),
-            new Question(
+            new QuestionWithRadioButton(
                     R.string.question_6,
                     R.drawable.pic_6,
                     R.array.answers_question_6,
                     R.id.answer_4_radio_button),
-            new Question(
+            new QuestionWithRadioButton(
                     R.string.question_7,
                     R.drawable.pic_7,
                     R.array.answers_question_7,
                     R.id.answer_4_radio_button)*/
+            new QuestionWithEditText(
+                    R.string.question_8,
+                    R.drawable.pic_7,
+                    "123"
+            )
     };
+    private QuestionWithEditText mCurrentQuestionWithEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +94,10 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
             setIntroductionFragment();
         } else if (mCurrentStep == mQuestions.length) {
             setResultFragment();
+        } else if (mCurrentStep == 1) {
+            setQuestionWithEditTextFragment();
         } else {
-            setQuestionFragment();
+            setQuestionWithRadioButtonFragment();
         }
     }
 
@@ -107,15 +115,32 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         outState.putBoolean("isScoring", isScoring);
     }
 
-    private void setQuestionFragment() {
+    private void setQuestionWithRadioButtonFragment() {
         setTitleQuestion(mCurrentStep);
 
-        QuestionFragment fragment = new QuestionFragment();
+        QuestionWithRadioButtonFragment fragment = new QuestionWithRadioButtonFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        mCurrentQuestion = mQuestions[mCurrentStep];
+        mCurrentQuestionWithRadioButton = (QuestionWithRadioButton) mQuestions[mCurrentStep];
 
-        fragment.initQuestionFragment(mCurrentQuestion);
+        fragment.initQuestionWhithRadioButtonFragment(mCurrentQuestionWithRadioButton);
+        // Заменить фрагмент
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        // Включить анимацию растворения и появления фрагментов
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // Закрепить транзакцию
+        fragmentTransaction.commit();
+    }
+
+    private void setQuestionWithEditTextFragment() {
+        setTitleQuestion(mCurrentStep);
+
+        QuestionWithEditTextFragment fragment = new QuestionWithEditTextFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
+
+        mCurrentQuestionWithEditText = (QuestionWithEditText) mQuestions[mCurrentStep];
+
+        fragment.initQuestionWithEditTextFragment(mCurrentQuestionWithEditText);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Включить анимацию растворения и появления фрагментов
@@ -158,23 +183,42 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onQuestionFragmentInteraction(int selectAnswer) {
-        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
-        alertHelper.openQuestionDialog(mCurrentQuestion.getCorrectAnswerId(), selectAnswer);
+    public void onQuestionWithRadioButtonFragmentInteraction(int selectAnswer) {
+        int correctAnswerId = mCurrentQuestionWithRadioButton.getCorrectAnswerId();
 
-        // Увеличение количества набранных очков, если установлен чекбокс подсчета результата
-        if (isScoring) {
+        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
+        alertHelper.openQuestionWithRadioButtonDialog(correctAnswerId, selectAnswer);
+
+        // Увеличение количества набранных очков, если ответ верен и установлен чекбокс подсчета результата
+        if (isScoring && correctAnswerId == selectAnswer) {
+            mScore++;
+        }
+    }
+
+    @Override
+    public void onQuestionWithEditTextFragmentInteraction(String enterAnswer) {
+        String correctAnswer = mCurrentQuestionWithEditText.getCorrectAnswer();
+
+        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
+        alertHelper.openQuestionWithEditTextDialog(correctAnswer, enterAnswer);
+
+        // Увеличение количества набранных очков, если ответ верен и установлен чекбокс подсчета результата
+        if (isScoring && correctAnswer.equals(enterAnswer)) {
             mScore++;
         }
     }
 
     @Override
     public void onQuestionDialogClose() {
-        if (++mCurrentStep < mQuestions.length) {
-            setQuestionFragment();
-        } else {
+        ++mCurrentStep;
+
+        if (mCurrentStep == 1) {
+            setQuestionWithEditTextFragment();
+        } else if (mCurrentStep == mQuestions.length) {
             // Если вопрос последний, отображается результирующий фрагмент
             setResultFragment();
+        } else {
+            setQuestionWithRadioButtonFragment();
         }
     }
 
@@ -185,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         mCurrentStep++;
 
-        setQuestionFragment();
+        setQuestionWithRadioButtonFragment();
     }
 
     @Override
@@ -205,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private void setTitleQuestion(int step) {
-        setTitle("Question " + ++step + "/" + mQuestions.length);
+        setTitle("QuestionWithRadioButton " + ++step + "/" + mQuestions.length);
     }
 
     private void resetTitle() {
