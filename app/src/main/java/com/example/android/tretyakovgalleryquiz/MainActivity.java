@@ -1,7 +1,6 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.array.answers_question_7,
                     R.id.answer_4_radio_button),
             new QuestionWithEditText(
-                    R.string.question_8,
-                    R.drawable.pic_8,
-                    R.string.question_8_answer
+                    R.string.question_7,
+                    R.drawable.pic_7,
+                    R.string.end
             )
     };
     private QuestionWithEditText mCurrentQuestionWithEditText;
@@ -226,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
 
     @Override
     public void onQuestionWithEditTextFragmentInteraction(String enterAnswer) {
-        String correctAnswer = getString(mCurrentQuestionWithEditText.getCorrectAnswer());
+        String correctAnswer = getString(mCurrentQuestionWithEditText.getCorrectAnswerId());
 
         AlertHelper alertHelper = new AlertHelper(MainActivity.this);
         alertHelper.openQuestionWithEditTextDialog(correctAnswer, enterAnswer);

@@ -1,8 +1,25 @@
 package com.example.android.tretyakovgalleryquiz;
 
-/**
- * Created by Kazakova_net on 04.02.2018.
- */
+class Question {
+    protected int mQuestionId;
+    protected int mPictureImageId;
+    protected int mCorrectAnswerId;
 
-public class Question {
+    Question(int pictureImageId, int correctAnswerId, int questionId) {
+        this.mPictureImageId = pictureImageId;
+        this.mCorrectAnswerId = correctAnswerId;
+        this.mQuestionId = questionId;
+    }
+
+    int getQuestion() {
+        return mQuestionId;
+    }
+
+    int getPictureId() {
+        return mPictureImageId;
+    }
+
+    int getCorrectAnswerId() {
+        return mCorrectAnswerId;
+    }
 }
