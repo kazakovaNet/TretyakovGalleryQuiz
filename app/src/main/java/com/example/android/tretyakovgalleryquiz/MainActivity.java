@@ -1,11 +1,16 @@
 package com.example.android.tretyakovgalleryquiz;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener, QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
@@ -316,5 +321,28 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     public void onBackPressed() {
         AlertHelper alertHelper = new AlertHelper(MainActivity.this);
         alertHelper.openQuitDialog();
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (view != null && imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if(view instanceof EditText) {
+
+                view.clearFocus();
+                hideKeyboard();
+            }
+        }
+
+        return super.dispatchTouchEvent(ev);
     }
 }
