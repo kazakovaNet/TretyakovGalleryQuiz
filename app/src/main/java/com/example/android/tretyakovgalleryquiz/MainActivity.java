@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.drawable.pic_1,
                     R.array.answers_question_1,
                     R.id.answer_1_radio_button),
-            /*new QuestionWithRadioButton(
+            new QuestionWithRadioButton(
                     R.string.question_2,
                     R.drawable.pic_2,
                     R.array.answers_question_2,
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.string.question_7,
                     R.drawable.pic_7,
                     R.array.answers_question_7,
-                    R.id.answer_4_radio_button)*/
+                    R.id.answer_4_radio_button),
             new QuestionWithEditText(
                     R.string.question_8,
                     R.drawable.pic_8,
@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     };
     private QuestionWithEditText mCurrentQuestionWithEditText;
     private String mEnterAnswer;
+    private String mEmail;
+    private int mCheckedTypeResultShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +96,23 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
             mEnterAnswer = savedInstanceState.getString("mEnterAnswer");
         }
 
+        // Восстановление введенной в EditText электронной почты
+        if (savedInstanceState != null && savedInstanceState.containsKey("mEmail")) {
+            mEmail = savedInstanceState.getString("mEmail");
+        }
+
+        // Восстановление введенной в EditText электронной почты
+        if (savedInstanceState != null && savedInstanceState.containsKey("mCheckedTypeResultShow")) {
+            mCheckedTypeResultShow = savedInstanceState.getInt("mCheckedTypeResultShow");
+        }
+
         // В зависимости от шага отображается приветственный фрагмент /
         // фрагмент с вопросом / результирующий фрагмент
         if (mCurrentStep == -1) {
             setIntroductionFragment();
         } else if (mCurrentStep == mQuestions.length) {
             setResultFragment();
-        } else if (mCurrentStep == 1) {
+        } else if (mCurrentStep == 7) {
             setQuestionWithEditTextFragment();
         } else {
             setQuestionWithRadioButtonFragment();
@@ -121,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         outState.putBoolean("isScoring", isScoring);
         // Сохранение введенного в EditText значения
         outState.putString("mEnterAnswer", mEnterAnswer);
+        // Сохранение введенной в EditText электронной почты
+        outState.putString("mEmail", mEmail);
+        // Сохранение выбранного вида отображения результатов
+        outState.putInt("mCheckedTypeResultShow", mCheckedTypeResultShow);
     }
 
     private void setQuestionWithRadioButtonFragment() {
@@ -180,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         ResultFragment resultFragment = new ResultFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        resultFragment.initResultFragment(mName, isScoring, mScore, mQuestions.length);
+        resultFragment.initResultFragment(mName, isScoring, mScore, mQuestions.length, mEmail, mCheckedTypeResultShow);
 
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, resultFragment);
@@ -220,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     public void onQuestionDialogClose() {
         ++mCurrentStep;
 
-        if (mCurrentStep == 1) {
+        if (mCurrentStep == mQuestions.length - 1) {
             setQuestionWithEditTextFragment();
         } else if (mCurrentStep == mQuestions.length) {
             // Если вопрос последний, отображается результирующий фрагмент
@@ -249,6 +265,12 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     @Override
     public void onQuestionWithEditTextFragmentPause(String enterAnswer) {
         this.mEnterAnswer = enterAnswer;
+    }
+
+    @Override
+    public void onResultFragmentPause(String email, int checkedTypeResultShow) {
+        this.mEmail = email;
+        this.mCheckedTypeResultShow = checkedTypeResultShow;
     }
 
     @Override

@@ -34,6 +34,8 @@ public class ResultFragment extends Fragment {
     private boolean isScoring;
     private int mScore;
     private int mCountOfQuestion;
+    private RadioGroup mShowResultRadioGroup;
+    private int mCheckedTypeResultShow;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -57,6 +59,16 @@ public class ResultFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Сохранение введенного адреса электронной почты
+        if (mListener != null) {
+            mListener.onResultFragmentPause(String.valueOf(mEmailEditText.getText()), mShowResultRadioGroup.getCheckedRadioButtonId());
+        }
+    }
+
     private void initializeFragment(View view) {
         TextView showResultTextView = view.findViewById(R.id.show_result_text_view);
 
@@ -65,9 +77,16 @@ public class ResultFragment extends Fragment {
         nameTextView.setText(mParentContext.getString(R.string.thank_you_for_attention, mName));
 
         mEmailEditText = view.findViewById(R.id.email_edit_text);
+        if (mEmail != null && !mEmail.equals("")) {
+            mEmailEditText.setText(mEmail);
+        }
 
-        RadioGroup showResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
-        showResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mShowResultRadioGroup = view.findViewById(R.id.show_result_radio_group);
+        if (mShowResultRadioGroup != null && mCheckedTypeResultShow != 0) {
+            RadioButton selectRadioButton = view.findViewById(mCheckedTypeResultShow);
+            selectRadioButton.setChecked(true);
+        }
+        mShowResultRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -144,19 +163,21 @@ public class ResultFragment extends Fragment {
         // в зависимости от установленного checkbox на приветственном экране
         if (isScoring) {
             showResultTextView.setVisibility(View.VISIBLE);
-            showResultRadioGroup.setVisibility(View.VISIBLE);
+            mShowResultRadioGroup.setVisibility(View.VISIBLE);
         } else {
             showResultTextView.setVisibility(View.GONE);
-            showResultRadioGroup.setVisibility(View.GONE);
+            mShowResultRadioGroup.setVisibility(View.GONE);
             exitButton.setVisibility(View.VISIBLE);
         }
     }
 
-    public void initResultFragment(String name, boolean isScoring, int score, int countOfQuestion) {
+    public void initResultFragment(String name, boolean isScoring, int score, int countOfQuestion, String email, int checkedTypeResultShow) {
         this.isScoring = isScoring;
         this.mName = name;
         this.mScore = score;
         this.mCountOfQuestion = countOfQuestion;
+        this.mEmail = email;
+        this.mCheckedTypeResultShow = checkedTypeResultShow;
     }
 
     @Override
@@ -204,5 +225,7 @@ public class ResultFragment extends Fragment {
         void onResultFragmentInteraction(String email);
 
         void onExitButtonClicked();
+
+        void onResultFragmentPause(String email, int checkedRadioButtonId);
     }
 }
