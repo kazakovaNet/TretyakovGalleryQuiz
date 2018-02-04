@@ -51,6 +51,7 @@
             android:id="@+id/on_email_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/send_on_email" />
     </RadioGroup>
 
@@ -66,7 +67,6 @@
         android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress"
         android:text="kazakova.net@yandex.ru"
-        android:visibility="gone"
         android:imeOptions="actionDone"
         tools:visibility="visible" />
 

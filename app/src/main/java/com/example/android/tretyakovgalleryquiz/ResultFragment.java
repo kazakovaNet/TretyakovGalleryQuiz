@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class ResultFragment extends Fragment {
     private OnResultFragmentInteractionListener mListener;
     private Context mParentContext;
     private EditText mEmailEditText;
-    private String mTypeResultShow = ON_SCREEN;
+    private String mTypeResultShow = ON_EMAIL;
     private String mEmail;
     private String mName;
     private boolean isScoring;
@@ -89,7 +90,6 @@ public class ResultFragment extends Fragment {
                 }
             }
         });
-        showResultRadioGroup.clearCheck();
 
         Button resultButton = view.findViewById(R.id.result_button);
         // Если выставлен чекбокс подсчета очков, отображается кнопка отображения результатов
