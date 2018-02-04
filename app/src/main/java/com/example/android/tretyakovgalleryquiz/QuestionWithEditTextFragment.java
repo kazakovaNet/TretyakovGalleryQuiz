@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -61,9 +62,20 @@ public class QuestionWithEditTextFragment extends Fragment {
         questionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String enterAnswer = String.valueOf(questionEditText.getText());
+
+                if (enterAnswer.equals("")) {
+                    Toast.makeText(
+                            mParentContext,
+                            mParentContext.getString(R.string.enter_your_answer),
+                            Toast.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
+
                 if (mListener != null) {
                     // Сообщить слушателю о том, что на кнопке был сделан щелчок
-                    mListener.onQuestionWithEditTextFragmentInteraction(String.valueOf(questionEditText.getText()));
+                    mListener.onQuestionWithEditTextFragmentInteraction(enterAnswer);
                 }
             }
         });
