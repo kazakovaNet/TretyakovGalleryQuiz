@@ -78,7 +78,7 @@
         android:layout_marginLeft="56dp"
         android:layout_marginRight="56dp"
         android:background="@drawable/button_custom"
-        android:text="Получить результат"
+        android:text="@string/get_result_button"
         android:textColor="@color/primary_text"
         android:visibility="gone"
         tools:visibility="visible" />

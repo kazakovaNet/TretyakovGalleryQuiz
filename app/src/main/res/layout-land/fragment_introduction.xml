@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="24dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
             android:layout_marginBottom="48dp"

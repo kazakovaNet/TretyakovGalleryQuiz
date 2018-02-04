@@ -284,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     }
 
     private void setTitleQuestion(int step) {
-        setTitle("QuestionWithRadioButton " + ++step + "/" + mQuestions.length);
+        setTitle(getString(R.string.title, ++step, mQuestions.length));
     }
 
     private void resetTitle() {
