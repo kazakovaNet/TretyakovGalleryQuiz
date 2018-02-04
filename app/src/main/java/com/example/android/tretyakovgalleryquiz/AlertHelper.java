@@ -24,7 +24,7 @@ class AlertHelper {
                     + ((RadioButton) mActivity.findViewById(correctAnswer))
                     .getText();
 
-            questionDialog.setData(
+            questionDialog.initDialogAlertFragment(
                     R.string.wrong,
                     message,
                     R.drawable.wrong_icon,
@@ -33,7 +33,7 @@ class AlertHelper {
         } else {
             message = mActivity.getString(R.string.right_answer_text);
 
-            questionDialog.setData(
+            questionDialog.initDialogAlertFragment(
                     R.string.right, message,
                     R.drawable.right_icon,
                     String.valueOf(QuestionFragment.class),
@@ -47,7 +47,7 @@ class AlertHelper {
         mFragmentManager = mActivity.getFragmentManager();
         DialogAlertFragment quitDialog = new DialogAlertFragment();
 
-        quitDialog.setData(
+        quitDialog.initDialogAlertFragment(
                 R.string.quit,
                 mActivity.getString(R.string.are_you_sure),
                 R.drawable.end_icon,
@@ -55,5 +55,19 @@ class AlertHelper {
                 mActivity.getString(R.string.exit));
 
         quitDialog.show(mFragmentManager, DIALOG_ALERT);
+    }
+
+    void openResultDialog(int score, int countOfQuestion) {
+        mFragmentManager = mActivity.getFragmentManager();
+        DialogAlertFragment resultDialog = new DialogAlertFragment();
+
+        resultDialog.initDialogAlertFragment(
+                R.string.your_result,
+                mActivity.getString(R.string.text_result_on_screen, score, countOfQuestion),
+                R.drawable.right_icon,
+                String.valueOf(ResultFragment.class),
+                mActivity.getString(R.string.exit));
+
+        resultDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 }

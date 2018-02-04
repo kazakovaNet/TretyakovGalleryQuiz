@@ -1,6 +1,5 @@
 package com.example.android.tretyakovgalleryquiz;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,35 +21,17 @@ public class DialogAlertFragment extends DialogFragment {
     private final String RESULT_CLASS = String.valueOf(ResultFragment.class);
     private final String MAIN_CLASS = String.valueOf(MainActivity.class);
     private String mCallTag;
-    private int mTitle = R.string.right;
-    private int mIcon;
     private String mMessage;
     private String mButtonText;
+    private int mTitle = R.string.right;
+    private int mIcon;
     private QuestionFragment.onQuestionFragmentInteractionListener mQuestionListener;
     private ResultFragment.OnResultFragmentInteractionListener mResultListener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (savedInstanceState != null && savedInstanceState.containsKey(TITLE_TAG)) {
-            mTitle = savedInstanceState.getInt(TITLE_TAG);
-        }
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(ICON_TAG)) {
-            mIcon = savedInstanceState.getInt(ICON_TAG);
-        }
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(MESSAGE_TAG)) {
-            mMessage = savedInstanceState.getString(MESSAGE_TAG);
-        }
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(CALL_TAG)) {
-            mCallTag = savedInstanceState.getString(CALL_TAG);
-        }
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(BUTTON_TEXT_TAG)) {
-            mButtonText = savedInstanceState.getString(BUTTON_TEXT_TAG);
-        }
+        getSaveInstanceState(savedInstanceState);
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog, null);
 
@@ -79,6 +60,28 @@ public class DialogAlertFragment extends DialogFragment {
                 .create();
     }
 
+    private void getSaveInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(TITLE_TAG)) {
+            mTitle = savedInstanceState.getInt(TITLE_TAG);
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(ICON_TAG)) {
+            mIcon = savedInstanceState.getInt(ICON_TAG);
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(MESSAGE_TAG)) {
+            mMessage = savedInstanceState.getString(MESSAGE_TAG);
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(CALL_TAG)) {
+            mCallTag = savedInstanceState.getString(CALL_TAG);
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(BUTTON_TEXT_TAG)) {
+            mButtonText = savedInstanceState.getString(BUTTON_TEXT_TAG);
+        }
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -103,7 +106,7 @@ public class DialogAlertFragment extends DialogFragment {
         outState.putString(BUTTON_TEXT_TAG, mButtonText);
     }
 
-    public void setData(int title, String message, int icon, String callTag, String buttonText) {
+    public void initDialogAlertFragment(int title, String message, int icon, String callTag, String buttonText) {
         mTitle = title;
         mMessage = message;
         mIcon = icon;

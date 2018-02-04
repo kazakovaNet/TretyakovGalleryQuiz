@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         mCurrentQuestion = mQuestions[mCurrentStep];
 
-        fragment.setAnswerData(mCurrentQuestion);
+        fragment.initQuestionFragment(mCurrentQuestion);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Включить анимацию растворения и появления фрагментов
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
 
         // Передаем имя и состояние галочки
         if (mName != null) {
-            introductionFragment.setIntroductionData(mName, isScoring);
+            introductionFragment.initIntroductionFragment(mName, isScoring);
         }
 
         // Добавить фрагмент
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
         ResultFragment resultFragment = new ResultFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
-        resultFragment.setResultData(mName, isScoring, mScore, mQuestions.length);
+        resultFragment.initResultFragment(mName, isScoring, mScore, mQuestions.length);
 
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, resultFragment);
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onIntroductionFragmentSendData(String name, boolean isScoring) {
+    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
         this.mName = name;
         this.isScoring = isScoring;
 
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
+    public void onIntroductionFragmentPause(String name, boolean isScoring) {
         this.mName = name;
         this.isScoring = isScoring;
     }

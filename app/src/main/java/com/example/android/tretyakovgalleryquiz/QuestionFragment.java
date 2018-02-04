@@ -20,8 +20,8 @@ import android.widget.TextView;
 
 public class QuestionFragment extends Fragment implements View.OnClickListener {
     private onQuestionFragmentInteractionListener mListener;
-    private Question mQuestion;
     private Context mParentContext;
+    private Question mQuestion;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -30,8 +30,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_question, container, false);
     }
@@ -105,10 +103,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
 
         mListener = null;
+        mParentContext = null;
     }
 
     // Определяются данные для отображения
-    public void setAnswerData(Question question) {
+    public void initQuestionFragment(Question question) {
         mQuestion = question;
     }
 
