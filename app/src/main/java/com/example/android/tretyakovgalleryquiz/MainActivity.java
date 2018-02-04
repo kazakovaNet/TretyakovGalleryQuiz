@@ -1,18 +1,14 @@
 package com.example.android.tretyakovgalleryquiz;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.WindowManager;
-import android.widget.RadioButton;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.onQuestionFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
-    private static final String DIALOG_ALERT = "DialogAlert";
     private Question mCurrentQuestion;
     private String mName;
     private boolean isScoring;
@@ -162,29 +158,14 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public void onQuestionFragmentInteraction(int id) {
-        int correctAnswer = mCurrentQuestion.getCorrectAnswerId();
-        String message;
+    public void onQuestionFragmentInteraction(int selectAnswer) {
+        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
+        alertHelper.openQuestionDialog(mCurrentQuestion.getCorrectAnswerId(), selectAnswer);
 
-        FragmentManager manager = getFragmentManager();
-        DialogAlertFragment questionDialog = new DialogAlertFragment();
-
-        if (correctAnswer != id) {
-            message = getString(R.string.wrong_answer_text) + ((RadioButton) findViewById(correctAnswer)).getText();
-
-            questionDialog.setData(R.string.wrong, message, R.drawable.wrong_icon, String.valueOf(QuestionFragment.class), getString(R.string.next));
-        } else {
-            message = getString(R.string.right_answer_text);
-
-            questionDialog.setData(R.string.right, message, R.drawable.right_icon, String.valueOf(QuestionFragment.class), getString(R.string.next));
-
-            // Увеличение количества набранных очков, если установлен чекбокс подсчета результата
-            if (isScoring) {
-                mScore++;
-            }
+        // Увеличение количества набранных очков, если установлен чекбокс подсчета результата
+        if (isScoring) {
+            mScore++;
         }
-
-        questionDialog.show(manager, DIALOG_ALERT);
     }
 
     @Override
@@ -249,20 +230,12 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private String createResultSummary() {
-        return null;
+        return "";
     }
 
     @Override
     public void onBackPressed() {
-        openQuitDialog();
-    }
-
-    private void openQuitDialog() {
-        FragmentManager manager = getFragmentManager();
-        DialogAlertFragment exitDialog = new DialogAlertFragment();
-
-        exitDialog.setData(R.string.quit, getString(R.string.are_you_sure), R.drawable.end_icon, String.valueOf(this.getClass()), getString(R.string.exit));
-
-        exitDialog.show(manager, DIALOG_ALERT);
+        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
+        alertHelper.openQuitDialog();
     }
 }
