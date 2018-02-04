@@ -7,8 +7,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DialogAlertFragment extends DialogFragment {
@@ -28,6 +30,15 @@ public class DialogAlertFragment extends DialogFragment {
     private QuestionFragment.onQuestionFragmentInteractionListener mQuestionListener;
     private ResultFragment.OnResultFragmentInteractionListener mResultListener;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        // Запрет на закрытие диалога по клику за пределами
+        getDialog().setCanceledOnTouchOutside(false);
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,7 +53,6 @@ public class DialogAlertFragment extends DialogFragment {
                 .setView(v)
                 .setTitle(mTitle)
                 .setIcon(mIcon)
-                .setCancelable(true)
                 .setPositiveButton(mButtonText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

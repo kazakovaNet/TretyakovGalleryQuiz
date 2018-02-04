@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     private String createResultSummary() {
-        return "";
+        return getString(R.string.text_result_on_screen, mScore, mQuestions.length);
     }
 
     @Override
