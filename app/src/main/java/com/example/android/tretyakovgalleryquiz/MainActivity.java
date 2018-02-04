@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.id.answer_4_radio_button)*/
             new QuestionWithEditText(
                     R.string.question_8,
-                    R.drawable.pic_7,
-                    "123"
+                    R.drawable.pic_8,
+                    R.string.question_8_answer
             )
     };
     private QuestionWithEditText mCurrentQuestionWithEditText;
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
 
     @Override
     public void onQuestionWithEditTextFragmentInteraction(String enterAnswer) {
-        String correctAnswer = mCurrentQuestionWithEditText.getCorrectAnswer();
+        String correctAnswer = getString(mCurrentQuestionWithEditText.getCorrectAnswer());
 
         AlertHelper alertHelper = new AlertHelper(MainActivity.this);
         alertHelper.openQuestionWithEditTextDialog(correctAnswer, enterAnswer);

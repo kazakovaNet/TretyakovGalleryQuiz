@@ -48,7 +48,8 @@
         So the rich get married…\"\n\n
         Name the author of the poem. What kind of picture is it?
     </string>
+    <string name="question_8">In what year was the beginning of the collection of P.V. Tretyakov?</string>
+    <string name="question_8_answer">1856</string>
     <string name="are_you_sure">How, already?</string>
-    <string name="question_8">Question with Edit Text</string>
     <string name="check">Check</string>
 </resources>

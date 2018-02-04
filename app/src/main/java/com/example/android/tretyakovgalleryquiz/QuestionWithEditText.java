@@ -3,9 +3,9 @@ package com.example.android.tretyakovgalleryquiz;
 class QuestionWithEditText extends Question{
     private int mQuestionId;
     private int mPictureImageId;
-    private String mCorrectAnswerId;
+    private int mCorrectAnswerId;
 
-    QuestionWithEditText(int questionId, int pictureImageId, String correctAnswerId) {
+    QuestionWithEditText(int questionId, int pictureImageId, int correctAnswerId) {
         this.mQuestionId = questionId;
         this.mPictureImageId = pictureImageId;
         this.mCorrectAnswerId = correctAnswerId;
@@ -19,7 +19,7 @@ class QuestionWithEditText extends Question{
         return mPictureImageId;
     }
 
-    String getCorrectAnswer() {
+    int getCorrectAnswer() {
         return mCorrectAnswerId;
     }
 }

@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:contentDescription="@string/picture"
-        android:src="@drawable/pic_1" />
+        android:src="@drawable/pic_8" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
                     android:layout_marginBottom="16dp"
                     android:maxLines="100"
                     android:singleLine="false"
-                    android:text="@string/question_3"
+                    android:text="@string/question_8"
                     android:textColor="@color/secondary_text"
                     android:textSize="16sp" />
             </TableRow>
@@ -50,10 +50,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginRight="48dp"
+                    android:gravity="center"
                     android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:inputType="number" />
             </TableRow>
 
             <TableRow>
