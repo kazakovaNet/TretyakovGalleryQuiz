@@ -29,6 +29,10 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="next">Далее</string>
+    <string name="are_you_sure">Как, уже?</string>
+    <string name="check">Проверить</string>
+    <string name="enter_your_answer">Введите свой ответ</string>
+    <string name="title">Вопрос <xliff:g example="2" id="step">%d</xliff:g>/<xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
     <string name="question_4">Назовите автора картины \"Полдень. В окрестностях Москвы\"</string>
     <string name="question_5">Перед вами главный фасад Третьяковской галереи, выходящий в Лаврушинский переулок и выполненный в русском стиле. Перестройка была завершена в 1904 году, уже после смерти П.М. Третьякова. Кто был автором этого эскиза здания?</string>
     <string name="question_6">Весной 1880 года в Петербурге открылась необыкновенная выставка. К зданию, где она помещалась, стекались толпы народа. У двери выстроилась длинная очередь. А в зале с опущенными на окна шторами, освещенная электрическими лампами, стояла одна единственная картина. Как называлась эта картина, кто ее написал?</string>
@@ -50,8 +54,4 @@
     </string>
     <string name="question_8">В каком году было положено начало коллекции П.В. Третьякова?</string>
     <string name="question_8_answer">1856</string>
-    <string name="are_you_sure">Как, уже?</string>
-    <string name="check">Проверить</string>
-    <string name="enter_your_answer">Введите свой ответ</string>
-    <string name="title">Вопрос <xliff:g example="2" id="step">%d</xliff:g>/<xliff:g example="10" id="countOfQuestion">%d</xliff:g></string>
 </resources>
