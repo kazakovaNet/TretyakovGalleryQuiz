@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Викторина \"Третьяковская галерея\"</string>
+    <string name="app_name">\"Третьяковская галерея\"</string>
     <string name="picture">Картина</string>
     <string name="question_1">Это картина Николая Шильдера \"Искушение\". Чем она была знаменательна для Третьякова?</string>
     <string name="question_2">Перед вами известная картина Василия Сурикова \"Утро стрелецкой казни\". В изображении событий автор совершил историческую ошибку. Назовите ее.</string>

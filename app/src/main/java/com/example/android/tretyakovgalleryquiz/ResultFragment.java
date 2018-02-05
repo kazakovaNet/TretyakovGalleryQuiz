@@ -35,7 +35,7 @@ public class ResultFragment extends Fragment {
     private int mScore;
     private int mCountOfQuestion;
     private RadioGroup mShowResultRadioGroup;
-    private int mCheckedTypeResultShow;
+    private int mCheckedTypeResultShow = R.id.on_email_radio_button;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -117,7 +117,7 @@ public class ResultFragment extends Fragment {
             if (mCheckedTypeResultShow == R.id.on_email_radio_button) {
                 mEmailEditText.setVisibility(View.VISIBLE);
             }
-        } else{
+        } else {
             mEmailEditText.setVisibility(View.GONE);
         }
 
@@ -181,7 +181,11 @@ public class ResultFragment extends Fragment {
         this.mScore = score;
         this.mCountOfQuestion = countOfQuestion;
         this.mEmail = email;
-        this.mCheckedTypeResultShow = checkedTypeResultShow;
+        if (checkedTypeResultShow == 0) {
+            this.mCheckedTypeResultShow = R.id.on_email_radio_button;
+        } else {
+            this.mCheckedTypeResultShow = checkedTypeResultShow;
+        }
     }
 
     @Override

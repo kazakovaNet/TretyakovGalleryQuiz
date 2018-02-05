@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Tretyakov Gallery Quiz</string>
+    <string name="app_name">\"Tretyakov Gallery\" Quiz</string>
     <string name="picture">Picture</string>
     <string name="wrong_answer_text">You gave the wrong answer.\nCorrect answer -&#160;</string>
     <string name="right">Correct</string>
