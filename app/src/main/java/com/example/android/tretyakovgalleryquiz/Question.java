@@ -5,10 +5,10 @@ class Question {
     protected int mPictureImageId;
     protected int mCorrectAnswerId;
 
-    Question(int pictureImageId, int correctAnswerId, int questionId) {
+    Question(int questionId, int pictureImageId, int correctAnswerId) {
+        this.mQuestionId = questionId;
         this.mPictureImageId = pictureImageId;
         this.mCorrectAnswerId = correctAnswerId;
-        this.mQuestionId = questionId;
     }
 
     int getQuestion() {

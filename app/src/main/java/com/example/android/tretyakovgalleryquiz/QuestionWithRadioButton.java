@@ -5,7 +5,7 @@ class QuestionWithRadioButton extends Question {
     private int mAnswersArrayId;
 
     QuestionWithRadioButton(int questionId, int pictureImageId, int answersArrayId, int correctAnswerId) {
-        super(pictureImageId, correctAnswerId, questionId);
+        super(questionId, pictureImageId, correctAnswerId);
 
         this.mAnswersArrayId = answersArrayId;
     }

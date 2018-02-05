@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.array.answers_question_7,
                     R.id.answer_4_radio_button),
             new QuestionWithEditText(
-                    R.string.question_7,
-                    R.drawable.pic_7,
-                    R.string.end
+                    R.string.question_8,
+                    R.drawable.pic_8,
+                    R.string.question_8_answer
             )
     };
     private QuestionWithEditText mCurrentQuestionWithEditText;
