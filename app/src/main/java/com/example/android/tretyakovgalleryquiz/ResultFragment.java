@@ -117,6 +117,8 @@ public class ResultFragment extends Fragment {
             if (mCheckedTypeResultShow == R.id.on_email_radio_button) {
                 mEmailEditText.setVisibility(View.VISIBLE);
             }
+        } else{
+            mEmailEditText.setVisibility(View.GONE);
         }
 
         resultButton.setOnClickListener(new View.OnClickListener() {
