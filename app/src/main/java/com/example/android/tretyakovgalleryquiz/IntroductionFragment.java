@@ -92,8 +92,8 @@ public class IntroductionFragment extends Fragment {
             public void onClick(View v) {
                 mName = String.valueOf(mNameEditText.getText());
 
-                if (mName.equals("")) {
-                    Toast.makeText(mParentContext, "Укажите свое имя", Toast.LENGTH_SHORT).show();
+                if (mName.trim().equals("")) {
+                    Toast.makeText(mParentContext, mParentContext.getString(R.string.enter_your_name), Toast.LENGTH_SHORT).show();
                     return;
                 }
 

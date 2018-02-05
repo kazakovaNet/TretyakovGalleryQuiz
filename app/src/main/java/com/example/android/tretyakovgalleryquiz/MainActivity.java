@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.drawable.pic_1,
                     R.array.answers_question_1,
                     R.id.answer_1_radio_button),
-           /* new QuestionWithRadioButton(
+            new QuestionWithRadioButton(
                     R.string.question_2,
                     R.drawable.pic_2,
                     R.array.answers_question_2,
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.string.question_7,
                     R.drawable.pic_7,
                     R.array.answers_question_7,
-                    R.id.answer_4_radio_button),*/
+                    R.id.answer_4_radio_button),
             new QuestionWithEditText(
                     R.string.question_8,
                     R.drawable.pic_8,
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
             setIntroductionFragment();
         } else if (mCurrentStep == mQuestions.length) {
             setResultFragment();
-        } else if (mCurrentStep == 7) {
+        } else if (mCurrentStep == mQuestions.length - 1) {
             setQuestionWithEditTextFragment();
         } else {
             setQuestionWithRadioButtonFragment();
@@ -333,9 +333,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-        if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View view = getCurrentFocus();
-            if(view instanceof EditText) {
+            if (view instanceof EditText) {
 
                 view.clearFocus();
                 hideKeyboard();
