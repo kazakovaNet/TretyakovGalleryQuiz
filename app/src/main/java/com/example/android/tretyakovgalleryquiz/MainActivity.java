@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener, QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
     private QuestionWithRadioButton mCurrentQuestionWithRadioButton;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     private boolean isScoring;
     private int mScore;
     private int mCurrentStep = -1;
+//    private List<Question> questions;
 
     private Question[] mQuestions = {
             new QuestionWithRadioButton(
@@ -182,9 +185,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
         // Передаем имя и состояние галочки
-        if (mName != null) {
-            introductionFragment.initIntroductionFragment(mName, isScoring);
-        }
+//        if (mName != null) {
+//            introductionFragment.initIntroductionFragment(mName, isScoring);
+//        }
 
         // Добавить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, introductionFragment);
@@ -305,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         // добавляем текст для передачи
         sendIntent.putExtra(Intent.EXTRA_TEXT, resultSummary);
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.result_email_subject, mName));
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.result_email_subject));
         // запускаем активити
         if (sendIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(sendIntent);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,13 +27,29 @@ public class IntroductionFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//
+//        // Сохранение введенных пользователем имени и галочки при смене ориентации
+//        if (mListener != null) {
+//            mListener.onIntroductionFragmentPause(String.valueOf(mNameEditText.getText()), mScoringCheckBox.isChecked());
+//        }
+//    }
 
-        // Сохранение введенных пользователем имени и галочки при смене ориентации
-        if (mListener != null) {
-            mListener.onIntroductionFragmentPause(String.valueOf(mNameEditText.getText()), mScoringCheckBox.isChecked());
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Восстновление значения, введенного пользователем в поле имени
+        if (savedInstanceState != null && savedInstanceState.containsKey("mNameEditText")) {
+            mName = savedInstanceState.getString("mNameEditText");
+        }
+
+        // Восстановление состояния галочки подсчета очков
+        if (savedInstanceState != null && savedInstanceState.containsKey("mScoringCheckBox")) {
+            isScoring = savedInstanceState.getBoolean("mScoringCheckBox");
         }
     }
 
@@ -106,16 +123,24 @@ public class IntroductionFragment extends Fragment {
     }
 
     public void initIntroductionFragment(String name, boolean isScoring) {
-        if (!name.equals("")) {
-            this.mName = name;
-        }
-
-        this.isScoring = isScoring;
+//        if (!name.equals("")) {
+//            this.mName = name;
+//        }
+//
+//        this.isScoring = isScoring;
     }
 
     interface onIntroductionFragmentInteractionListener {
         void onIntroductionFragmentInteraction(String name, boolean isScoring);
 
         void onIntroductionFragmentPause(String name, boolean isScoring);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Сохранение значения, введенного пользователем в поле имени,
+        // и состояния галочки подсчета очков
+        outState.putString("mNameEditText", String.valueOf(mNameEditText.getText()));
+        outState.putBoolean("mScoringCheckBox", mScoringCheckBox.isChecked());
     }
 }
