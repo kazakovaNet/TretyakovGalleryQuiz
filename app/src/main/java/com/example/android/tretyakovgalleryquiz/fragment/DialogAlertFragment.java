@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.android.tretyakovgalleryquiz.R;
+import com.example.android.tretyakovgalleryquiz.activity.MainActivity;
 
 public class DialogAlertFragment extends DialogFragment {
     private final String CALL_TAG = "mCallTag";

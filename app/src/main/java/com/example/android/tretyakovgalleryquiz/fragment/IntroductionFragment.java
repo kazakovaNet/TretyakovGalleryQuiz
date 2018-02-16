@@ -1,18 +1,18 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.android.tretyakovgalleryquiz.R;
 
 public class IntroductionFragment extends Fragment {
     private onIntroductionFragmentInteractionListener mListener;
@@ -113,7 +113,7 @@ public class IntroductionFragment extends Fragment {
         this.isScoring = isScoring;
     }
 
-    interface onIntroductionFragmentInteractionListener {
+    public interface onIntroductionFragmentInteractionListener {
         void onIntroductionFragmentInteraction(String name, boolean isScoring);
 
         void onIntroductionFragmentPause(String name, boolean isScoring);

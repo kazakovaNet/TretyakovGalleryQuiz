@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:resources="com.example.android.tretyakovgalleryquiz.MainActivity">
+    tools:resources="com.example.android.tretyakovgalleryquiz.activity.MainActivity">
 
     <!--Фрагмент во FrameLayout будет добавляться на программном уровне-->
     <FrameLayout

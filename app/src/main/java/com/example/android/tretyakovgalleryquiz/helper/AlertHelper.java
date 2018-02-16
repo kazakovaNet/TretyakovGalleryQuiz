@@ -1,20 +1,25 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.helper;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.widget.EditText;
 import android.widget.RadioButton;
 
-class AlertHelper {
+import com.example.android.tretyakovgalleryquiz.R;
+import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
+import com.example.android.tretyakovgalleryquiz.fragment.DialogAlertFragment;
+import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithEditTextFragment;
+import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithRadioButtonFragment;
+
+public class AlertHelper {
     private final String DIALOG_ALERT = "DialogAlert";
     private Activity mActivity;
     private FragmentManager mFragmentManager;
 
-    AlertHelper(Activity activity) {
+    public AlertHelper(Activity activity) {
         mActivity = activity;
     }
 
-    void openQuestionWithRadioButtonDialog(int correctAnswer, int selectAnswer) {
+    public void openQuestionWithRadioButtonDialog(int correctAnswer, int selectAnswer) {
         mFragmentManager = mActivity.getFragmentManager();
 
         DialogAlertFragment questionDialog = new DialogAlertFragment();
@@ -44,7 +49,7 @@ class AlertHelper {
         questionDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 
-    void openQuitDialog() {
+    public void openQuitDialog() {
         mFragmentManager = mActivity.getFragmentManager();
         DialogAlertFragment quitDialog = new DialogAlertFragment();
 
@@ -58,7 +63,7 @@ class AlertHelper {
         quitDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 
-    void openResultDialog(int score, int countOfQuestion) {
+    public void openResultDialog(int score, int countOfQuestion) {
         mFragmentManager = mActivity.getFragmentManager();
         DialogAlertFragment resultDialog = new DialogAlertFragment();
 
@@ -72,7 +77,7 @@ class AlertHelper {
         resultDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 
-    void openQuestionWithEditTextDialog(String correctAnswer, String selectAnswer) {
+    public void openQuestionWithEditTextDialog(String correctAnswer, String selectAnswer) {
         mFragmentManager = mActivity.getFragmentManager();
 
         DialogAlertFragment questionDialog = new DialogAlertFragment();

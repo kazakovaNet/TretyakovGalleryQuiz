@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.fragment;
 
 
 import android.app.Activity;
@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.android.tretyakovgalleryquiz.common.QuestionWithEditText;
+import com.example.android.tretyakovgalleryquiz.R;
 
 
 /**
@@ -135,7 +138,7 @@ public class QuestionWithEditTextFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    interface onQuestionWithEditTextFragmentInteractionListener {
+    public interface onQuestionWithEditTextFragmentInteractionListener {
         void onQuestionWithEditTextFragmentInteraction(String answer);
 
         void onQuestionDialogClose();

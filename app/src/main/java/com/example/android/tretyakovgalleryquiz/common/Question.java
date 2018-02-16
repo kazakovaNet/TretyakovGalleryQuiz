@@ -1,25 +1,25 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.common;
 
-class Question {
+public class Question {
     protected int mQuestionId;
     protected int mPictureImageId;
     protected int mCorrectAnswerId;
 
-    Question(int questionId, int pictureImageId, int correctAnswerId) {
+    public Question(int questionId, int pictureImageId, int correctAnswerId) {
         this.mQuestionId = questionId;
         this.mPictureImageId = pictureImageId;
         this.mCorrectAnswerId = correctAnswerId;
     }
 
-    int getQuestion() {
+    public int getQuestion() {
         return mQuestionId;
     }
 
-    int getPictureId() {
+    public int getPictureId() {
         return mPictureImageId;
     }
 
-    int getCorrectAnswerId() {
+    public int getCorrectAnswerId() {
         return mCorrectAnswerId;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.android.tretyakovgalleryquiz.R;
+import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.fragment;
 
 
 import android.app.Activity;
@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.android.tretyakovgalleryquiz.common.QuestionWithRadioButton;
+import com.example.android.tretyakovgalleryquiz.R;
 
 
 /**
@@ -117,7 +120,7 @@ public class QuestionWithRadioButtonFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    interface onQuestionWithRadioButtonFragmentInteractionListener {
+    public interface onQuestionWithRadioButtonFragmentInteractionListener {
         void onQuestionWithRadioButtonFragmentInteraction(int id);
 
         void onQuestionDialogClose();

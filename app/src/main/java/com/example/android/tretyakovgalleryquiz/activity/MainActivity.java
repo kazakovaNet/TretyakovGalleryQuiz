@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz;
+package com.example.android.tretyakovgalleryquiz.activity;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -10,6 +10,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
+import com.example.android.tretyakovgalleryquiz.fragment.IntroductionFragment;
+import com.example.android.tretyakovgalleryquiz.common.Question;
+import com.example.android.tretyakovgalleryquiz.common.QuestionWithEditText;
+import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithEditTextFragment;
+import com.example.android.tretyakovgalleryquiz.common.QuestionWithRadioButton;
+import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithRadioButtonFragment;
+import com.example.android.tretyakovgalleryquiz.R;
+import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
 
 public class MainActivity extends AppCompatActivity implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener, QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
     private static final String TAG = "MainActivity";
