@@ -85,15 +85,9 @@
 
     <Button
         android:id="@+id/exit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MyButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="48dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="56dp"
-        android:background="@drawable/button_custom"
         android:text="@string/exit"
-        android:textColor="@color/primary_text"
         android:visibility="gone"
         tools:visibility="visible" />
 </RelativeLayout>

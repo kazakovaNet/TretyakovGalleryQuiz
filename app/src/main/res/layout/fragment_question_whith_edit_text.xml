@@ -18,54 +18,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TableLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:paddingBottom="16dp">
 
-            <TableRow>
+            <TextView
+                android:id="@+id/question_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:maxLines="100"
+                android:padding="16dp"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp"
+                tools:text="@string/question_3" />
 
-                <TextView
-                    android:id="@+id/question_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="100"
-                    android:padding="16dp"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="16sp"
-                    tools:text="@string/question_3" />
-            </TableRow>
+            <EditText
+                android:id="@+id/question_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question_text_view"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="48dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number" />
 
-            <TableRow>
-
-                <EditText
-                    android:id="@+id/question_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginRight="48dp"
-                    android:gravity="center"
-                    android:imeOptions="actionDone"
-                    android:inputType="number" />
-            </TableRow>
-
-            <TableRow>
-
-                <Button
-                    android:id="@+id/question_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginRight="48dp"
-                    android:background="@drawable/button_custom"
-                    android:text="@string/check"
-                    android:textColor="@color/primary_text" />
-            </TableRow>
-        </TableLayout>
-
-
+            <Button
+                android:id="@+id/question_button"
+                style="@style/MyButton"
+                android:layout_below="@id/question_edit_text"
+                android:text="@string/check"/>
+        </RelativeLayout>
     </ScrollView>
-
 </LinearLayout>

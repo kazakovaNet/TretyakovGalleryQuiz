@@ -36,7 +36,7 @@
 
             <RadioGroup
                 android:id="@+id/answer_radio_group"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/question_text_view"
                 android:layout_marginTop="8dp"
@@ -48,25 +48,25 @@
                     android:id="@+id/answer_1_radio_button"
                     style="@style/MyRadioButton"
                     android:theme="@style/MyRadioButton"
-                    tools:text="Она была первой в коллекции" />
+                    tools:text="И.И. Шишкин" />
 
                 <RadioButton
                     android:id="@+id/answer_2_radio_button"
                     style="@style/MyRadioButton"
                     android:theme="@style/MyRadioButton"
-                    tools:text="Чтобы получить ее Третьяков ездил в Индию" />
+                    tools:text="А.И. Куинджи" />
 
                 <RadioButton
                     android:id="@+id/answer_3_radio_button"
                     style="@style/MyRadioButton"
                     android:theme="@style/MyRadioButton"
-                    tools:text="Она была подвергнута цензурному запрету" />
+                    tools:text="И.Н. Крамской" />
 
                 <RadioButton
                     android:id="@+id/answer_4_radio_button"
                     style="@style/MyRadioButton"
                     android:theme="@style/MyRadioButton"
-                    tools:text="На ней изображена Царевна Софья" />
+                    tools:text="В.Г. Перов" />
             </RadioGroup>
         </RelativeLayout>
     </ScrollView>

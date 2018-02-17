@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
     private int mCurrentStep = -1;
     private int mCheckedTypeResultShow;
 
-    private Question[] mQuestions = {
+    private final Question[] mQuestions = {
             new QuestionWithRadioButton(
                     R.string.question_1,
                     R.drawable.pic_1,
@@ -387,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
      *
      * @param email введенный пользователем адрес электронной почты
      */
-    public void sentResultOnEmail(String email) {
+    private void sentResultOnEmail(String email) {
         String resultSummary = createResultSummary();
 
         Intent sendIntent = new Intent();

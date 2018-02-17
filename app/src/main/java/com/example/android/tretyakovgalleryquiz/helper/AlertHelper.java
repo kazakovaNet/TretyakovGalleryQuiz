@@ -12,7 +12,7 @@ import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithRadioButton
 
 public class AlertHelper {
     private final String DIALOG_ALERT = "DialogAlert";
-    private Activity mActivity;
+    private final Activity mActivity;
     private FragmentManager mFragmentManager;
 
     public AlertHelper(Activity activity) {

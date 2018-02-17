@@ -1,9 +1,9 @@
 package com.example.android.tretyakovgalleryquiz.model;
 
 public class Question {
-    private int mQuestionId;
-    private int mPictureImageId;
-    private int mCorrectAnswerId;
+    private final int mQuestionId;
+    private final int mPictureImageId;
+    private final int mCorrectAnswerId;
 
     Question(int questionId, int pictureImageId, int correctAnswerId) {
         this.mQuestionId = questionId;
