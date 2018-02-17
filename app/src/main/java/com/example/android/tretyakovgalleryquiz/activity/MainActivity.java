@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         // добавляем текст для передачи
         sendIntent.putExtra(Intent.EXTRA_TEXT, resultSummary);
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.result_email_subject, mName));
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.result_email_subject));
         // запускаем активити
         if (sendIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(sendIntent);

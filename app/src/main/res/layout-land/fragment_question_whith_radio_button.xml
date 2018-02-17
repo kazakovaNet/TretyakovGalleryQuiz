@@ -49,61 +49,29 @@
                     android:id="@+id/answer_radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="vertical">
 
                     <RadioButton
                         android:id="@+id/answer_1_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_custom"
-                        android:paddingBottom="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/primary_text"
-                        android:textSize="14sp"
+                        style="@style/MyRadioButton"
                         android:theme="@style/MyRadioButton"
                         tools:text="Она была первой в коллекции" />
 
                     <RadioButton
                         android:id="@+id/answer_2_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/button_custom"
-                        android:paddingBottom="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/primary_text"
-                        android:textSize="14sp"
+                        style="@style/MyRadioButton"
                         android:theme="@style/MyRadioButton"
                         tools:text="Чтобы получить ее Третьяков ездил в Индию" />
 
                     <RadioButton
                         android:id="@+id/answer_3_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/button_custom"
-                        android:paddingBottom="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/primary_text"
-                        android:textSize="14sp"
+                        style="@style/MyRadioButton"
                         android:theme="@style/MyRadioButton"
                         tools:text="Она была подвергнута цензурному запрету" />
 
                     <RadioButton
                         android:id="@+id/answer_4_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/button_custom"
-                        android:paddingBottom="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/primary_text"
-                        android:textSize="14sp"
+                        style="@style/MyRadioButton"
                         android:theme="@style/MyRadioButton"
                         tools:text="На ней изображена Царевна Софья" />
                 </RadioGroup>

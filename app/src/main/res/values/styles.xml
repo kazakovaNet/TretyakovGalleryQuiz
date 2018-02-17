@@ -10,8 +10,17 @@
         <item name="android:actionBarSize">40dp</item>
     </style>
 
-    <style name="MyRadioButton" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyRadioButton">
         <item name="colorControlNormal">@color/primary_text</item>
         <item name="colorControlActivated">@color/primary_text</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/button_custom</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
     </style>
 </resources>
