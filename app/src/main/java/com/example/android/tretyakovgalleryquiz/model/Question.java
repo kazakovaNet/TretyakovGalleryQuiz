@@ -1,4 +1,4 @@
-package com.example.android.tretyakovgalleryquiz.common;
+package com.example.android.tretyakovgalleryquiz.model;
 
 public class Question {
     protected int mQuestionId;

@@ -13,21 +13,25 @@ import android.widget.EditText;
 
 import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
 import com.example.android.tretyakovgalleryquiz.fragment.IntroductionFragment;
-import com.example.android.tretyakovgalleryquiz.common.Question;
-import com.example.android.tretyakovgalleryquiz.common.QuestionWithEditText;
+import com.example.android.tretyakovgalleryquiz.model.Question;
+import com.example.android.tretyakovgalleryquiz.model.QuestionWithEditText;
 import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithEditTextFragment;
-import com.example.android.tretyakovgalleryquiz.common.QuestionWithRadioButton;
+import com.example.android.tretyakovgalleryquiz.model.QuestionWithRadioButton;
 import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithRadioButtonFragment;
 import com.example.android.tretyakovgalleryquiz.R;
 import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
 
 public class MainActivity extends AppCompatActivity implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener, QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener, IntroductionFragment.onIntroductionFragmentInteractionListener, ResultFragment.OnResultFragmentInteractionListener {
-    private static final String TAG = "MainActivity";
+    private final String TAG = "MainActivity";
     private QuestionWithRadioButton mCurrentQuestionWithRadioButton;
+    private QuestionWithEditText mCurrentQuestionWithEditText;
     private String mName;
+    private String mEmail;
+    private String mEnterAnswer;
     private boolean isScoring;
     private int mScore;
     private int mCurrentStep = -1;
+    private int mCheckedTypeResultShow;
 
     private Question[] mQuestions = {
             new QuestionWithRadioButton(
@@ -71,10 +75,6 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
                     R.string.question_8_answer
             )
     };
-    private QuestionWithEditText mCurrentQuestionWithEditText;
-    private String mEnterAnswer;
-    private String mEmail;
-    private int mCheckedTypeResultShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         outState.putInt("mCheckedTypeResultShow", mCheckedTypeResultShow);
     }
 
+    /**
+     * Метод создает, инициализирует и выводит фрагмент вопроса типа "с радио кнопкой"
+     */
     private void setQuestionWithRadioButtonFragment() {
         setTitleQuestion(mCurrentStep);
 
@@ -161,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
 
         mCurrentQuestionWithRadioButton = (QuestionWithRadioButton) mQuestions[mCurrentStep];
 
+        // Инициализация данных фрагмента
         fragment.initQuestionWhithRadioButtonFragment(mCurrentQuestionWithRadioButton);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -170,6 +174,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         fragmentTransaction.commit();
     }
 
+    /**
+     * Метод создает, инициализирует и выводит фрагмент вопроса типа "с полем для ввода текста"
+     */
     private void setQuestionWithEditTextFragment() {
         setTitleQuestion(mCurrentStep);
 
@@ -178,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
 
         mCurrentQuestionWithEditText = (QuestionWithEditText) mQuestions[mCurrentStep];
 
+        // Инициализация данных фрагмента
         fragment.initQuestionWithEditTextFragment(mCurrentQuestionWithEditText, mEnterAnswer);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -187,12 +195,16 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         fragmentTransaction.commit();
     }
 
+    /**
+     * Метод создает, инициализирует и выводит приветственный фрагмент
+     */
     private void setIntroductionFragment() {
         IntroductionFragment introductionFragment = new IntroductionFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction(); // начало транзакции фрагмента
 
         // Передаем имя и состояние галочки
         if (mName != null) {
+            // Инициализация данных фрагмента
             introductionFragment.initIntroductionFragment(mName, isScoring);
         }
 
@@ -204,6 +216,9 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         fragmentTransaction.commit();
     }
 
+    /**
+     * Метод создает, инициализирует и выводит результирующий фрагмент
+     */
     private void setResultFragment() {
         resetTitle();
 
@@ -220,6 +235,11 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         fragmentTransaction.commit();
     }
 
+    /**
+     * Метод реагирует на взаимодействие с фрагментом вопроса типа "с радио кнопкой"
+     *
+     * @param selectAnswer идентификатор выбранного пользователем виджета RadioButton
+     */
     @Override
     public void onQuestionWithRadioButtonFragmentInteraction(int selectAnswer) {
         int correctAnswerId = mCurrentQuestionWithRadioButton.getCorrectAnswerId();
@@ -233,6 +253,11 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         }
     }
 
+    /**
+     * Метод реагирует на взаимодействие с фрагментом вопроса типа "с полем для ввода текста"
+     *
+     * @param enterAnswer введенный пользователем ответ
+     */
     @Override
     public void onQuestionWithEditTextFragmentInteraction(String enterAnswer) {
         String correctAnswer = getString(mCurrentQuestionWithEditText.getCorrectAnswerId());
@@ -246,6 +271,72 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         }
     }
 
+    /**
+     * Метод реагирует на взаимодействие с приветственным фрагментом
+     *
+     * @param name      введенное пользователем имя
+     * @param isScoring выбранное пользователем состояние виджета CheckBox, отвечающего за посчет очков
+     */
+    @Override
+    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
+        this.mName = name;
+        this.isScoring = isScoring;
+
+        mCurrentStep++;
+
+        setQuestionWithRadioButtonFragment();
+    }
+
+    /**
+     * Метод реагирует на взаимодействие с результирующим фрагментом
+     *
+     * @param email введенный пользователем адрес электронной почты
+     */
+    @Override
+    public void onResultFragmentInteraction(String email) {
+        sentResultOnEmail(email);
+    }
+
+    /**
+     * Метод реагирует на приостановку приветственного фрагмента, сохраняет введенные пользователем данные
+     *
+     * @param name      введенное пользователем имя
+     * @param isScoring выбранное пользователем состояние виджета CheckBox, отвечающего за посчет очков
+     */
+    @Override
+    public void onIntroductionFragmentPause(String name, boolean isScoring) {
+        this.mName = name;
+        this.isScoring = isScoring;
+    }
+
+    /**
+     * Метод реагирует на приостановку фрагмента вопроса типа "с полем для ввода текста",
+     * сохраняет введенные пользователем данные
+     *
+     * @param enterAnswer введенный пользователем ответ
+     */
+    @Override
+    public void onQuestionWithEditTextFragmentPause(String enterAnswer) {
+        this.mEnterAnswer = enterAnswer;
+    }
+
+    /**
+     * Метод реагирует на приостановку результирующего фрагмента,
+     * сохраняет введенные пользователем данные
+     *
+     * @param email                 введенный пользователем адрес электронной почты
+     * @param checkedTypeResultShow выбранное пользователем состояние виджета RadioButton,
+     *                              отвечающего за тип отображения результатов викторины
+     */
+    @Override
+    public void onResultFragmentPause(String email, int checkedTypeResultShow) {
+        this.mEmail = email;
+        this.mCheckedTypeResultShow = checkedTypeResultShow;
+    }
+
+    /**
+     * Метод реагирует на закрытие диалога с результатом ответа на вопрос
+     */
     @Override
     public void onQuestionDialogClose() {
         ++mCurrentStep;
@@ -260,51 +351,42 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         }
     }
 
-    @Override
-    public void onIntroductionFragmentInteraction(String name, boolean isScoring) {
-        this.mName = name;
-        this.isScoring = isScoring;
-
-        mCurrentStep++;
-
-        setQuestionWithRadioButtonFragment();
-    }
-
-    @Override
-    public void onIntroductionFragmentPause(String name, boolean isScoring) {
-        this.mName = name;
-        this.isScoring = isScoring;
-    }
-
-    @Override
-    public void onQuestionWithEditTextFragmentPause(String enterAnswer) {
-        this.mEnterAnswer = enterAnswer;
-    }
-
-    @Override
-    public void onResultFragmentPause(String email, int checkedTypeResultShow) {
-        this.mEmail = email;
-        this.mCheckedTypeResultShow = checkedTypeResultShow;
-    }
-
-    @Override
-    public void onResultFragmentInteraction(String email) {
-        sentResultOnEmail(email);
-    }
-
+    /**
+     * Метод реагирует на нажатие кнопки выхода из программы
+     */
     @Override
     public void onExitButtonClicked() {
         finish();
     }
 
-    private void setTitleQuestion(int step) {
-        setTitle(getString(R.string.title, ++step, mQuestions.length));
+    /**
+     * Метод реагирует на нажатие аппаратной кнопки назад
+     */
+    @Override
+    public void onBackPressed() {
+        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
+        alertHelper.openQuitDialog();
     }
 
+    /**
+     * Метод устанавливает в заголовок программы название викторины
+     */
     private void resetTitle() {
         setTitle(getString(R.string.app_name));
     }
 
+    /**
+     * Метод устанавливает в заголовок программы текущий вопрос / общее количество вопросов
+     */
+    private void setTitleQuestion(int step) {
+        setTitle(getString(R.string.title, ++step, mQuestions.length));
+    }
+
+    /**
+     * Метод отправляет результат викторы на электронную почту
+     *
+     * @param email введенный пользователем адрес электронной почты
+     */
     public void sentResultOnEmail(String email) {
         String resultSummary = createResultSummary();
 
@@ -322,24 +404,21 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         }
     }
 
+    /**
+     * Метод формирует резюме прохождения викторины
+     *
+     * @return строка с результатом викторины
+     */
     private String createResultSummary() {
         return getString(R.string.text_result_on_screen, mScore, mQuestions.length);
     }
 
-    @Override
-    public void onBackPressed() {
-        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
-        alertHelper.openQuitDialog();
-    }
-
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        if (view != null && imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
+    /**
+     * Метод реагирует на клик вне виджета EditText и скрывает клавиатуру
+     *
+     * @param ev событие клика
+     * @return результат назначения обработчика
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
@@ -353,5 +432,16 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         }
 
         return super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * Метод скрывает клавиатуру
+     */
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (view != null && imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

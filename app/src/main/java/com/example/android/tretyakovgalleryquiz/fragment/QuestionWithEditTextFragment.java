@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.tretyakovgalleryquiz.common.QuestionWithEditText;
+import com.example.android.tretyakovgalleryquiz.model.QuestionWithEditText;
 import com.example.android.tretyakovgalleryquiz.R;
 
 

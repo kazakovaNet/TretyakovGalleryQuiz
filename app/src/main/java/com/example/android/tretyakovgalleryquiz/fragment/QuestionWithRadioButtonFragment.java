@@ -13,7 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.android.tretyakovgalleryquiz.common.QuestionWithRadioButton;
+import com.example.android.tretyakovgalleryquiz.model.QuestionWithRadioButton;
 import com.example.android.tretyakovgalleryquiz.R;
 
 
