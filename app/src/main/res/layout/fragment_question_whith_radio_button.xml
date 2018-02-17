@@ -18,63 +18,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TableLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:paddingBottom="16dp">
 
-            <TableRow>
+            <TextView
+                android:id="@+id/question_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:maxLines="100"
+                android:padding="16dp"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp"
+                tools:text="@string/question_3" />
 
-                <TextView
-                    android:id="@+id/question_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="100"
-                    android:padding="16dp"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="16sp"
-                    tools:text="@string/question_3" />
-            </TableRow>
+            <RadioGroup
+                android:id="@+id/answer_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question_text_view"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingLeft="48dp"
+                android:paddingRight="48dp">
 
-            <TableRow>
+                <RadioButton
+                    android:id="@+id/answer_1_radio_button"
+                    style="@style/MyRadioButton"
+                    android:theme="@style/MyRadioButton"
+                    tools:text="Она была первой в коллекции" />
 
-                <RadioGroup
-                    android:id="@+id/answer_radio_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="48dp"
-                    android:paddingRight="48dp">
+                <RadioButton
+                    android:id="@+id/answer_2_radio_button"
+                    style="@style/MyRadioButton"
+                    android:theme="@style/MyRadioButton"
+                    tools:text="Чтобы получить ее Третьяков ездил в Индию" />
 
-                    <RadioButton
-                        android:id="@+id/answer_1_radio_button"
-                        style="@style/MyRadioButton"
-                        android:theme="@style/MyRadioButton"
-                        tools:text="Она была первой в коллекции" />
+                <RadioButton
+                    android:id="@+id/answer_3_radio_button"
+                    style="@style/MyRadioButton"
+                    android:theme="@style/MyRadioButton"
+                    tools:text="Она была подвергнута цензурному запрету" />
 
-                    <RadioButton
-                        android:id="@+id/answer_2_radio_button"
-                        style="@style/MyRadioButton"
-                        android:theme="@style/MyRadioButton"
-                        tools:text="Чтобы получить ее Третьяков ездил в Индию" />
-
-                    <RadioButton
-                        android:id="@+id/answer_3_radio_button"
-                        style="@style/MyRadioButton"
-                        android:theme="@style/MyRadioButton"
-                        tools:text="Она была подвергнута цензурному запрету" />
-
-                    <RadioButton
-                        android:id="@+id/answer_4_radio_button"
-                        style="@style/MyRadioButton"
-                        android:theme="@style/MyRadioButton"
-                        tools:text="На ней изображена Царевна Софья" />
-                </RadioGroup>
-            </TableRow>
-
-
-        </TableLayout>
+                <RadioButton
+                    android:id="@+id/answer_4_radio_button"
+                    style="@style/MyRadioButton"
+                    android:theme="@style/MyRadioButton"
+                    tools:text="На ней изображена Царевна Софья" />
+            </RadioGroup>
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

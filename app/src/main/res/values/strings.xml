@@ -4,8 +4,6 @@
     <string name="wrong_answer_text">You gave the wrong answer.\nCorrect answer -&#160;</string>
     <string name="right">Correct</string>
     <string name="right_answer_text">You are absolutely right!</string>
-    <string name="end">End</string>
-    <string name="end_text">You answered all questions</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="intro_text">The Tretyakov Gallery is the main museum of Russian national art, reflecting its unique contribution to world culture. It is a hospitable museum that is known for its rich collection and variety of presented ideas.</string>
     <string name="counting_points">Counting points?</string>
@@ -23,8 +21,6 @@
     <string name="result_email_subject">Results of the quiz \"Tretyakov Gallery\"</string>
     <string name="get_result_button">Get results</string>
     <string name="quit">Quit</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="next">Further</string>
     <string name="wrong">Incorrect</string>
     <string name="are_you_sure">How, already?</string>

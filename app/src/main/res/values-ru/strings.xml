@@ -8,8 +8,6 @@
     <string name="wrong_answer_text">Вы дали неверный ответ.\nПравильный ответ -&#160;</string>
     <string name="right">Верно</string>
     <string name="right_answer_text">Вы абсолютно правы!</string>
-    <string name="end">Конец</string>
-    <string name="end_text">Вы ответили на все вопросы</string>
     <string name="enter_your_name">Укажите свое имя</string>
     <string name="intro_text">Третьяковская галерея — это главный музей национального искусства России, отражающий его уникальный вклад в мировую культуру. Это гостеприимный музей, известный своей богатой коллекцией и многообразием представленных идей.</string>
     <string name="counting_points">Подсчитывать очки?</string>
@@ -26,8 +24,6 @@
     <string name="result_email_subject">Результаты викторины \"Третьяковская галерея\"</string>
     <string name="get_result_button">Получить результат</string>
     <string name="quit">Выход</string>
-    <string name="yes">Да</string>
-    <string name="no">Нет</string>
     <string name="next">Далее</string>
     <string name="are_you_sure">Как, уже?</string>
     <string name="check">Проверить</string>
