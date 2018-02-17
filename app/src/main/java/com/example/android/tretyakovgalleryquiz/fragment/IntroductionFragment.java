@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,15 @@ import android.widget.Toast;
 
 import com.example.android.tretyakovgalleryquiz.R;
 
+/**
+ * Класс приветственного фрагмента.
+ * Активити, содержащие данный фрагмент должны реализовывать интерфейс
+ * onIntroductionFragmentInteractionListener для обработки
+ * взаимодействия пользователя с фрагментом
+ */
 public class IntroductionFragment extends Fragment {
+    public static final String IS_SCORING = "isScoring";
+    public final String M_NAME = "mName";
     private onIntroductionFragmentInteractionListener mListener;
     private Context mParentContext;
     private EditText mNameEditText;
@@ -39,11 +48,10 @@ public class IntroductionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_introduction, container, false);
     }
 
-    // Вызывается при присоединении фрагмента к активности
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -69,6 +77,11 @@ public class IntroductionFragment extends Fragment {
         }
     }
 
+    /**
+     * Метод инициализирует данные во фрагменте
+     *
+     * @param view объект представления фрагмента
+     */
     private void initializeFragment(View view) {
         mNameEditText = view.findViewById(R.id.name_edit_text);
         if (mName != null && !mName.equals("")) {
@@ -105,6 +118,12 @@ public class IntroductionFragment extends Fragment {
         });
     }
 
+    /**
+     * Метод устанавливает данные для фрагмента (после его приостановки)
+     *
+     * @param name      введенное пользователем имя
+     * @param isScoring выбранное пользователем состояние виджета CheckBox, отвечающего за посчет очков
+     */
     public void initIntroductionFragment(String name, boolean isScoring) {
         if (!name.equals("")) {
             this.mName = name;
@@ -113,6 +132,10 @@ public class IntroductionFragment extends Fragment {
         this.isScoring = isScoring;
     }
 
+    /**
+     * Этот интерфейс должен реализовываться активностью, которая содержит этот фрагмент
+     * для возможности взаимодействия с этим фрагментом
+     */
     public interface onIntroductionFragmentInteractionListener {
         void onIntroductionFragmentInteraction(String name, boolean isScoring);
 

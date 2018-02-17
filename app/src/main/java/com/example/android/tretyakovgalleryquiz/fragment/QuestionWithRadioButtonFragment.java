@@ -18,9 +18,11 @@ import com.example.android.tretyakovgalleryquiz.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Класс фрагмента вопроса типа "с радио кнопкой".
+ * Активити, содержащие данный фрагмент должны реализовывать интерфейс
+ * onQuestionWithRadioButtonFragmentInteractionListener для обработки
+ * взаимодействия пользователя с фрагментом
  */
-
 public class QuestionWithRadioButtonFragment extends Fragment {
     private onQuestionWithRadioButtonFragmentInteractionListener mListener;
     private Context mParentContext;
@@ -48,6 +50,11 @@ public class QuestionWithRadioButtonFragment extends Fragment {
         }
     }
 
+    /**
+     * Метод инициализирует данные во фрагменте
+     *
+     * @param view объект представления фрагмента
+     */
     private void initializeFragment(View view) {
         // Назначение изображения
         ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
@@ -82,7 +89,6 @@ public class QuestionWithRadioButtonFragment extends Fragment {
         answer4RadioButton.setText(answers[3]);
     }
 
-    // Вызывается при присоединении фрагмента к активности
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -105,20 +111,18 @@ public class QuestionWithRadioButtonFragment extends Fragment {
         mParentContext = null;
     }
 
-    // Определяются данные для отображения
-    public void initQuestionWhithRadioButtonFragment(QuestionWithRadioButton questionWithRadioButton) {
+    /**
+     * Метод устанавливает данные для фрагмента (после его приостановки)
+     *
+     * @param questionWithRadioButton отображаемый объект вопроса
+     */
+    public void initQuestionWithRadioButtonFragment(QuestionWithRadioButton questionWithRadioButton) {
         mQuestionWithRadioButton = questionWithRadioButton;
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Этот интерфейс должен реализовываться активностью, которая содержит этот фрагмент
+     * для возможности взаимодействия с этим фрагментом
      */
     public interface onQuestionWithRadioButtonFragmentInteractionListener {
         void onQuestionWithRadioButtonFragmentInteraction(int id);

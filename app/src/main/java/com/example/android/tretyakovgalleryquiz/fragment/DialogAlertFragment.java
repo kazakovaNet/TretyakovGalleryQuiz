@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.example.android.tretyakovgalleryquiz.R;
 import com.example.android.tretyakovgalleryquiz.activity.MainActivity;
 
+/**
+ * Класс фрагмента диалога
+ */
 public class DialogAlertFragment extends DialogFragment {
     private final String CALL_TAG = "mCallTag";
     private final String BUTTON_TEXT_TAG = "mButtonText";
@@ -65,9 +68,10 @@ public class DialogAlertFragment extends DialogFragment {
                             mOnQuestionWithRadioButtonFragmentInteractionListener.onQuestionDialogClose();
                         } else if (mCallTag.equals(QUESTION_WITH_EDIT_TEXT_CLASS)) {
                             mOnQuestionWithEditTextFragmentInteractionListener.onQuestionDialogClose();
-                        }if (mCallTag.equals(RESULT_CLASS)) {
+                        }
+                        if (mCallTag.equals(RESULT_CLASS)) {
                             mResultListener.onExitButtonClicked();
-                        } else if (mCallTag.equals(MAIN_CLASS)){
+                        } else if (mCallTag.equals(MAIN_CLASS)) {
                             mResultListener.onExitButtonClicked();
                         }
 
@@ -127,6 +131,15 @@ public class DialogAlertFragment extends DialogFragment {
         outState.putString(BUTTON_TEXT_TAG, mButtonText);
     }
 
+    /**
+     * Метод инициализирует данные в диалоге
+     *
+     * @param title      заголовок диалога
+     * @param message    текст отображаемого сообщения
+     * @param icon       иконка в заголовке диалога
+     * @param callTag    тег вызывающего класса
+     * @param buttonText текст кнопки
+     */
     public void initDialogAlertFragment(int title, String message, int icon, String callTag, String buttonText) {
         mTitle = title;
         mMessage = message;

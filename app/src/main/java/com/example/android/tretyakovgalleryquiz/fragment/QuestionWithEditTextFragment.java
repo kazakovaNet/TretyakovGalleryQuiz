@@ -19,9 +19,11 @@ import com.example.android.tretyakovgalleryquiz.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Класс фрагмента вопроса типа "с радио кнопкой".
+ * Активити, содержащие данный фрагмент должны реализовывать интерфейс
+ * onQuestionWithEditTextFragmentInteractionListener для обработки
+ * взаимодействия пользователя с фрагментом
  */
-
 public class QuestionWithEditTextFragment extends Fragment {
     private onQuestionWithEditTextFragmentInteractionListener mListener;
     private Context mParentContext;
@@ -51,6 +53,11 @@ public class QuestionWithEditTextFragment extends Fragment {
         }
     }
 
+    /**
+     * Метод инициализирует данные во фрагменте
+     *
+     * @param view объект представления фрагмента
+     */
     private void initializeFragment(View view) {
         // Назначение изображения
         ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
@@ -122,21 +129,20 @@ public class QuestionWithEditTextFragment extends Fragment {
         mParentContext = null;
     }
 
-    // Определяются данные для отображения
+    /**
+     * Метод устанавливает данные для фрагмента (после его приостановки)
+     *
+     * @param questionWithEditText отображаемый объект вопроса
+     * @param answer               введенный пользователем ответ
+     */
     public void initQuestionWithEditTextFragment(QuestionWithEditText questionWithEditText, String answer) {
         mQuestionWithEditText = questionWithEditText;
         mEnterAnswer = answer;
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Этот интерфейс должен реализовываться активностью, которая содержит этот фрагмент
+     * для возможности взаимодействия с этим фрагментом
      */
     public interface onQuestionWithEditTextFragmentInteractionListener {
         void onQuestionWithEditTextFragmentInteraction(String answer);

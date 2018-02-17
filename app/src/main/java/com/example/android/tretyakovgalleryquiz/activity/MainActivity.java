@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements QuestionWithRadio
         mCurrentQuestionWithRadioButton = (QuestionWithRadioButton) mQuestions[mCurrentStep];
 
         // Инициализация данных фрагмента
-        fragment.initQuestionWhithRadioButtonFragment(mCurrentQuestionWithRadioButton);
+        fragment.initQuestionWithRadioButtonFragment(mCurrentQuestionWithRadioButton);
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Включить анимацию растворения и появления фрагментов

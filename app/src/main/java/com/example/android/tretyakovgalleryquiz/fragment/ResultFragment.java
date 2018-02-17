@@ -20,10 +20,9 @@ import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnResultFragmentInteractionListener} interface
- * to handle interaction events.
+ * Класс результирующего фрагмента.
+ * Активити, содержащие данный фрагмент должны реализовывать интерфейс
+ * OnResultFragmentInteractionListener для обработки взаимодействия пользователя с фрагментом
  */
 public class ResultFragment extends Fragment {
     private final String ON_SCREEN = "onScreen";
@@ -72,6 +71,11 @@ public class ResultFragment extends Fragment {
         }
     }
 
+    /**
+     * Метод инициализирует данные во фрагменте
+     *
+     * @param view объект представления фрагмента
+     */
     private void initializeFragment(View view) {
         TextView showResultTextView = view.findViewById(R.id.show_result_text_view);
 
@@ -223,14 +227,8 @@ public class ResultFragment extends Fragment {
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Этот интерфейс должен реализовываться активностью, которая содержит этот фрагмент
+     * для возможности взаимодействия с этим фрагментом
      */
     public interface OnResultFragmentInteractionListener {
         void onResultFragmentInteraction(String email);
