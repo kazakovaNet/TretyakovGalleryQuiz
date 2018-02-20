@@ -77,9 +77,9 @@ public class QuestionWithEditTextFragment extends Fragment {
         questionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String enterAnswer = String.valueOf(mQuestionEditText.getText());
+                String enteredAnswer = String.valueOf(mQuestionEditText.getText());
 
-                if (enterAnswer.equals("")) {
+                if (enteredAnswer.equals("")) {
                     Toast.makeText(
                             mParentContext,
                             mParentContext.getString(R.string.enter_your_answer),
@@ -90,7 +90,7 @@ public class QuestionWithEditTextFragment extends Fragment {
 
                 if (mListener != null) {
                     // Сообщить слушателю о том, что на кнопке был сделан щелчок
-                    mListener.onQuestionWithEditTextFragmentInteraction(enterAnswer);
+                    mListener.onQuestionWithEditTextFragmentInteraction(enteredAnswer);
                 }
             }
         });
@@ -135,7 +135,7 @@ public class QuestionWithEditTextFragment extends Fragment {
      * @param questionWithEditText отображаемый объект вопроса
      * @param answer               введенный пользователем ответ
      */
-    public void initQuestionWithEditTextFragment(QuestionWithEditText questionWithEditText, String answer) {
+    public void initFragment(QuestionWithEditText questionWithEditText, String answer) {
         mQuestionWithEditText = questionWithEditText;
         mEnterAnswer = answer;
     }

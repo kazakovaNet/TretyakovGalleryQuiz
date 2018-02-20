@@ -2,15 +2,28 @@ package com.example.android.tretyakovgalleryquiz.model;
 
 public class QuestionWithRadioButton extends Question {
 
-    private final int mAnswersArrayId;
+    private final String[] mAnswersArray;
 
-    public QuestionWithRadioButton(int questionId, int pictureImageId, int answersArrayId, int correctAnswerId) {
-        super(questionId, pictureImageId, correctAnswerId);
 
-        this.mAnswersArrayId = answersArrayId;
+    private final String mCorrectAnswer;
+
+    public QuestionWithRadioButton(int questionId, int pictureImageId, String[] answersArray,
+                                   int correctAnswerIndex) {
+        super(questionId, pictureImageId);
+
+        this.mAnswersArray = answersArray;
+        this.mCorrectAnswer = answersArray[correctAnswerIndex];
     }
 
-    public int getAnswersArrayId() {
-        return mAnswersArrayId;
+    public String[] getAnswersArray() {
+        return mAnswersArray;
+    }
+
+    public String getCorrectAnswer() {
+        return mCorrectAnswer;
+    }
+
+    public boolean checkAnswer(String selectAnswer) {
+        return this.mCorrectAnswer.equals(selectAnswer);
     }
 }

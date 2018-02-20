@@ -55,7 +55,7 @@ public class QuestionWithRadioButtonFragment extends Fragment {
      *
      * @param view объект представления фрагмента
      */
-    private void initializeFragment(View view) {
+    private void initializeFragment(final View view) {
         // Назначение изображения
         ImageView pictureImageView = view.findViewById(R.id.picture_image_view);
         pictureImageView.setImageResource(mQuestionWithRadioButton.getPictureId());
@@ -70,14 +70,17 @@ public class QuestionWithRadioButtonFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (mListener != null) {
+                    String selectedAnswer = ((RadioButton) view.findViewById(checkedId))
+                            .getText().toString();
+
                     // Сообщить слушателю о том, что на одной из кнопок был сделан щелчок
-                    mListener.onQuestionWithRadioButtonFragmentInteraction(checkedId);
+                    mListener.onQuestionWithRadioButtonFragmentInteraction(selectedAnswer);
                 }
             }
         });
 
         // Назначение текста радио-кнопкам
-        String[] answers = mParentContext.getResources().getStringArray(mQuestionWithRadioButton.getAnswersArrayId());
+        String[] answers = mQuestionWithRadioButton.getAnswersArray();
 
         RadioButton answer1RadioButton = view.findViewById(R.id.answer_1_radio_button);
         answer1RadioButton.setText(answers[0]);
@@ -116,7 +119,7 @@ public class QuestionWithRadioButtonFragment extends Fragment {
      *
      * @param questionWithRadioButton отображаемый объект вопроса
      */
-    public void initQuestionWithRadioButtonFragment(QuestionWithRadioButton questionWithRadioButton) {
+    public void initFragment(QuestionWithRadioButton questionWithRadioButton) {
         mQuestionWithRadioButton = questionWithRadioButton;
     }
 
@@ -125,7 +128,7 @@ public class QuestionWithRadioButtonFragment extends Fragment {
      * для возможности взаимодействия с этим фрагментом
      */
     public interface onQuestionWithRadioButtonFragmentInteractionListener {
-        void onQuestionWithRadioButtonFragmentInteraction(int id);
+        void onQuestionWithRadioButtonFragmentInteraction(String selectAnswer);
 
         void onQuestionDialogClose();
     }

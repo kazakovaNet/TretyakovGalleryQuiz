@@ -27,6 +27,7 @@ public class DialogAlertFragment extends DialogFragment {
     private final String MESSAGE_TAG = "mMessage";
     private final String QUESTION_WITH_RADIO_BUTTON_CLASS = String.valueOf(QuestionWithRadioButtonFragment.class);
     private final String QUESTION_WITH_EDIT_TEXT_CLASS = String.valueOf(QuestionWithEditTextFragment.class);
+    private final String QUESTION_WITH_CHECK_BOX_CLASS = String.valueOf(QuestionWithCheckBoxFragment.class);
     private final String RESULT_CLASS = String.valueOf(ResultFragment.class);
     private final String MAIN_CLASS = String.valueOf(MainActivity.class);
     private String mCallTag;
@@ -36,6 +37,7 @@ public class DialogAlertFragment extends DialogFragment {
     private int mIcon;
     private QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener mOnQuestionWithRadioButtonFragmentInteractionListener;
     private QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener mOnQuestionWithEditTextFragmentInteractionListener;
+    private QuestionWithCheckBoxFragment.onQuestionWithCheckBoxFragmentInteractionListener mOnQuestionWithCheckBoxFragmentInteractionListener;
     private ResultFragment.OnResultFragmentInteractionListener mResultListener;
 
     @Nullable
@@ -68,7 +70,10 @@ public class DialogAlertFragment extends DialogFragment {
                             mOnQuestionWithRadioButtonFragmentInteractionListener.onQuestionDialogClose();
                         } else if (mCallTag.equals(QUESTION_WITH_EDIT_TEXT_CLASS)) {
                             mOnQuestionWithEditTextFragmentInteractionListener.onQuestionDialogClose();
+                        } else if (mCallTag.equals(QUESTION_WITH_CHECK_BOX_CLASS)) {
+                            mOnQuestionWithCheckBoxFragmentInteractionListener.onQuestionDialogClose();
                         }
+
                         if (mCallTag.equals(RESULT_CLASS)) {
                             mResultListener.onExitButtonClicked();
                         } else if (mCallTag.equals(MAIN_CLASS)) {

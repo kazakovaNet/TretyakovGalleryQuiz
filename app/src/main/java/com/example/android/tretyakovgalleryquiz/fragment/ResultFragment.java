@@ -182,7 +182,7 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    public void initResultFragment(String name, boolean isScoring, int score, int countOfQuestion, String email, int checkedTypeResultShow) {
+    public void initFragment(String name, boolean isScoring, int score, int countOfQuestion, String email, int checkedTypeResultShow) {
         this.isScoring = isScoring;
         this.mName = name;
         this.mScore = score;

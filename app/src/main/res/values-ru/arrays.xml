@@ -48,4 +48,16 @@
         <item>Л.И. Соломаткин, \"Старый быт\"</item>
         <item>П.А. Федотов, \"Сватовство майора\"</item>
     </string-array>
+
+    <string-array name="answers_question_9">
+        <item>Ответ 1</item>
+        <item>Ответ 2</item>
+        <item>Ответ 3</item>
+        <item>Ответ 4</item>
+    </string-array>
+
+    <string-array name="correct_answers_question_9">
+        <item>Ответ 1</item>
+        <item>Ответ 2</item>
+    </string-array>
 </resources>

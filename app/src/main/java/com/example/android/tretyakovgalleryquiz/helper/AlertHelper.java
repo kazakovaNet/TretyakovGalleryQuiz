@@ -2,13 +2,10 @@ package com.example.android.tretyakovgalleryquiz.helper;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.widget.RadioButton;
 
 import com.example.android.tretyakovgalleryquiz.R;
-import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
 import com.example.android.tretyakovgalleryquiz.fragment.DialogAlertFragment;
-import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithEditTextFragment;
-import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithRadioButtonFragment;
+import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
 
 public class AlertHelper {
     private final String DIALOG_ALERT = "DialogAlert";
@@ -17,36 +14,6 @@ public class AlertHelper {
 
     public AlertHelper(Activity activity) {
         mActivity = activity;
-    }
-
-    public void openQuestionWithRadioButtonDialog(int correctAnswer, int selectAnswer) {
-        mFragmentManager = mActivity.getFragmentManager();
-
-        DialogAlertFragment questionDialog = new DialogAlertFragment();
-
-        String message;
-        if (correctAnswer != selectAnswer) {
-            message = mActivity.getString(R.string.wrong_answer_text)
-                    + ((RadioButton) mActivity.findViewById(correctAnswer))
-                    .getText();
-
-            questionDialog.initDialogAlertFragment(
-                    R.string.wrong,
-                    message,
-                    R.drawable.wrong_icon,
-                    String.valueOf(QuestionWithRadioButtonFragment.class),
-                    mActivity.getString(R.string.next));
-        } else {
-            message = mActivity.getString(R.string.right_answer_text);
-
-            questionDialog.initDialogAlertFragment(
-                    R.string.right, message,
-                    R.drawable.right_icon,
-                    String.valueOf(QuestionWithRadioButtonFragment.class),
-                    mActivity.getString(R.string.next));
-        }
-
-        questionDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 
     public void openQuitDialog() {
@@ -77,20 +44,20 @@ public class AlertHelper {
         resultDialog.show(mFragmentManager, DIALOG_ALERT);
     }
 
-    public void openQuestionWithEditTextDialog(String correctAnswer, String selectAnswer) {
+    public void openAnswerDialog(boolean isAnswerTrue, String correctAnswer, String className) {
         mFragmentManager = mActivity.getFragmentManager();
 
         DialogAlertFragment questionDialog = new DialogAlertFragment();
-
         String message;
-        if (!correctAnswer.equals(selectAnswer)) {
+
+        if (!isAnswerTrue) {
             message = mActivity.getString(R.string.wrong_answer_text) + correctAnswer;
 
             questionDialog.initDialogAlertFragment(
                     R.string.wrong,
                     message,
                     R.drawable.wrong_icon,
-                    String.valueOf(QuestionWithEditTextFragment.class),
+                    className,
                     mActivity.getString(R.string.next));
         } else {
             message = mActivity.getString(R.string.right_answer_text);
@@ -99,7 +66,7 @@ public class AlertHelper {
                     R.string.right,
                     message,
                     R.drawable.right_icon,
-                    String.valueOf(QuestionWithEditTextFragment.class),
+                    className,
                     mActivity.getString(R.string.next));
         }
 

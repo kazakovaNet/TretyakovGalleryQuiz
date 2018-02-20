@@ -20,7 +20,7 @@ import com.example.android.tretyakovgalleryquiz.R;
  * onIntroductionFragmentInteractionListener для обработки
  * взаимодействия пользователя с фрагментом
  */
-public class IntroductionFragment extends Fragment {
+public class IntroductionFragment extends QuizFragment {
     public static final String IS_SCORING = "isScoring";
     public final String M_NAME = "mName";
     private onIntroductionFragmentInteractionListener mListener;
@@ -29,10 +29,6 @@ public class IntroductionFragment extends Fragment {
     private CheckBox mScoringCheckBox;
     private String mName;
     private boolean isScoring;
-
-    public IntroductionFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onPause() {
@@ -123,11 +119,10 @@ public class IntroductionFragment extends Fragment {
      * @param name      введенное пользователем имя
      * @param isScoring выбранное пользователем состояние виджета CheckBox, отвечающего за посчет очков
      */
-    public void initIntroductionFragment(String name, boolean isScoring) {
-        if (!name.equals("")) {
-            this.mName = name;
-        }
+    public void initFragment(String name, boolean isScoring) {
+        super.initFragment();
 
+        this.mName = name;
         this.isScoring = isScoring;
     }
 
