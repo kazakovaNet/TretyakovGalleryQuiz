@@ -1,6 +1,7 @@
 package com.example.android.tretyakovgalleryquiz.activity;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.android.tretyakovgalleryquiz.fragment.QuestionWithCheckBoxFragment;
-import com.example.android.tretyakovgalleryquiz.fragment.QuizFragment;
 import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
 import com.example.android.tretyakovgalleryquiz.fragment.IntroductionFragment;
 import com.example.android.tretyakovgalleryquiz.model.Question;
@@ -27,6 +27,7 @@ import com.example.android.tretyakovgalleryquiz.fragment.ResultFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity
         implements QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener,
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         IntroductionFragment.onIntroductionFragmentInteractionListener,
         ResultFragment.OnResultFragmentInteractionListener {
     private final String TAG = "MainActivity";
+    public static final String EXIT_TAG ="exit";
     private String mName;
     private String mEmail;
     private String mEnterAnswer;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private int mCurrentStep = -2;
 
     private int mCheckedTypeResultShow;
+    private FragmentManager fragmentManager;
     private final ArrayList<Question> mQuestions = new ArrayList<>();
 
     @Override
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
+
+        fragmentManager = getFragmentManager();
 
         // Формирование массива вопросов
         initQuestions();
@@ -163,6 +168,9 @@ public class MainActivity extends AppCompatActivity
                 R.array.answers_question_9,
                 new ArrayList<String>(Arrays.asList(getResources()
                         .getStringArray(R.array.correct_answers_question_9)))));
+
+        // Сортировка списка случайным образом
+        Collections.shuffle(mQuestions);
     }
 
     @Override
@@ -237,7 +245,7 @@ public class MainActivity extends AppCompatActivity
 
     private void startFragment(Fragment fragment) {
         // начало транзакции фрагмента
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // Заменить фрагмент
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         // Включить анимацию растворения и появления фрагментов
@@ -287,7 +295,7 @@ public class MainActivity extends AppCompatActivity
         // Открытие диалога с результатом проверки
         AlertHelper alertHelper = new AlertHelper(MainActivity.this);
         alertHelper.openAnswerDialog(
-                isAnswerTrue, questionWithEditText.getmCorrectAnswer(),
+                isAnswerTrue, questionWithEditText.getCorrectAnswer(),
                 String.valueOf(QuestionWithEditTextFragment.class));
 
         // Увеличение количества набранных очков, если ответ верен и установлен чекбокс подсчета результата
@@ -328,7 +336,7 @@ public class MainActivity extends AppCompatActivity
         AlertHelper alertHelper = new AlertHelper(MainActivity.this);
         alertHelper.openAnswerDialog(
                 isAnswerTrue, questionWithCheckBox.getCorrectAnswers(),
-                String.valueOf(QuestionWithCheckBox.class));
+                String.valueOf(QuestionWithCheckBoxFragment.class));
 
         // Увеличение количества набранных очков, если ответ верен и установлен чекбокс подсчета результата
         if (isScoring && isAnswerTrue) {
@@ -390,23 +398,6 @@ public class MainActivity extends AppCompatActivity
     public void onQuestionDialogClose() {
         // Отображение фрагмента
         setFragment();
-    }
-
-    /**
-     * Метод реагирует на нажатие кнопки выхода из программы
-     */
-    @Override
-    public void onExitButtonClicked() {
-        finish();
-    }
-
-    /**
-     * Метод реагирует на нажатие аппаратной кнопки назад
-     */
-    @Override
-    public void onBackPressed() {
-        AlertHelper alertHelper = new AlertHelper(MainActivity.this);
-        alertHelper.openQuitDialog();
     }
 
     /**

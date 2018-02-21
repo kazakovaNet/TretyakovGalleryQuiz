@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="answers_question_1">
-        <item>She was the first in the collection</item>
+        <item>She was one of the first in the collection</item>
         <item>To get it Tretyakov went to India</item>
         <item>It was subjected to censorship</item>
         <item>It depicts the princess Sophia</item>
@@ -47,5 +47,18 @@
         <item>I.M. Pryanishnikov, \"Waiting for the best man\"</item>
         <item>L.I. Solomatkin, \"The Old Way of Life\"</item>
         <item>P.A. Fedotov, \"Matchmaking Major\"</item>
+    </string-array>
+
+    <string-array name="answers_question_9">
+        <item> I.I. Shishkin, \"Morning in the Pine Forest\"</item>
+        <item> I.K. Aivazovsky, \"The Ninth Wave\"</item>
+        <item> AK. Savrasov, \"Rooks Arrived\"</item>
+        <item> MA. Vrubel, \"Demon\"</item>
+    </string-array>
+
+    <string-array name="correct_answers_question_9">
+        <item> I.I. Shishkin, \"Morning in the Pine Forest\"</item>
+        <item> AK. Savrasov, \"Rooks Arrived\"</item>
+        <item> MA. Vrubel, \"Demon\"</item>
     </string-array>
 </resources>

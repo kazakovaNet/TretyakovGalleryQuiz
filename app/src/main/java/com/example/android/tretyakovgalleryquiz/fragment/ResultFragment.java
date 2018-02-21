@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.tretyakovgalleryquiz.R;
+import com.example.android.tretyakovgalleryquiz.activity.MainActivity;
 import com.example.android.tretyakovgalleryquiz.helper.AlertHelper;
 
 
@@ -28,7 +29,7 @@ public class ResultFragment extends Fragment {
     private final String ON_SCREEN = "onScreen";
     private final String ON_EMAIL = "onEmail";
     private OnResultFragmentInteractionListener mListener;
-    private Context mParentContext;
+    private Activity mParentContext;
     private EditText mEmailEditText;
     private String mTypeResultShow = ON_EMAIL;
     private String mEmail;
@@ -134,7 +135,7 @@ public class ResultFragment extends Fragment {
                 switch (mTypeResultShow) {
                     case ON_SCREEN:
                         // Отображение текста с результатом викторины
-                        showResultDialog();
+                        showResult();
                         break;
                     case ON_EMAIL:
                         // Сохранение введенного адреса электронной почты,
@@ -156,17 +157,10 @@ public class ResultFragment extends Fragment {
         });
 
         Button exitButton = view.findViewById(R.id.exit_button);
-        // Если не выставлен чекбокс подсчета очков, отображается кнопка выхода
-        if (!isScoring) {
-            exitButton.setVisibility(View.VISIBLE);
-        }
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Сообщить слушателю о действиях пользователя
-                if (mListener != null) {
-                    mListener.onExitButtonClicked();
-                }
+                mParentContext.finish();
             }
         });
 
@@ -178,7 +172,6 @@ public class ResultFragment extends Fragment {
         } else {
             showResultTextView.setVisibility(View.GONE);
             mShowResultRadioGroup.setVisibility(View.GONE);
-            exitButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -217,9 +210,10 @@ public class ResultFragment extends Fragment {
         mParentContext = null;
     }
 
-    private void showResultDialog() {
-        AlertHelper alertHelper = new AlertHelper((Activity) mParentContext);
-        alertHelper.openResultDialog(mScore, mCountOfQuestion);
+    private void showResult() {
+        Toast.makeText(mParentContext, mParentContext.getString(
+                R.string.text_result_on_screen, mScore, mCountOfQuestion),
+                Toast.LENGTH_LONG).show();
     }
 
     private boolean isValidEmail(CharSequence target) {
@@ -232,8 +226,6 @@ public class ResultFragment extends Fragment {
      */
     public interface OnResultFragmentInteractionListener {
         void onResultFragmentInteraction(String email);
-
-        void onExitButtonClicked();
 
         void onResultFragmentPause(String email, int checkedRadioButtonId);
     }

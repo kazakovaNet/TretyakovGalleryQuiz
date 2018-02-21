@@ -35,6 +35,7 @@ public class DialogAlertFragment extends DialogFragment {
     private String mButtonText;
     private int mTitle = R.string.right;
     private int mIcon;
+    private Activity mainActivity;
     private QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener mOnQuestionWithRadioButtonFragmentInteractionListener;
     private QuestionWithEditTextFragment.onQuestionWithEditTextFragmentInteractionListener mOnQuestionWithEditTextFragmentInteractionListener;
     private QuestionWithCheckBoxFragment.onQuestionWithCheckBoxFragmentInteractionListener mOnQuestionWithCheckBoxFragmentInteractionListener;
@@ -74,10 +75,8 @@ public class DialogAlertFragment extends DialogFragment {
                             mOnQuestionWithCheckBoxFragmentInteractionListener.onQuestionDialogClose();
                         }
 
-                        if (mCallTag.equals(RESULT_CLASS)) {
-                            mResultListener.onExitButtonClicked();
-                        } else if (mCallTag.equals(MAIN_CLASS)) {
-                            mResultListener.onExitButtonClicked();
+                        if (mCallTag.equals(MainActivity.EXIT_TAG)) {
+                            mainActivity.finish();
                         }
 
                         dialog.cancel();
@@ -106,6 +105,7 @@ public class DialogAlertFragment extends DialogFragment {
         if (savedInstanceState != null && savedInstanceState.containsKey(BUTTON_TEXT_TAG)) {
             mButtonText = savedInstanceState.getString(BUTTON_TEXT_TAG);
         }
+
     }
 
     @Override
@@ -121,8 +121,14 @@ public class DialogAlertFragment extends DialogFragment {
         }
 
         if (activity instanceof QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener) {
+            mOnQuestionWithCheckBoxFragmentInteractionListener = (QuestionWithCheckBoxFragment.onQuestionWithCheckBoxFragmentInteractionListener) activity;
+        }
+
+        if (activity instanceof QuestionWithRadioButtonFragment.onQuestionWithRadioButtonFragmentInteractionListener) {
             mResultListener = (ResultFragment.OnResultFragmentInteractionListener) activity;
         }
+
+        mainActivity = activity;
     }
 
     @Override

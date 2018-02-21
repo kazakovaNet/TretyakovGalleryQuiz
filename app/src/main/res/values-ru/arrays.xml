@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="answers_question_1">
-        <item>Она была первой в коллекции</item>
+        <item>Она была одной из первых в коллекции</item>
         <item>Чтобы получить ее Третьяков ездил в Индию</item>
         <item>Она была подвергнута цензурному запрету</item>
         <item>На ней изображена Царевна Софья</item>
@@ -50,14 +50,15 @@
     </string-array>
 
     <string-array name="answers_question_9">
-        <item>Ответ 1</item>
-        <item>Ответ 2</item>
-        <item>Ответ 3</item>
-        <item>Ответ 4</item>
+        <item>И.И. Шишкин, \"Утро в сосновом лесу\"</item>
+        <item>И.К. Айвазовский, \"Девятый вал\"</item>
+        <item>А.К. Саврасов, \"Грачи прилетели\"</item>
+        <item>М.А. Врубель, \"Демон\"</item>
     </string-array>
 
     <string-array name="correct_answers_question_9">
-        <item>Ответ 1</item>
-        <item>Ответ 2</item>
+        <item>И.И. Шишкин, \"Утро в сосновом лесу\"</item>
+        <item>А.К. Саврасов, \"Грачи прилетели\"</item>
+        <item>М.А. Врубель, \"Демон\"</item>
     </string-array>
 </resources>

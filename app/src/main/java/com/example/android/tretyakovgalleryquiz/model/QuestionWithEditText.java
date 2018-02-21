@@ -11,7 +11,7 @@ public class QuestionWithEditText extends Question {
         this.mCorrectAnswer = correctAnswer;
     }
 
-    public String getmCorrectAnswer() {
+    public String getCorrectAnswer() {
         return mCorrectAnswer;
     }
 
