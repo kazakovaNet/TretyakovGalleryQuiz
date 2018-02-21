@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="my_button_margin_bottom">48dp</dimen>
+    <dimen name="my_button_margin_left">56dp</dimen>
+    <dimen name="my_button_margin_right">56dp</dimen>
+
+    <dimen name="my_checkbox_margin_left">56dp</dimen>
+    <dimen name="my_checkbox_margin_right">56dp</dimen>
+
+    <dimen name="my_radio_button_margin_top">12dp</dimen>
+
+    <dimen name="my_radio_button_padding_bottom">10dp</dimen>
+    <dimen name="my_radio_button_padding_right">10dp</dimen>
+    <dimen name="my_radio_button_padding_top">10dp</dimen>
+    <dimen name="my_radio_button_text_size">14sp</dimen>
+
+    <dimen name="action_bar_size">40dp</dimen>
+</resources>
